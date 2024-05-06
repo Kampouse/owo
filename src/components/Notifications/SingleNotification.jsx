@@ -1,18 +1,13 @@
 import Toast from 'react-bootstrap/Toast';
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactTimeAgo from 'react-time-ago'
 import { IoIosChatbubbles } from 'react-icons/io';
 import Link from 'next/link'
+import { viewNotification } from '@/notifications/UserNotificationClient';
 
 const SingleNotification = ({ id, excerpt, createdAt, status, type, context }) => {
-  useEffect(() => {
-    if (status === "new") {
-      // TODO: mark as seen
-    }
-  }, [])
-
   return (
-    <Link href={type === 'message' && `/messages/${context.conversationId}`}>
+    <Link href={type === 'message' && `/messages/${context.conversationId}`} onClick={() => viewNotification(id)}>
       <Toast>
         <Toast.Header closeButton={false}>
           <IoIosChatbubbles className="icon" />

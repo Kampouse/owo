@@ -6,6 +6,7 @@ import ChatMessages from './ChatMessages';
 import { Conversation, User } from '@/types/ChatTypes';
 import { useLiveChat } from '@/contexts/useLiveChat';
 import { IoIosMenu } from 'react-icons/io';
+import { viewNotificationsFromConversation } from '@/notifications/UserNotificationClient';
 
 
 type ChatWithUserProps = {
@@ -26,6 +27,13 @@ const ChatWithUser = ({ conversation, currentUser, showNav }: ChatWithUserProps)
       });
     }
   }, [conversation.messages.length]);
+
+  useEffect(() => {
+    if (currentUser.id) {
+      viewNotificationsFromConversation({ conversationId: conversation.id, userId: currentUser.id })
+    }
+  }, [conversation.id, currentUser.id]);
+
 
   return (
     <Card className="conversationWindow">
