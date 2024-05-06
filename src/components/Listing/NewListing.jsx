@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import ListingLayout from '@/components/Listing/Layout'
 import { Container, Row, Col, Button, Card, Nav } from 'react-bootstrap';
 import { PictureInput, Form, Input, Textarea, ListingPriceInput } from '@/components/Form'
