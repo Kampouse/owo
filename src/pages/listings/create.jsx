@@ -54,7 +54,7 @@ const CreateListing = () => {
         location: false,
       },
       tags: tags.split(',').map(tag => tag.trim()),
-      // price: price,
+      price: price,
     }
     console.log('saving listing', listing);
 

@@ -15,4 +15,5 @@ export type Listing = {
   type?: string[];
   userProfile: UserProfile;
   images: string[];
+  price: number;
 }

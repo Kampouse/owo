@@ -29,6 +29,7 @@ const ListingPriceInput = ({ name, label, rules, register, error, placeholder, s
         <InputGroup className="mb-3">
           <Form.Control
             id={name}
+            name={name}
             type="number"
             label={label}
             isInvalid={!!error}

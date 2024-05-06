@@ -1,10 +1,15 @@
 import { Row, Col, Card } from 'react-bootstrap';
 
-const ListingLayout = ({ title, image, description, footer, left = "" }) => (
+const ListingLayout = ({ title, image, description, footer, price, left = "" }) => (
   <Card className="mb-3">
     <Card.Header>
       <Card.Title>
         {title}
+          {!!price ?
+            <span className="text-danger float-end">{price}$</span>
+          :
+            <span className="text-success float-end">{0}$</span>
+          }
       </Card.Title>
     </Card.Header>
     <Card.Body>

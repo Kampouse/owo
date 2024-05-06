@@ -8,9 +8,9 @@ import { PictureInput, Form, Input, Textarea, ListingPriceInput } from '@/compon
 const NewListing = ({ cancel, saveListing, listing }) => {
   const [isLoading, setIsLoading] = useState(false)
 
-  const onSave = async () => {
+  const onSave = async (values) => {
     setIsLoading(true)
-    await saveListing(listing)
+    await saveListing(values)
     setIsLoading(false)
   }
 

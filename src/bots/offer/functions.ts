@@ -50,18 +50,18 @@ export const completeOffer = async ({
     Advisor: Cette offre et pour un pret, une vente ou un don? ou toutes ces réponses? ;
     User: ${offer_terms_raw}
   `;
-
+  try {
     const { data: response } = await supabase.functions.invoke<string>('ai-offer-complete', {
-        body: { content }
+      body: { content }
     })
-
-    if (response) {
-      const textes = JSON.parse(response)
-
-    }
-
-
     return response ? response : 'rip'
+
+  } catch (error) {
+    console.log({error})
+    return 'oh no! 😱 une erreur est survenue! 😭'
+  }
+
+
 }
 
 type JsonString = string

@@ -12,10 +12,11 @@ const borderTypes = {
 
 const getTypeColor = (type) => type && type.length ? borderTypes[type[0]] : 'primary'
 
-const Listing = ({ listing: { id, title, description, type, tags, userProfile, created_at, images }, children, noProfile }) => {
+const Listing = ({ listing: { id, title, description, type, tags, userProfile, created_at, images, price }, children, noProfile }) => {
   return (
     <ListingLayout
       title={title}
+      price={price}
       image={images && images.length > 0 && images[0]}
       description={description}
       footer={

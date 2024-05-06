@@ -28,6 +28,7 @@ export const fetchListings = async (): Promise<Listing[]> => {
             tags,
             type,
             images,
+            price,
             user_profile (
                 id,
                 name,
