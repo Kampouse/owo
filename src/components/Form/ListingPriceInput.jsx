@@ -25,21 +25,21 @@ const ListingPriceInput = ({ name, label, rules, register, error, placeholder, s
         onChange={onSwitchChange}
         checked={isFree}
       />
-
-      <InputGroup className="mb-3">
-        <Form.Control
-          id={name}
-          type="number"
-          label={label}
-          isInvalid={!!error}
-          placeholder={placeholder}
-          defaultValue={0}
-          className="text-right"
-          disabled={isFree}
-          {...register(name, rules)}
-        />
-        <InputGroup.Text>.00</InputGroup.Text>
-      </InputGroup>
+      {!isFree &&
+        <InputGroup className="mb-3">
+          <Form.Control
+            id={name}
+            type="number"
+            label={label}
+            isInvalid={!!error}
+            placeholder={placeholder}
+            className="text-right"
+            disabled={isFree}
+            {...register(name, rules)}
+          />
+          <InputGroup.Text>.00</InputGroup.Text>
+        </InputGroup>
+      }
       </div>
 
       {error && (
