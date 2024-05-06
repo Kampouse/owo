@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Link from 'next/link'
 import cn from 'classnames'
 import { FaWandMagicSparkles } from "react-icons/fa6";
 import { PictureInput, Form, Input, Textarea } from '@/components/Form'
@@ -89,8 +90,10 @@ const CreateListing = () => {
                 L'assistant owo est au travail et rédige votre annonce!
               </div>
             }
+            <Link href="/messages/offer">
+              Je ne veux pas commencer par une photo
+            </Link>
           </div>
-
           {
             !!listing &&
             <NewListing
