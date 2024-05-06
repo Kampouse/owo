@@ -114,6 +114,48 @@ class OpenAiAPI {
       throw error;
     }
   }
+
+  async listingAskDetails(offerDescription: string) {
+    try {
+      const listingAskDetails = await this.client.chat.completions.create({
+        model: "gpt-3.5-turbo-0125",
+        messages: [
+          {
+            role: "system",
+            content: `Vous êtes un assistant de marché avisé, qui aide les utilisateurs à créer des annonces détaillées et
+      attrayantes pour leurs produits. Votre tâche consiste à obtenir de l'utilisateur des informations spécifiques et
+      pertinentes qui amélioreront la visibilité du produit sur la place de marché et faciliteront la recherche. N'oubliez
+      pas que les spécificités et les détails du produit, tels que la taille, la tranche d'âge, etc. sont importants.
+      Après avoir lu la dernière ligne de la description de l'utilisateur, utilisez la méthode STAR pour trouver la question
+      complémentaire la plus éclairante qui permettra d'en savoir plus sur l'article.
+      Généralement, tes questions doivent couvrir les spécificité de l'item, marque, modèle, couleur, spécificités et sa condition (usée, neuf, etc).
+      vous êtes joyeux, drôle et utilisez des émojis. vous avez un ton de conversation convivial et concis.
+      tu sais déjà où la personne habite.
+      tu ne peux pas demander de photo.
+      tu dois poser quelques questions à l'utilisateur pour obtenir plus d'informations sur l'objet.
+      Ne fais pas de salutations, l'utlisateur te connais déjà`,
+          },
+          {
+            role: "user",
+            content: `${offerDescription}`,
+          },
+        ],
+        max_tokens: 150,
+      });
+
+      this.calculateCost("gpt-3.5-turbo-0125", { prompt: listingAskDetails.usage?.prompt_tokens || 0, completion: listingAskDetails.usage?.completion_tokens || 0 });
+
+      const questions = listingAskDetails.choices[0].message.content || '';
+      return questions;
+
+    } catch (error) {
+      console.log(error)
+      throw error;
+    }
+
+  }
+
+
 }
 
 const openAiApi = new OpenAiAPI();

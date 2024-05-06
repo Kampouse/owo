@@ -2,11 +2,24 @@ import { supabase } from "@/config/SupabaseClient"
 
 type followupQuestionsType = { offer_raw: string }
 export const followupQuestions = async ({ offer_raw }: followupQuestionsType) => {
-    const { data: response } = await supabase.functions.invoke<string>('ai-offer-followup-questions', {
-        body: { content: offer_raw }
-    })
 
-    return response ? response : 'rip'
+
+  try {
+
+    const response = await fetch('/api/listings/ask-details', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ content: offer_raw }),
+    })
+    const data = await response.json()
+
+
+    return data.question
+  } catch (error) {
+    return 'Peux tu me parler un peut plus de ton offre ? 🤔'
+  }
 }
 
 type OfferItem = {
