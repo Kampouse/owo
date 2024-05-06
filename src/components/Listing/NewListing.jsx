@@ -10,7 +10,7 @@ const NewListing = ({ cancel, saveListing, listing }) => {
 
   const onSave = async () => {
     setIsLoading(true)
-    await saveListing()
+    await saveListing(listing)
     setIsLoading(false)
   }
 
