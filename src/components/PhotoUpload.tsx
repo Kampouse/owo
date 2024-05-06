@@ -32,7 +32,7 @@ const PhotoUpload: React.FC<PhotoUploadProps> = ({ onFileSelect }) => {
         </Button>
       )}
       <Form.Group controlId="formFileSm" style={{ display: 'none' }}>
-        <Form.Control type="file" size="sm" onChange={handleFileChange} ref={fileInputRef} />
+        <Form.Control type="file" size="sm" onChange={handleFileChange} ref={fileInputRef} accept="image/*" />
       </Form.Group>
       {previewUrl && (
         <>

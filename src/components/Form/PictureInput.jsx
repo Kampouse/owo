@@ -19,6 +19,7 @@ const PictureInput = ({ name, label, rules, placeholder, register, error, setVal
 
   const onPictureChange = (e) => {
     const file = e.target.files[0]
+    setValue(`${name}File`, file)
     if (file) {
       const reader = new FileReader()
       reader.onloadend = () => {
@@ -50,6 +51,7 @@ const PictureInput = ({ name, label, rules, placeholder, register, error, setVal
           placeholder={placeholder}
           className="d-none"
           onChange={onPictureChange}
+          accept="image/*"
         />
         <AiOutlineCamera />
         <span>

@@ -6,6 +6,7 @@ import { Container, Row, Col, Button, Card, Nav } from 'react-bootstrap';
 import { PrivateLayout } from "@/components/Layouts"
 import NewListing from '@/components/Listing/NewListing'
 import { supabase } from "@/config/SupabaseClient"
+import resizeImg from '@/utils/resizeImg'
 
 
 const CreateListing = () => {
@@ -18,15 +19,18 @@ const CreateListing = () => {
     setListing(null);
   }
 
-  const pictureToListing = (data) => {
+  const pictureToListing = async (data) => {
     setIsLoading(true);
+
+    const resizedImg = await resizeImg(data.pictureFile, 800, 800)
+
     fetch('/api/listings/generate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ picture: resizedImg }),
     })
       .then(response => response.json())
       .then(resp => {
