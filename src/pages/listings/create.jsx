@@ -5,12 +5,14 @@ import { PictureInput, Form, Input, Textarea } from '@/components/Form'
 import { Container, Row, Col, Button, Card, Nav } from 'react-bootstrap';
 import { PrivateLayout } from "@/components/Layouts"
 import NewListing from '@/components/Listing/NewListing'
+import { supabase } from "@/config/SupabaseClient"
 
 
 const CreateListing = () => {
   const { token } = 'TOKEN' // TODO: make it work ; useAuthentication();
   const [listing, setListing] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [saveStatus, setSaveStatus] = useState()
 
   const cancel = () => {
     setListing(null);
@@ -34,9 +36,35 @@ const CreateListing = () => {
     })
   }
 
-  const saveListing = (data) => {
-    console.log('saving listing', data);
-    alert('saved')
+  const saveListing = ({ title, description, picture, price, tags }) => {
+
+    const listing = {
+      title,
+      description,
+      images: [picture],
+      proposition_terms: {
+        don: price === 0 ,
+        pret: false,
+        vente: price !== 0,
+        service: false,
+        location: false,
+      },
+      tags: tags.split(',').map(tag => tag.trim()),
+      // price: price,
+    }
+    console.log('saving listing', listing);
+
+    supabase.functions.invoke('save-offer', { body: listing })
+    .then((response) => {
+      console.log(response.data);
+      setSaveStatus('success');
+    })
+    .catch((error) => {
+      console.error(error);
+      setSaveStatus('error');
+      alert('FAIL');
+    })
+
   }
 
   return (
@@ -67,6 +95,17 @@ const CreateListing = () => {
               saveListing={saveListing}
             />
           }
+
+          {saveStatus === 'success' && (
+            <div className="alert alert-success" role="alert">
+              Votre annonce a été sauvegardé! Vous allez être redirigé vers le marché.
+            </div>
+          )}
+          {saveStatus === 'error' && (
+            <div className="alert alert-error" role="alert">
+              Une erreur c'est produite. Vous pouvez essayer a nouveau.
+            </div>
+          )}
         </Col>
       </Row>
     </Container>

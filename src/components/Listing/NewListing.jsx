@@ -6,6 +6,14 @@ import { PictureInput, Form, Input, Textarea, ListingPriceInput } from '@/compon
 
 
 const NewListing = ({ cancel, saveListing, listing }) => {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const onSave = async () => {
+    setIsLoading(true)
+    await saveListing()
+    setIsLoading(false)
+  }
+
   return (
     <ListingLayout
       title={""}
@@ -15,7 +23,7 @@ const NewListing = ({ cancel, saveListing, listing }) => {
       </>}
       description={
 
-        <Form onSubmit={saveListing} defaultValues={listing}>
+        <Form onSubmit={onSave} defaultValues={listing}>
           <Input
             name="title"
             label="Titre"
@@ -52,7 +60,7 @@ const NewListing = ({ cancel, saveListing, listing }) => {
               <Button variant="link" className="px-0" onClick={cancel}>X Cancel</Button>
             </Nav.Item>
             <Nav.Item className="ml-auto">
-              <Button variant="success" type="submit">Publier</Button>
+              <Button variant="success" type="submit" disabled={isLoading}>Publier</Button>
             </Nav.Item>
           </Nav>
         </Form>
