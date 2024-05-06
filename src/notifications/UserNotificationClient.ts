@@ -88,7 +88,7 @@ const viewNotificationsFromConversation = async ({ conversationId, userId }: Vie
     .from(SOURCE_TABLE)
     .update({ status: 'seen' })
     .eq('target', userId)
-    .eq('context->conversationId', conversationId)
+    .eq('context->>conversationId', conversationId)
     .eq('status', 'new');
 }
 
@@ -116,5 +116,6 @@ export {
   removeUserNotificationBroadcaster,
   sendUserNotification,
   viewNotification,
+  viewNotificationsFromConversation,
   getAllNotifications,
 }
