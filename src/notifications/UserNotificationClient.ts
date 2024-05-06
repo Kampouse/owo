@@ -5,13 +5,6 @@ import { UserConversationNotification } from "./UserNotification"
 type ConversationId = string
 type UserId = string
 
-export type SendUserConversationNotificationUsecase = {
-  conversationId: ConversationId,
-  userId: UserId,
-  from: string,
-  message: string,
-}
-
 type UserNotificationIdentification = {
   targetUserId: UserId,
   notify: (notification: UserConversationNotification) => void,
@@ -51,6 +44,14 @@ const removeUserNotificationBroadcaster = async (toRemove: RealtimeChannel): Pro
   await supabase.removeChannel(toRemove)
 }
 
+
+export type SendUserConversationNotificationUsecase = {
+  conversationId: ConversationId,
+  userId: UserId,
+  from: string,
+  message: string,
+}
+
 const sendUserNotification = async ({ conversationId, userId, message, from }: SendUserConversationNotificationUsecase): Promise<void> => {
   const newNotification = {
     type: 'message',
@@ -65,6 +66,30 @@ const sendUserNotification = async ({ conversationId, userId, message, from }: S
   await supabase
     .from('user_notifications')
     .insert(newNotification)
+}
+
+
+type NotificationId = string
+
+const viewNotification = async (id: NotificationId): Promise<void> => {
+  await supabase
+    .from(SOURCE_TABLE)
+    .update({ status: 'seen' })
+    .eq('id', id);
+}
+
+type ViewNotificationsFromConversationUsecase = {
+  conversationId: ConversationId,
+  userId: UserId,
+}
+
+const viewNotificationsFromConversation = async ({ conversationId, userId }: ViewNotificationsFromConversationUsecase) => {
+  await supabase
+    .from(SOURCE_TABLE)
+    .update({ status: 'seen' })
+    .eq('target', userId)
+    .eq('context->conversationId', conversationId)
+    .eq('status', 'new');
 }
 
 const getAllNotifications = async (user: UserId): Promise<UserConversationNotification[]> => {
@@ -90,5 +115,6 @@ export {
   initializeUserNotificationBroadcaster,
   removeUserNotificationBroadcaster,
   sendUserNotification,
+  viewNotification,
   getAllNotifications,
 }
