@@ -21,13 +21,13 @@ const SingleNotification = ({ id, excerpt, createdAt, status, type, context, flo
         <Toast.Header closeButton={false}>
           <IoIosChatbubbles className="icon" />
           <strong className="me-auto ml-2">
-            {type === 'message' && "Nouveau message"}
+             {context.from}
           </strong>
           <small>
-            <ReactTimeAgo date={new Date(createdAt)} locale="fr" />
+             <ReactTimeAgo date={new Date(createdAt)} locale="fr" />
           </small>
         </Toast.Header>
-        <Toast.Body>{excerpt}</Toast.Body>
+        <Toast.Body>{type === 'message' && "Nouveau message"}: {excerpt}</Toast.Body>
       </Toast>
     </Link>
   );

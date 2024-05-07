@@ -2,9 +2,10 @@ import React from 'react';
 import { Badge, Navbar, Nav } from 'react-bootstrap'
 import { IoIosApps, IoIosNotifications, IoIosChatbubbles, IoIosPerson, IoIosAddCircle } from 'react-icons/io';
 import Link from 'next/link'
+import { useUserNotification } from '@/notifications/useUserNotifications';
 
 const FooterNav = () => {
-
+  const { hasNewNotification  } = useUserNotification()
   return (
     <Navbar className="justify-content-around bottom-navbar" bg="primary" >
       <div className="nav-item text-center">
@@ -33,8 +34,8 @@ const FooterNav = () => {
         </Link>
       </div>
       <div className="nav-item text-center">
-        <Link href="/notifications" >
-          <IoIosNotifications className="icon text-danger" />
+        <Link href="/notifications">
+          <IoIosNotifications className={`icon ${hasNewNotification && 'text-danger'}`} />
           <div className="nav-text">Notifications</div>
         </Link>
       </div>

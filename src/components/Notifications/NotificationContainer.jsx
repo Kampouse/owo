@@ -8,7 +8,7 @@ const NotificationContainer = ({ }) => {
   const { uiState: {toasts} } = useUi();
 
   return (
-    <ToastContainer position="top-end" className="p-3" style={{ position: 'fixed' }}>
+    <ToastContainer position="top-center" className="p-3" style={{ position: 'fixed' }}>
       {toasts.map((toast) => (
         <SingleNotification
           key={`toast-${toast.id}`}

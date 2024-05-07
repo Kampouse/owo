@@ -29,6 +29,7 @@ export const UiContextProvider = ({ children }) => {
 
   const addToast = (toast) => {
     const curentToasts = [...uiState.toasts]
+    curentToasts.push(toast)
     changeUi('toasts', curentToasts)
 
     setTimeout(() => {
