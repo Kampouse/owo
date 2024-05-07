@@ -7,12 +7,13 @@ const DEFAULT_UI_STATE = {
   onboardingRegistration: false,  // went trough the registration onboarding process
   onboardingListings: false,
   onboardingMessages: false,
+  toasts: [],
 }
 
 export const UiContextProvider = ({ children }) => {
   const [uiState, setUiState] = useState(() => {
     const storedState = (typeof window !== "undefined") ? localStorage.getItem("uiState") : undefined;
-    return storedState ? JSON.parse(storedState) : DEFAULT_UI_STATE;
+    return storedState ? {...DEFAULT_UI_STATE, ...JSON.parse(storedState)} : DEFAULT_UI_STATE;
   });
 
   const [virtualKeyboardOpen, setVirtualKeyboardOpen] = useState(false);
@@ -25,6 +26,18 @@ export const UiContextProvider = ({ children }) => {
       localStorage.setItem("uiState", JSON.stringify(updatedState));
     }
   };
+
+  const addToast = (toast) => {
+    const curentToasts = [...uiState.toasts]
+    changeUi('toasts', curentToasts)
+
+    setTimeout(() => {
+      const curentToasts = [...uiState.toasts]
+      const newToasts = curentToasts.filter(t => t.id !== toast.id)
+      changeUi('toasts', newToasts)
+    }, 8*1000); // because in ToastContainer we have a delay of 7s
+  }
+
 
   const watchKeyboard = {
     onFocus: () => {
@@ -41,6 +54,7 @@ export const UiContextProvider = ({ children }) => {
       value={{
         uiState,
         changeUi,
+        addToast,
         keyboard: {
           isOpen: virtualKeyboardOpen,
           watchKeyboard

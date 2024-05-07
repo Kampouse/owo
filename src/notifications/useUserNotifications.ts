@@ -1,3 +1,4 @@
+import { useUi } from "@/contexts/UiContext"
 import { useNotificationContext } from "./NotificationContext"
 import { UserConversationNotification } from "./UserNotification"
 
@@ -10,12 +11,17 @@ type UserNotificationUsecase = {
 // or onesignal.com
 export const useUserNotification = (): UserNotificationUsecase => {
   const { userNotifications, setUserNotifications } = useNotificationContext()
+  const { addToast } = useUi()
 
   return {
     notifications: userNotifications,
     hasNewNotification: userNotifications.some((notification) => notification.status === 'new'),
     syncNotification: (notification) => {
       setUserNotifications([notification, ...userNotifications])
+
+      if (notification.status === 'new') {
+        addToast(notification)
+      }
     },
   }
 }

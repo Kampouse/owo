@@ -1,14 +1,23 @@
 import Toast from 'react-bootstrap/Toast';
-import React from 'react';
+import React, {useState} from 'react';
 import ReactTimeAgo from 'react-time-ago'
 import { IoIosChatbubbles } from 'react-icons/io';
 import Link from 'next/link'
 import { viewNotification } from '@/notifications/UserNotificationClient';
 
-const SingleNotification = ({ id, excerpt, createdAt, status, type, context }) => {
+
+const SingleNotification = ({ id, excerpt, createdAt, status, type, context, floating }) => {
+  const [show, setShow] = useState(true)
+  const floatingProps = floating ? {
+    onClose: () => setShow(false),
+    delay: 7000,
+    autohide: true,
+  } : {}
+
+
   return (
     <Link href={type === 'message' && `/messages/${context.conversationId}`} onClick={() => viewNotification(id)}>
-      <Toast>
+      <Toast {...floatingProps} show={show}>
         <Toast.Header closeButton={false}>
           <IoIosChatbubbles className="icon" />
           <strong className="me-auto ml-2">
