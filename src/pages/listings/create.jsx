@@ -8,6 +8,7 @@ import { PrivateLayout } from "@/components/Layouts"
 import NewListing from '@/components/Listing/NewListing'
 import { supabase } from "@/config/SupabaseClient"
 import resizeImg from '@/utils/resizeImg'
+import { useRouter } from 'next/router';
 
 
 const CreateListing = () => {
@@ -15,6 +16,7 @@ const CreateListing = () => {
   const [listing, setListing] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [saveStatus, setSaveStatus] = useState()
+  const router = useRouter();
 
   const cancel = () => {
     setListing(null);
@@ -42,7 +44,6 @@ const CreateListing = () => {
   }
 
   const saveListing = ({ title, description, picture, price, tags }) => {
-
     const listing = {
       title,
       description,
@@ -63,6 +64,11 @@ const CreateListing = () => {
     .then((response) => {
       console.log(response.data);
       setSaveStatus('success');
+      debugger
+      setTimeout(() => {
+        console.log('lisrintgs')
+        router.push('/listings')
+      }, 3*1000);
     })
     .catch((error) => {
       console.error(error);
@@ -105,7 +111,7 @@ const CreateListing = () => {
 
           {saveStatus === 'success' && (
             <div className="alert alert-success" role="alert">
-              Votre annonce a été sauvegardé! Vous allez être redirigé vers le marché.
+              Votre annonce a été sauvegardé! Vous allez être redirigé vers le <Link href='/listings'>marché</Link>.
             </div>
           )}
           {saveStatus === 'error' && (
