@@ -37,6 +37,17 @@ const initializeUserNotificationBroadcaster = ({ targetUserId, notify }: UserNot
       (payload) => {
         notify(fromSQLToDomain(payload.new))
       })
+    .on<SQLUserConversationNotification>(
+      "postgres_changes",
+      { 
+        event: 'UPDATE',
+        schema: SOURCE_SCHEMA,
+        table: SOURCE_TABLE,
+        filter: `target=eq.${targetUserId}`,
+      },
+      (payload) => {
+        notify(fromSQLToDomain(payload.new))
+      })
     .subscribe()
 }
 

@@ -31,7 +31,6 @@ class UserConversationNotificationsGroupedByStatus implements Countable {
   }
 
   public countBy(conversationId: ConversationId, status: UserConversationNotification['status']): number {
-    debugger
     if (this.newNotificationsByConversation[conversationId] === undefined) {
       return 0
     }
@@ -53,7 +52,6 @@ export const useUserNotification = (): UserNotificationUsecase => {
   const { addToast } = useUi()
 
   const conversationsByStatus = useMemo(() => {
-    debugger
     return UserConversationNotificationsGroupedByStatus.create().setNotifications(userNotifications)
   }, [userNotifications])
 
@@ -62,10 +60,17 @@ export const useUserNotification = (): UserNotificationUsecase => {
     hasNewNotification: userNotifications.some((notification) => notification.status === 'new'),
     conversationsByStatus,
     syncNotification: (notification) => {
-      setUserNotifications([notification, ...userNotifications])
+      const notificationToModify = userNotifications.find(userNotification => userNotification.id === notification.id)
+      if (notificationToModify === undefined) {
+        setUserNotifications([...userNotifications, notification])
 
-      if (notification.status === 'new') {
-        addToast(notification)
+        if (notification.status === 'new') {
+          addToast(notification)
+        }
+      } else {
+        const updatedNotification: UserConversationNotification = {...notificationToModify, status: 'seen' }
+        const updatedNotifications = [...userNotifications.filter(userNotification => userNotification.id !== notificationToModify.id), updatedNotification]
+        setUserNotifications(updatedNotifications)
       }
     },
   }
