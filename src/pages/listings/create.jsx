@@ -58,20 +58,15 @@ const CreateListing = () => {
       tags: tags.split(',').map(tag => tag.trim()),
       price: price,
     }
-    console.log('saving listing', listing);
 
     supabase.functions.invoke('save-offer', { body: listing })
-    .then((response) => {
-      console.log(response.data);
+    .then(() => {
       setSaveStatus('success');
-      debugger
       setTimeout(() => {
-        console.log('lisrintgs')
         router.push('/listings')
       }, 3*1000);
     })
-    .catch((error) => {
-      console.error(error);
+    .catch(() => {
       setSaveStatus('error');
       alert('FAIL');
     })

@@ -2,7 +2,7 @@ import { supabase } from "@/config/SupabaseClient"
 import { RealtimeChannel } from '@supabase/supabase-js'
 import { UserConversationNotification } from "./UserNotification"
 
-type ConversationId = string
+export type ConversationId = string
 type UserId = string
 
 type UserNotificationIdentification = {

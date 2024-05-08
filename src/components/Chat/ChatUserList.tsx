@@ -2,14 +2,16 @@ import React from 'react';
 import Link from 'next/link'
 import { ListGroup, Badge } from 'react-bootstrap';
 import { Conversation } from '@/types/ChatTypes';
+import { Countable } from '@/notifications/useUserNotifications';
 
 type ChatUserListProps = {
   conversations: Conversation[],
-  currentChatId: string
+  currentChatId: string,
+  conversationsByStatus: Countable,
   onSelect: () => void
 }
 
-const ChatUserList = ({ conversations, currentChatId, onSelect }: ChatUserListProps) => {
+const ChatUserList = ({ conversations, currentChatId, conversationsByStatus, onSelect }: ChatUserListProps) => {
 
   return (
     <ListGroup as="ol" variant="flush">
@@ -36,9 +38,10 @@ const ChatUserList = ({ conversations, currentChatId, onSelect }: ChatUserListPr
               <p className="small text-muted">{chat.title}</p>
             </div>
           </div>
-          <Badge bg="primary" pill>
-            {chat.messages.length}
-          </Badge>
+          {conversationsByStatus.countBy(chat.id, 'new') > 0 &&
+            <Badge bg="primary" pill>
+              {conversationsByStatus.countBy(chat.id, 'new')}
+            </Badge>}
         </ListGroup.Item>
 
       ))}

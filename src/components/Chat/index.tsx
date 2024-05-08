@@ -5,9 +5,11 @@ import { useChat } from "@/contexts/ChatContext";
 import ChatWithUser from './ChatWithUser'
 import ChatUserList from './ChatUserList'
 import ChatWithBot from './ChatBot'
+import { useUserNotification } from "@/notifications/useUserNotifications";
 
 const Chat: React.FC = () => {
   const { selectedConversation: conversation, currentUser, conversations, currentChatId, isSelectedConversationBot } = useChat();
+  const { conversationsByStatus } = useUserNotification();
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -27,7 +29,7 @@ const Chat: React.FC = () => {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Card style={{ width: '100%' }}>
-              <ChatUserList conversations={conversations} currentChatId={currentChatId} onSelect={handleClose}/>
+              <ChatUserList conversations={conversations} currentChatId={currentChatId} onSelect={handleClose} conversationsByStatus={conversationsByStatus} />
             </Card>
           </Offcanvas.Body>
         </Offcanvas>
