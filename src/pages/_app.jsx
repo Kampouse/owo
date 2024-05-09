@@ -8,6 +8,7 @@ import TimeAgo from 'javascript-time-ago'
 import Head from 'next/head'
 import en from 'javascript-time-ago/locale/en.json'
 import fr from 'javascript-time-ago/locale/fr.json'
+import { Analytics } from "@vercel/analytics/react"
 
 TimeAgo.addDefaultLocale(en)
 TimeAgo.addLocale(fr)
@@ -30,6 +31,7 @@ const MyApp = ({
         {getLayout(<Component {...pageProps} />)}
       </AuthenticationProvider>
     </UiContextProvider>
+    <Analytics />
   </>
   )
 }
