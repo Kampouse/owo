@@ -1,13 +1,10 @@
 {
   "functions": {
-
     "src/pages/*.tsx": {
       "maxDuration": 45
     },
-
-    "src/api/*.js": {
+    "src/pages/api/*.js": {
       "maxDuration": 60
     }
-
   }
 }
