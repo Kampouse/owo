@@ -16,6 +16,18 @@ const RegisterForm = ({ }) => {
 
   return (
     <>
+      <div className="row">
+        <div className="col">
+          <Button variant="outline-primary" className="w-100">
+            Google
+          </Button>
+        </div>
+        <div className="col">
+          <Button variant="outline-primary" className="w-100">
+            Facebook
+          </Button>
+        </div>
+      </div>
       <Form onSubmit={onSubmit}>
         <Input
           name="firstname"
