@@ -1,5 +1,5 @@
-import openAiApi from "@/backend/services/OpenAiAPI";
-
+import OpenAiApi from "@/backend/services/OpenAiAPI";
+import createClient from "@/backend/services/supabaseApiClient/createClient";
 
 export default async function handler(req, res) {
   // TODO: Add authentication with token
@@ -27,6 +27,8 @@ export default async function handler(req, res) {
       ],
     };
 */
+    const supabaseClient = createClient(req, res);
+    const openAiApi = new OpenAiApi(supabaseClient);
     const imageDescription = await openAiApi.visionDescription(picture);
     const listing = await openAiApi.listingCompletions(imageDescription);
 

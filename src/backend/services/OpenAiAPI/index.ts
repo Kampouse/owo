@@ -1,30 +1,24 @@
 import OpenAi from "openai";
 import { ModelName } from "./prices";
 import { CostTokens, CostSummary, calculateCost } from "./cost-calculator";
-
-type Logger = {
-  log: (message: string) => void;
-}
-
-const consoleLogger: Logger = {
-  log: (message: string) => {
-    console.log(message);
-  }
-};
+import { SupabaseClient } from "@supabase/supabase-js";
 
 class OpenAiAPI {
   private client;
-  private logger: Logger;
+  private supabaseClient: SupabaseClient<any, "public", any>; 
 
-  constructor() {
+  constructor(supabaseClient: SupabaseClient<any, "public", any>) {
     this.client = new OpenAi();
-    this.logger = consoleLogger;
+    this.supabaseClient = supabaseClient;
   }
 
-  calculateCost(modelName: ModelName, tokens: CostTokens): CostSummary {
+  async calculateCost(callerFunctionName: string, modelName: ModelName, tokens: CostTokens): Promise<CostSummary> {
     const costSummary = calculateCost(modelName, tokens);
 
-    this.logger.log(`$$ -- called  --    ${modelName}      $ ${costSummary.totalCost}    -- $$`);
+    const { data } = await this.supabaseClient.auth.getUser();
+    await this.supabaseClient.from('ai_pricing').insert([
+        { call: callerFunctionName, model: modelName, amount: costSummary.totalCost, user_id: data.user?.id },
+    ]);
 
     return costSummary;
   }
@@ -59,7 +53,7 @@ class OpenAiAPI {
         max_tokens: 300,
       });
 
-      this.calculateCost("gpt-4-vision-preview", { prompt: visionCompletion.usage?.prompt_tokens || 0, completion: visionCompletion.usage?.completion_tokens || 0 });
+      await this.calculateCost("visionDescription", "gpt-4-vision-preview", { prompt: visionCompletion.usage?.prompt_tokens || 0, completion: visionCompletion.usage?.completion_tokens || 0 });
 
       const imageDescription = visionCompletion.choices[0].message.content;
 
@@ -104,7 +98,7 @@ class OpenAiAPI {
         max_tokens: 400,
       });
 
-      this.calculateCost("gpt-3.5-turbo-0125", { prompt: listingCompletion.usage?.prompt_tokens || 0, completion: listingCompletion.usage?.completion_tokens || 0 });
+      await this.calculateCost("listingCompletions", "gpt-3.5-turbo-0125", { prompt: listingCompletion.usage?.prompt_tokens || 0, completion: listingCompletion.usage?.completion_tokens || 0 });
 
       const listing = listingCompletion.choices[0].message.content || '';
       return JSON.parse(listing)
@@ -143,7 +137,7 @@ class OpenAiAPI {
         max_tokens: 150,
       });
 
-      this.calculateCost("gpt-3.5-turbo-0125", { prompt: listingAskDetails.usage?.prompt_tokens || 0, completion: listingAskDetails.usage?.completion_tokens || 0 });
+      await this.calculateCost("listingAskDetails", "gpt-3.5-turbo-0125", { prompt: listingAskDetails.usage?.prompt_tokens || 0, completion: listingAskDetails.usage?.completion_tokens || 0 });
 
       const questions = listingAskDetails.choices[0].message.content || '';
       return questions;
@@ -155,8 +149,10 @@ class OpenAiAPI {
 
   }
 
+  public static create(supabaseClient: SupabaseClient<any, "public", any>) {
+    return new OpenAiAPI(supabaseClient);
+  }
 
 }
 
-const openAiApi = new OpenAiAPI();
-export default openAiApi;
+export default OpenAiAPI;
