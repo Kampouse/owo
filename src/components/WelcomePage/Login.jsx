@@ -11,6 +11,7 @@ const Login = ({ }) => {
   const onSubmit = async ({ email, password }) => {
     await login({ email, password }, () => router.push('/listings'));
   }
+  
 
   return (
     <>
@@ -45,6 +46,21 @@ const Login = ({ }) => {
           {error.message}
         </p>
       )}
+
+
+
+      <div className="row">
+        <div className="col">
+          <Button variant="outline-primary" className="w-100">
+            Google
+          </Button>
+        </div>
+        <div className="col">
+          <Button variant="outline-primary" className="w-100">
+            Facebook
+          </Button>
+        </div>
+      </div>
     </>
   )
 }
