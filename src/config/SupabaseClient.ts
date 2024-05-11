@@ -5,7 +5,7 @@ export const supabase = createClient('https://nchfhnhquozlugyqknuf.supabase.co',
     auth: {
       storage: {
         getItem: (key: string) => Cookies.get(key) ?? null,
-        setItem: (key: string, value: string) => { Cookies.set(key, value, { expires: 365 }) },
+        setItem: (key: string, value: string) => { Cookies.set(key, value) },
         removeItem: (key: string) => Cookies.remove(key),
       },
     },
