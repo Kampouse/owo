@@ -143,7 +143,46 @@ class OpenAiAPI {
       console.log(error)
       throw error;
     }
+  }
+  
+  async createEmbeddings (input: string): Promise<number[]> {
+    const embeddingResponse = await this.client.embeddings.create({
+        model: 'text-embedding-ada-002',
+        input,
+      })
 
+      await this.calculateCost("createEmbeddings", "text-embedding-ada-002", { prompt: embeddingResponse.usage?.prompt_tokens || 0, completion: 0 });
+  
+      return embeddingResponse.data[0].embedding
+  }
+
+  async chatCompletion (input: string, configuration: any): Promise<string> {
+    const response = await this.client.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: [ ...configuration.aiBehavior.messages,
+        {role: "user", content: input}
+      ],
+      temperature: configuration.aiBehavior.temperature
+    })
+
+    await this.calculateCost("chatCompletion", "gpt-3.5-turbo", { prompt: response.usage?.prompt_tokens || 0, completion: response.usage?.completion_tokens || 0 });
+  
+    return response.choices[0].message.content ?? '';
+  }
+
+  async jsonCompletion (input: string, configuration: any): Promise<string> {
+    const response = await this.client.chat.completions.create({
+      model: 'gpt-3.5-turbo-0125',
+      response_format: { type: "json_object" },
+      messages: [...configuration.aiBehavior.messages,
+      { role: "user", content: input }
+      ],
+      temperature: configuration.aiBehavior.temperature
+    })
+
+    await this.calculateCost("jsonCompletion", "gpt-3.5-turbo-0125", { prompt: response.usage?.prompt_tokens || 0, completion: response.usage?.completion_tokens || 0 });
+  
+    return response.choices[0].message.content ?? '';
   }
 
   public static create(supabaseClient: DatabaseClient) {
