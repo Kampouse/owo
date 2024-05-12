@@ -12,9 +12,14 @@ export const completeSearch = async ({
 
   const query = `${search_raw}`;
 
-  const { data: response } = await supabase.functions.invoke<string>('search-offers', {
-      body: { query }
+  const response = await fetch('/api/listings/search-offers', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ query }),
   })
+  const { data } = await response.json()
 
-    return response ? response : 'rip'
+  return data ? data : 'rip'
 }
