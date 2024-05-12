@@ -160,7 +160,7 @@ class OpenAiAPI {
     const response = await this.client.chat.completions.create({
       model: 'gpt-3.5-turbo-0125',
       response_format: { type: "json_object" },
-      messages: [configuration.messages,
+      messages: [...configuration.messages,
       { role: "user", content: input }
       ],
       temperature: configuration.temperature

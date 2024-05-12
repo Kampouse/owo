@@ -58,10 +58,9 @@ export const completeOffer = async ({
       },
       body: JSON.stringify({ content }),
     })
-    debugger
-    const data = await response.json()
+    const { result } = await response.json()
 
-    return data ? data : 'rip'
+    return result ? result : 'rip'
 
   } catch (error) {
     console.log({error})
