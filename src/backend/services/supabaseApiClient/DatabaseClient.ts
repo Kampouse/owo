@@ -9,6 +9,8 @@ export class DatabaseClient {
     this._supabase = supabase
   }
 
+  apply = () => this._supabase
+
   materializeUserInterests = async ({ owner, tags }: { owner?: string, tags: string[] }) => {
     const { error } = await this._supabase.from('user_interests').insert({ owner, tags })
 
@@ -26,10 +28,16 @@ export class DatabaseClient {
   }
 
   logAiPricing = async ({ callerFunctionName, modelName, totalCost }: { callerFunctionName: string, modelName: string, totalCost: number }) => {
-    const { data } = await this._supabase.auth.getUser();
+    const user = await this.getUser();
     await this._supabase.from('ai_pricing').insert([
-        { call: callerFunctionName, model: modelName, amount: totalCost, user_id: data.user?.id },
+        { call: callerFunctionName, model: modelName, amount: totalCost, user_id: user?.id },
     ]);
+  }
+
+  getUser = async () => {
+    const { data: { user } } = await this._supabase.auth.getUser();
+
+    return user
   }
 }
 

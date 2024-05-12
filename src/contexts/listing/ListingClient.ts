@@ -6,9 +6,15 @@ type SearchUsescase = {
 }
 
 export const searchListings = async ({ searchQuery }: SearchUsescase): Promise<Listing[]> => {
-    const { data: listing } = await supabase.functions.invoke('search-offers', {
-        body: { query: searchQuery }
-    })
+    const response = await fetch('/api/listings/search-offers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query: searchQuery }),
+      })
+    const result = await response.json()
+    const listing = result.data
 
     if (!listing) {
         return []
