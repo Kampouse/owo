@@ -1,4 +1,23 @@
-export const aiBehavior = {
+import OpenAiApi from "@/backend/services/OpenAiAPI";
+import createClient from "@/backend/services/supabaseApiClient/DatabaseClient";
+import { NextApiRequest, NextApiResponse } from "next";
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    if (req.method !== "POST") {
+      throw "Only POST requests are allowed";
+    }
+    const { content } = req.body;
+    const openAiApi = new OpenAiApi(createClient(req, res));
+    const result = await openAiApi.chatCompletion(content, aiBehavior)
+
+    res.status(200).json({ result });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+}
+
+const aiBehavior = {
   "messages": [
     {
       "role": "system",
