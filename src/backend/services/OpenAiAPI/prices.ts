@@ -84,6 +84,10 @@ const PRICES: Pricing = {
       Input: 0.02,
       Output: 0.02,
     },
+    "text-embedding-ada-002": {
+      Input: 0.0001,
+      Output: 0,
+    }
   },
   // FineTuningModels: {
   //   ada: {
