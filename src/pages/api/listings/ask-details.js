@@ -1,5 +1,5 @@
 import OpenAiApi from "@/backend/services/OpenAiAPI";
-import createClient from "@/backend/services/supabaseApiClient/createClient";
+import createClient from "@/backend/services/supabaseApiClient/DatabaseClient";
 
 
 export default async function handler(req, res) {
@@ -8,9 +8,7 @@ export default async function handler(req, res) {
       throw "Only POST requests are allowed";
     }
     const { content } = req.body;
-
-    const supabaseClient = createClient(req, res);
-    const openAiApi = new OpenAiApi(supabaseClient);
+    const openAiApi = new OpenAiApi(createClient(req, res));
     const question = await openAiApi.listingAskDetails(content);
 
     res.status(200).json({ content, question });

@@ -1,8 +1,7 @@
 import OpenAiApi from "@/backend/services/OpenAiAPI";
-import createClient from "@/backend/services/supabaseApiClient/createClient";
+import createClient from "@/backend/services/supabaseApiClient/DatabaseClient";
 
 export default async function handler(req, res) {
-  // TODO: Add authentication with token
   try {
     if (req.method !== "POST") {
       throw "Only POST requests are allowed";
@@ -27,8 +26,7 @@ export default async function handler(req, res) {
       ],
     };
 */
-    const supabaseClient = createClient(req, res);
-    const openAiApi = new OpenAiApi(supabaseClient);
+    const openAiApi = new OpenAiApi(createClient(req, res));
     const imageDescription = await openAiApi.visionDescription(picture);
     const listing = await openAiApi.listingCompletions(imageDescription);
 

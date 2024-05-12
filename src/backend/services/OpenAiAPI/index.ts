@@ -1,24 +1,21 @@
 import OpenAi from "openai";
 import { ModelName } from "./prices";
 import { CostTokens, CostSummary, calculateCost } from "./cost-calculator";
-import { SupabaseClient } from "@supabase/supabase-js";
+import { DatabaseClient } from "../supabaseApiClient/DatabaseClient";
 
 class OpenAiAPI {
   private client;
-  private supabaseClient: SupabaseClient<any, "public", any>; 
+  private database: DatabaseClient; 
 
-  constructor(supabaseClient: SupabaseClient<any, "public", any>) {
+  constructor(database: DatabaseClient) {
     this.client = new OpenAi();
-    this.supabaseClient = supabaseClient;
+    this.database = database;
   }
 
   async calculateCost(callerFunctionName: string, modelName: ModelName, tokens: CostTokens): Promise<CostSummary> {
     const costSummary = calculateCost(modelName, tokens);
 
-    const { data } = await this.supabaseClient.auth.getUser();
-    await this.supabaseClient.from('ai_pricing').insert([
-        { call: callerFunctionName, model: modelName, amount: costSummary.totalCost, user_id: data.user?.id },
-    ]);
+    await this.database.logAiPricing({ callerFunctionName, modelName, totalCost: costSummary.totalCost });
 
     return costSummary;
   }
@@ -149,7 +146,7 @@ class OpenAiAPI {
 
   }
 
-  public static create(supabaseClient: SupabaseClient<any, "public", any>) {
+  public static create(supabaseClient: DatabaseClient) {
     return new OpenAiAPI(supabaseClient);
   }
 
