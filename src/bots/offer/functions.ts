@@ -1,4 +1,4 @@
-import { supabase } from "@/config/SupabaseClient"
+
 
 type followupQuestionsType = { offer_raw: string }
 export const followupQuestions = async ({ offer_raw }: followupQuestionsType) => {
@@ -51,10 +51,16 @@ export const completeOffer = async ({
     User: ${offer_terms_raw}
   `;
   try {
-    const { data: response } = await supabase.functions.invoke<string>('ai-offer-complete', {
-      body: { content }
+    const response = await fetch('/api/listings/ai-offer-complete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ content }),
     })
-    return response ? response : 'rip'
+    const data = await response.json()
+
+    return data ? data : 'rip'
 
   } catch (error) {
     console.log({error})

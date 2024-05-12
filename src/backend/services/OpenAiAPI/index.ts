@@ -156,20 +156,6 @@ class OpenAiAPI {
       return embeddingResponse.data[0].embedding
   }
 
-  async chatCompletion (input: string, configuration: any): Promise<string> {
-    const response = await this.client.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [ ...configuration.aiBehavior.messages,
-        {role: "user", content: input}
-      ],
-      temperature: configuration.aiBehavior.temperature
-    })
-
-    await this.calculateCost("chatCompletion", "gpt-3.5-turbo", { prompt: response.usage?.prompt_tokens || 0, completion: response.usage?.completion_tokens || 0 });
-  
-    return response.choices[0].message.content ?? '';
-  }
-
   async jsonCompletion (input: string, configuration: any): Promise<string> {
     const response = await this.client.chat.completions.create({
       model: 'gpt-3.5-turbo-0125',
