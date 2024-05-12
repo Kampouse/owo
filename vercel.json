@@ -5,6 +5,9 @@
     },
     "src/pages/api/*.js": {
       "maxDuration": 60
+    },
+    "src/pages/api/*.ts": {
+      "maxDuration": 60
     }
   }
 }
