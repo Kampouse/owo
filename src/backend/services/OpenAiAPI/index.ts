@@ -160,10 +160,10 @@ class OpenAiAPI {
     const response = await this.client.chat.completions.create({
       model: 'gpt-3.5-turbo-0125',
       response_format: { type: "json_object" },
-      messages: [...configuration.aiBehavior.messages,
+      messages: [configuration.messages,
       { role: "user", content: input }
       ],
-      temperature: configuration.aiBehavior.temperature
+      temperature: configuration.temperature
     })
 
     await this.calculateCost("jsonCompletion", "gpt-3.5-turbo-0125", { prompt: response.usage?.prompt_tokens || 0, completion: response.usage?.completion_tokens || 0 });

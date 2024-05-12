@@ -58,6 +58,7 @@ export const completeOffer = async ({
       },
       body: JSON.stringify({ content }),
     })
+    debugger
     const data = await response.json()
 
     return data ? data : 'rip'

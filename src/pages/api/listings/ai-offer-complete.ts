@@ -7,17 +7,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method !== "POST") {
       throw "Only POST requests are allowed";
     }
+    console.log(req)
     const { content } = req.body;
     const openAiApi = new OpenAiApi(createClient(req, res));
-    const result = await openAiApi.jsonCompletion(content, aiBehavior)
+    const result = await openAiApi.jsonCompletion(content, configuration)
 
+    console.log(req)
     res.status(200).json({ result });
   } catch (error) {
+    console.log(error)
     res.status(500).json(error);
   }
 }
 
-const aiBehavior = {
+const configuration = {
     "messages": [
       {
         "role": "system",
