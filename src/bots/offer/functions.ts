@@ -73,10 +73,15 @@ export const saveOffer = async ({ save_offer, ai_offer_completion, image }: save
     const body = JSON.parse(ai_offer_completion);
     if(image !== 'NULL'){ body.images = [image] }
 
-    const { data: response } = await supabase.functions.invoke<string>('save-offer', {
-        body
+    const response = await fetch('/api/listings/save-offer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
     })
+    const data = await response.json()
 
-    return response ? "C'est enregistré ! 👍 Si tu souhaites recommencer, il te suffit de cliquer sur le bouton reset en haut de l'écran !" : 'rip'
+    return data ? "C'est enregistré ! 👍 Si tu souhaites recommencer, il te suffit de cliquer sur le bouton reset en haut de l'écran !" : 'rip'
   }
 }

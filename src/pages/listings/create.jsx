@@ -59,7 +59,13 @@ const CreateListing = () => {
       price: price,
     }
 
-    supabase.functions.invoke('save-offer', { body: listing })
+    fetch('/api/listings/save-offer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(listing),
+    })
     .then(() => {
       setSaveStatus('success');
       setTimeout(() => {
