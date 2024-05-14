@@ -26,6 +26,7 @@ const CreateListing = () => {
     setIsLoading(true);
 
     const resizedImg = await resizeImg(data.pictureFile, 800, 800)
+    const hdImg = await resizeImg(data.pictureFile, 2000, 2000)
 
     fetch('/api/listings/generate', {
       method: 'POST',
@@ -37,7 +38,7 @@ const CreateListing = () => {
     })
       .then(response => response.json())
       .then(resp => {
-        const generatedlisting = { ...resp, tags: resp.tags.join(', '), picture: data.picture }
+        const generatedlisting = { ...resp, tags: resp.tags.join(', '), picture: hdImg}
         setListing(generatedlisting);
         setIsLoading(false);
     })
@@ -66,7 +67,8 @@ const CreateListing = () => {
       },
       body: JSON.stringify(listing),
     })
-    .then(() => {
+    .then((response) => {
+      console.log(response)
       setSaveStatus('success');
       setTimeout(() => {
         router.push('/listings')

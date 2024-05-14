@@ -17,3 +17,5 @@ const resizeFile = (file, maxWidth, maxHeight) =>
   });
 
   export default resizeFile;
+
+  
