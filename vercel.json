@@ -3,10 +3,16 @@
     "src/pages/*.tsx": {
       "maxDuration": 45
     },
-    "src/pages/api/*.js": {
+    "src/pages/api/listings/*.js": {
       "maxDuration": 60
     },
-    "src/pages/api/*.ts": {
+    "src/pages/api/listings/*.ts": {
+      "maxDuration": 60
+    },
+    "src/pages/api/listings/generate.js": {
+      "maxDuration": 60
+    },
+    "src/pages/api/listings/ask-details.js": {
       "maxDuration": 60
     }
   }
