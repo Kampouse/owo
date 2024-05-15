@@ -9,10 +9,12 @@ import NewListing from '@/components/Listing/NewListing'
 import { supabase } from "@/config/SupabaseClient"
 import resizeImg from '@/utils/resizeImg'
 import { useRouter } from 'next/router';
+import { v4 as uuidv4 } from 'uuid';
+import useAuthentication from "@/contexts/authentication/useAuthentication";
 
 
 const CreateListing = () => {
-  const { token } = 'TOKEN' // TODO: make it work ; useAuthentication();
+  const { user } = useAuthentication();
   const [listing, setListing] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [saveStatus, setSaveStatus] = useState()
@@ -26,21 +28,32 @@ const CreateListing = () => {
     setIsLoading(true);
 
     const resizedImg = await resizeImg(data.pictureFile, 800, 800)
-    const hdImg = await resizeImg(data.pictureFile, 2000, 2000)
+    const hdFile = await resizeImg(data.pictureFile, 2000, 2000, 'file')
 
     fetch('/api/listings/generate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({ picture: resizedImg }),
     })
       .then(response => response.json())
       .then(resp => {
-        const generatedlisting = { ...resp, tags: resp.tags.join(', '), picture: hdImg}
-        setListing(generatedlisting);
-        setIsLoading(false);
+        debugger
+        const uuid = uuidv4();
+        const filePath = `${user?.id}/${uuid}.${hdFile.name.split('.')[1]}`
+
+        supabase
+          .storage
+          .from('offers')
+          .upload(filePath, hdFile, {
+            cacheControl: '3600',
+          })
+          .then(() => {
+            const generatedlisting = { ...resp, tags: resp.tags.join(', '), picture: `https://nchfhnhquozlugyqknuf.supabase.co/storage/v1/object/public/offers/${filePath}`}
+            setListing(generatedlisting);
+            setIsLoading(false);
+          })
     })
   }
 
