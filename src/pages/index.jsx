@@ -3,7 +3,7 @@
 import Head from 'next/head'
 import Container from 'react-bootstrap/Container'
 import { Header, WelcomePage, Listings } from '@/components'
-import { PublicLayout } from "@/components/Layouts"
+import { AuthLayout } from "@/components/Layouts"
 
 const Home = () => {
   return (
@@ -12,10 +12,7 @@ const Home = () => {
         <title>owo - Économie circulaire à Québec</title>
         <meta name="description" content="owo" />
       </Head>
-      <Container fluid className="g-primary h-screen">
-        <Header />
-        <WelcomePage />
-      </Container>
+      <WelcomePage />
     </>
   )
 }
@@ -23,7 +20,7 @@ const Home = () => {
 
 
 Home.getLayout = function getLayout(page) {
-  return <PublicLayout>{page}</PublicLayout>
+  return <AuthLayout>{page}</AuthLayout>
 }
 
 export default Home
