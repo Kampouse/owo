@@ -2,8 +2,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import cn from 'classnames'
 import { FaWandMagicSparkles } from "react-icons/fa6";
-import { PictureInput, Form, Input, Textarea } from '@/components/Form'
-import { Container, Row, Col, Button, Card, Nav } from 'react-bootstrap';
+import { PictureInput, Form } from '@/components/Form'
+import { Container, Row, Col } from 'react-bootstrap';
 import { PrivateLayout } from "@/components/Layouts"
 import NewListing from '@/components/Listing/NewListing'
 import { supabase } from "@/config/SupabaseClient"

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import { Button } from "@/components/ui/button"
 import ChatTextInput from './TextInput';
 import ChatMessage from './Message';
 import ChatMessages from './ChatMessages';
@@ -38,7 +39,7 @@ const ChatWithUser = ({ conversation, currentUser, showNav }: ChatWithUserProps)
   return (
     <Card className="conversationWindow">
       <Card.Header className="d-flex justify-content-start align-items-center p-3">
-        <Button variant="light" className="d-md-none mr-3" onClick={showNav}>
+        <Button variant="ghost" className="d-md-none mr-3" onClick={showNav}>
           <IoIosMenu className="icon" />
         </Button>
         <h5 className="mb-0">{conversation.title}</h5>

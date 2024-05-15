@@ -1,4 +1,4 @@
-import { Navbar, Container, Breadcrumb, Row, Col, Card, Tab, ListGroup, Figure } from "react-bootstrap";
+import { Row, Col, Card, Figure } from "react-bootstrap";
 
 
 const Badge = ({ name, label }) => (

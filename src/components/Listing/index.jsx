@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
+import { Row, Col, Card } from 'react-bootstrap';
 import ReactTimeAgo from 'react-time-ago'
 import ListingLayout from './Layout'
 

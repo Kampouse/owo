@@ -1,6 +1,6 @@
 import React, { useState  } from 'react';
 
-import Button from 'react-bootstrap/Button';
+import { Button } from "@/components/ui/button"
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 

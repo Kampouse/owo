@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { useChat } from "@/contexts/ChatContext";
 import { BiReset } from 'react-icons/bi';
 import { useBot } from "@/contexts/BotContext";
-import { Message } from "@/types/ChatTypes";
-import {
-  Button, ToggleButtonGroup, ToggleButton
-} from 'react-bootstrap'
+import { Button } from "@/components/ui/button"
 
 interface ResetInputProps {
   disabled?: boolean;

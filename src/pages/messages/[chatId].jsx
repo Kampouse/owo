@@ -1,4 +1,3 @@
-import { Container } from 'react-bootstrap';
 import { Chat } from '@/components'
 import { useRouter } from 'next/router'
 import { BotProvider } from '@/contexts/BotContext'
@@ -20,9 +19,7 @@ const Messages = () => {
   return (
     <ChatProvider chatId={router.query.chatId}>
       <BotProvider botId={router.query.chatId}>
-        <Container fluid>
-          <Chat />
-        </Container>
+        <Chat />
       </BotProvider>
     </ChatProvider>
   )

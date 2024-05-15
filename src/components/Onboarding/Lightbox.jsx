@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
+import { Button } from "@/components/ui/button"
 import Modal from 'react-bootstrap/Modal';
 import { useUi } from '@/contexts/UiContext'
 
