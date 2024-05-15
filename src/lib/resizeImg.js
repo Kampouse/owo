@@ -1,7 +1,7 @@
 import Resizer from "react-image-file-resizer";
 
 // type can be 'base64', 'file', or 'blob'
-const resizeFile = (file, maxWidth, maxHeight, type='base64') =>
+const resizeImg = (file, maxWidth, maxHeight, type='base64') =>
   new Promise((resolve) => {
     Resizer.imageFileResizer(
       file,
@@ -17,5 +17,5 @@ const resizeFile = (file, maxWidth, maxHeight, type='base64') =>
     );
   });
 
-  export default resizeFile;
+  export default resizeImg;
 
