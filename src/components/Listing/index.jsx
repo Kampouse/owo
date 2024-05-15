@@ -11,7 +11,11 @@ const borderTypes = {
 
 const getTypeColor = (type) => type && type.length ? borderTypes[type[0]] : 'primary'
 
-const Listing = ({ listing: { id, title, description, type, tags, userProfile, created_at, images, price }, children, noProfile }) => {
+const Listing = (props) => {
+
+  if(!props.listing) return null
+
+  const { listing: { id, title, description, type, tags, userProfile, created_at, images, price }, children, noProfile } = props
   return (
     <ListingLayout
       title={title}

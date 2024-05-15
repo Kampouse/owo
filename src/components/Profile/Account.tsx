@@ -1,14 +1,9 @@
-import { Container, Row, Col, Tab, ListGroup } from "react-bootstrap";
-import Badges from './Badges'
 import UpdatePasswordForm from './UpdatePasswordForm'
 import useAuthentication from "@/contexts/authentication/useAuthentication"
-import UserListings from './Listings'
-import { Card, CardContent, CardDescription, CardImg, CardTitle, CardHeader } from "@/components/ui/card";
-
+import { Card, CardContent, CardDescription, CardTitle, CardHeader } from "@/components/ui/card";
 
 import { useRouter } from "next/router";
 import { Separator } from "@/components/ui/separator";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Profile = ({ }) => {
   const { user, logout } = useAuthentication();

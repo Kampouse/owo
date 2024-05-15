@@ -1,61 +1,31 @@
-import { Row, Col, Card, Figure } from "react-bootstrap";
+import { Card, CardContent, CardDescription, CardTitle, CardHeader } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
 
 
 const Badge = ({ name, label }) => (
-  <Figure className="p-4">
-    <Figure.Image
-      width={171}
-      height={180}
-      alt={name}
-      src={`/badges/${name}.png`}
-    />
-    <Figure.Caption className="text-center">
-      {label}
-    </Figure.Caption>
-  </Figure>
+  <div className="flex flex-col items-center space-y-4 w-48">
+    <Avatar className="w-32 h-32">
+      <AvatarImage src={`/badges/${name}.png`} />
+      <AvatarFallback>{label}</AvatarFallback>
+    </Avatar>
+    <div className="text-center">
+      <p className="text-sm font-medium leading-none">Béta Habitus🌿</p>
+      <p className="text-sm text-muted-foreground">#account-creation-date</p>
+    </div>
+  </div>
 )
 
 const Badges = ({}) => (
-  <Card className="mb-4">
-    <Card.Body>
-      <Card.Title>🏆 Badges</Card.Title>
-
-      <Row>
-        <Col xs={4}>
-          <Badge name="habitus" label="Béta Habitus🌿"/>
-        </Col>
-{/*
-
-        <Col xs={4}>
-          <Badge name="Verified" />
-        </Col>
-
-        <Col xs={4}>
-          <Badge name="Secured" />
-        </Col>
-
-        <Col xs={4}>
-          <Badge name="Sharer" />
-        </Col>
-
-        <Col xs={4}>
-          <Badge name="Giver" />
-        </Col>
-
-        <Col xs={4}>
-          <Badge name="Entrepreneur" />
-        </Col>
-
-        <Col xs={4}>
-          <Badge name="Artisant" />
-        </Col>
-
-        <Col xs={4}>
-          <Badge name="Service" />
-        </Col>
-*/}
-      </Row>
-    </Card.Body>
+  <Card className="my-3">
+    <CardHeader>
+      <CardTitle>Badges</CardTitle>
+      <CardDescription></CardDescription>
+      <Separator />
+    </CardHeader>
+    <CardContent className="grid gap-6">
+      <Badge name="habitus" label="Béta Habitus🌿" />
+    </CardContent>
   </Card>
 );
 
