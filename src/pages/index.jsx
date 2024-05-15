@@ -1,7 +1,7 @@
 // pages/index.tsx
 
 import Head from 'next/head'
-import { WelcomePage } from '@/components'
+import WelcomePage from '@/components/WelcomePage'
 import { AuthLayout } from "@/components/Layouts"
 
 const Home = () => {

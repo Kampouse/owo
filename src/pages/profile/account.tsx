@@ -1,13 +1,11 @@
 import { ReactNode } from "react"
-import { Profile } from "@/components"
+import { Account } from "@/components"
 import { PrivateLayout } from "@/components/Layouts"
 import ProfileLayout from '@/components/Profile/ProfileLayout'
 
 const UserProfile = () => {
   return (
-    <div>
-      <Profile />
-    </div>
+    <Account />
   )
 }
 
