@@ -5,7 +5,7 @@ import { DatabaseClient } from "../supabaseApiClient/DatabaseClient";
 
 class OpenAiAPI {
   private client;
-  private database: DatabaseClient; 
+  private database: DatabaseClient;
 
   constructor(database: DatabaseClient) {
     this.client = new OpenAi();
@@ -76,10 +76,10 @@ class OpenAiAPI {
 
           Tes réponses sont toujours composées ainsit:
           - un titre en 5 mots ou moins qui résume le contenu de l'offre
-          - une courte description suivi des détials en point de forme du contenu de l'offre
+          - une courte description suivi des détials en point de forme du contenu de l'offre, indique uniquement les informations pertinentes et spécifiées par l'utilisateur.
           - prends note des termes de l'offre, si c'est service, un don, un pret, une vente, ou plusieur à la fois.
           - prépare une liste de hashtags a la pinterest représentant l'offre. Les hashtags doient etre des catégories,
-            des noms, des audiences, des lifestyle, des activitées faites avec ces objets, etc.
+            des noms, des audiences, des lifestyle, des activitées faites avec ces objets, etc
             tu vas ensuite me répondre uniquement un objet JSON validecontenant les infroamtions suivantes:
             \`\`\`
             {"title": [le titre],
@@ -144,7 +144,7 @@ class OpenAiAPI {
       throw error;
     }
   }
-  
+
   async createEmbeddings (input: string): Promise<number[]> {
     const embeddingResponse = await this.client.embeddings.create({
         model: 'text-embedding-ada-002',
@@ -152,7 +152,7 @@ class OpenAiAPI {
       })
 
       await this.calculateCost("createEmbeddings", "text-embedding-ada-002", { prompt: embeddingResponse.usage?.prompt_tokens || 0, completion: 0 });
-  
+
       return embeddingResponse.data[0].embedding
   }
 
@@ -167,7 +167,7 @@ class OpenAiAPI {
     })
 
     await this.calculateCost("jsonCompletion", "gpt-3.5-turbo-0125", { prompt: response.usage?.prompt_tokens || 0, completion: response.usage?.completion_tokens || 0 });
-  
+
     return response.choices[0].message.content ?? '';
   }
 
