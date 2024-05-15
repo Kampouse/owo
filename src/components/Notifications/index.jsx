@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import SingleNotification from './SingleNotification';
 import { Row, Col, Container } from "react-bootstrap";

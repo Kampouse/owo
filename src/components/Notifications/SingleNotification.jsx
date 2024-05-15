@@ -1,3 +1,4 @@
+'use client'
 import Toast from 'react-bootstrap/Toast';
 import React, {useState} from 'react';
 import ReactTimeAgo from 'react-time-ago'
