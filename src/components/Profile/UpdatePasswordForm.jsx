@@ -1,8 +1,11 @@
 import useAuthentication from '@/contexts/authentication/useAuthentication';
 import React, { useState } from 'react';
-import { Form, Card } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardImg, CardTitle, CardHeader } from "@/components/ui/card";
+
+
 
 const UpdatePasswordForm = () => {
   const { updatePassword } = useAuthentication()
@@ -17,9 +20,11 @@ const UpdatePasswordForm = () => {
   }
 
   return (
-    <Card>
-      <Card.Body>
-        <Card.Title>🔐 Changer mon mot de passe</Card.Title>
+    <Card className="my-3">
+      <CardHeader>
+        <CardTitle>🔐 Changer mon mot de passe</CardTitle>
+      </CardHeader>
+      <CardContent>
         <Form onSubmit={handleSubmit(onSubmit, onError)} validated={validated}>
           <Form.Group className="mb-2" controlId="formBasicPasswordReg">
             <Form.Label>Nouveau mot de passe</Form.Label>
@@ -33,7 +38,7 @@ const UpdatePasswordForm = () => {
             Changer
           </Button>
         </Form>
-      </Card.Body>
+      </CardContent>
     </Card>
   )
 }

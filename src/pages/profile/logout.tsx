@@ -6,7 +6,7 @@ import ProfileLayout from '@/components/Profile/ProfileLayout'
 const UserProfile = () => {
   return (
     <div>
-      <Profile />
+      LGOUT
     </div>
   )
 }
