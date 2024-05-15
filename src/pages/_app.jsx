@@ -2,8 +2,7 @@
 
 import { AuthenticationProvider } from '@/contexts/authentication/AuthenticationContext'
 import { UiContextProvider } from '@/contexts/UiContext'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '@/styles/globals.scss'
+import '@/styles/globals.css'
 import TimeAgo from 'javascript-time-ago'
 import Head from 'next/head'
 import en from 'javascript-time-ago/locale/en.json'

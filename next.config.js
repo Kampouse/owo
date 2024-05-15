@@ -11,8 +11,5 @@ const withPWA = require("next-pwa")({
 
   const nextConfig = {
     reactStrictMode: false,
-    sassOptions: {
-      includePaths: [path.join(__dirname, "styles")],
-    },
   };
 module.exports = nextConfig;
