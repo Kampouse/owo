@@ -12,7 +12,7 @@ const Home = () => {
         <title>owo - Économie circulaire à Québec</title>
         <meta name="description" content="owo" />
       </Head>
-      <Container fluid className="bg-primary vh-100">
+      <Container fluid className="g-primary h-screen">
         <Header />
         <WelcomePage />
       </Container>
