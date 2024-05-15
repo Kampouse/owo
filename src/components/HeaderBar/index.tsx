@@ -1,5 +1,6 @@
 import React from 'react';
-import { Navbar, Nav, Button } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
+import { Button } from "@/components/ui/button"
 import { IoIosArrowBack } from 'react-icons/io';
 import { useRouter } from "next/router"
 
@@ -9,7 +10,7 @@ const HeaderBar = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Nav className="mr-auto">
-        <Button variant="light" size="sm" onClick={() => {router.back()}}>
+        <Button variant="ghost" size="sm" onClick={() => {router.back()}}>
           <IoIosArrowBack />
         </Button>
         <Navbar.Brand>{router.pathname}</Navbar.Brand>

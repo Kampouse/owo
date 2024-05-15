@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Form, Card, Nav, Button } from 'react-bootstrap'
+import { Form, Card, Nav } from 'react-bootstrap'
+import { Button } from "@/components/ui/button"
 import cn from 'classnames'
 
 import { AiOutlineCamera } from 'react-icons/ai'

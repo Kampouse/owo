@@ -1,8 +1,7 @@
 // pages/index.tsx
 
 import Head from 'next/head'
-import Container from 'react-bootstrap/Container'
-import { Header, WelcomePage, Listings } from '@/components'
+import { WelcomePage } from '@/components'
 import { AuthLayout } from "@/components/Layouts"
 
 const Home = () => {

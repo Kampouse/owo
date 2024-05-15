@@ -3,7 +3,7 @@ import { useChat } from "@/contexts/ChatContext";
 import { useUi } from '@/contexts/UiContext'
 import { FaPaperPlane } from 'react-icons/fa';
 import { Message } from "@/types/ChatTypes";
-import { Button } from 'react-bootstrap'
+import { Button } from "@/components/ui/button"
 
 interface ChatTextInputProps {
   disabled?: boolean;

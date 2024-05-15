@@ -1,7 +1,8 @@
 import useAuthentication from '@/contexts/authentication/useAuthentication';
 import React, { useState } from 'react';
-import { Form, Button, Card } from 'react-bootstrap';
+import { Form, Card } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import { Button } from "@/components/ui/button"
 
 const UpdatePasswordForm = () => {
   const { updatePassword } = useAuthentication()

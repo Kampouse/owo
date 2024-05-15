@@ -1,7 +1,8 @@
 import useListing from '@/contexts/listing/useListing'
 import { useEffect, useState } from 'react';
 import Listing from '@/components/Listing'
-import { Container, Row, Col, Button, Navbar, ListGroup, Form, FormControl, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Navbar, ListGroup, Form, FormControl, Spinner } from 'react-bootstrap';
+import { Button } from "@/components/ui/button"
 import { PrivateLayout } from "@/components/Layouts"
 import { useRouter } from 'next/router'
 import useAuthentication from '@/contexts/authentication/useAuthentication';
