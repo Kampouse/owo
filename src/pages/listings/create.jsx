@@ -7,7 +7,7 @@ import { Container, Row, Col, Button, Card, Nav } from 'react-bootstrap';
 import { PrivateLayout } from "@/components/Layouts"
 import NewListing from '@/components/Listing/NewListing'
 import { supabase } from "@/config/SupabaseClient"
-import resizeImg from '@/utils/resizeImg'
+import resizeImg from '@/lib/resizeImg'
 import { useRouter } from 'next/router';
 import { v4 as uuidv4 } from 'uuid';
 import useAuthentication from "@/contexts/authentication/useAuthentication";
