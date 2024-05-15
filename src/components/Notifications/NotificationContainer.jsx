@@ -7,6 +7,8 @@ import SingleNotification from './SingleNotification';
 const NotificationContainer = ({ }) => {
   const { uiState: {toasts} } = useUi();
 
+  return (<pre>{JSON.stringify(toasts)}</pre>)
+
   return (
     <ToastContainer position="top-center" className="p-3" style={{ position: 'fixed' }}>
       {toasts.map((toast) => (
