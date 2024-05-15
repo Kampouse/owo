@@ -26,7 +26,7 @@ const CreateListing = () => {
     setIsLoading(true);
 
     const resizedImg = await resizeImg(data.pictureFile, 800, 800)
-    const hdImg = await resizeImg(data.pictureFile, 1500, 1500)
+    const hdImg = await resizeImg(data.pictureFile, 2000, 2000)
 
     fetch('/api/listings/generate', {
       method: 'POST',

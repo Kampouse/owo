@@ -11,7 +11,7 @@ const Login = ({ }) => {
   const onSubmit = async ({ email, password }) => {
     await login({ email, password }, () => router.push('/listings'));
   }
-  
+
 
   return (
     <>
@@ -49,7 +49,7 @@ const Login = ({ }) => {
 
 
 
-      <div className="row">
+      {/* <div className="row">
         <div className="col">
           <Button variant="outline-primary" className="w-100">
             Google
@@ -60,7 +60,7 @@ const Login = ({ }) => {
             Facebook
           </Button>
         </div>
-      </div>
+      </div>*/}
     </>
   )
 }
