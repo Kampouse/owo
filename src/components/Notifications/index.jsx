@@ -6,7 +6,7 @@ const Notifications = ({ notifications }) => {
   return (
     <>
       {notifications.map((notification, index) => (
-        <SingleNotification  {...notification} key={`notiflist-${i}`} />
+        <SingleNotification  {...notification} key={`notiflist-${index}`} />
       ))}
     </>
   )
