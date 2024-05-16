@@ -15,58 +15,54 @@ const NewListing = ({ cancel, saveListing, listing }) => {
   }
 
   return (
-    <ListingLayout
-      title={""}
-      image={listing.picture}
-      left={<>
-        {listing.imageDescription}
-      </>}
-      description={
+      <Form onSubmit={onSave} defaultValues={listing}>
 
-        <Form onSubmit={onSave} defaultValues={listing}>
-          <Input
-            name="title"
-            label="Titre"
-            rules={{
-              required: "Entrez un titre",
-            }}
-          />
-          <Textarea
-            name="description"
-            label="Description"
-            rules={{
-              required: "Entrez une description",
-            }}
+        <Input
+          name="title"
+          label="Titre"
+          rules={{
+            required: "Entrez un titre",
+          }}
+        />
+        <Textarea
+          name="description"
+          label="Description"
+          rules={{
+            required: "Entrez une description",
+          }}
+        />
+        <Textarea
+          name="imageDescription"
+          label="Descirption de l'image (générée)"
+          rules={{
+            required: "Descirption de l'image",
+          }}
+        />
+        <Input
+          name="tags"
+          label="Tags"
+          rules={{
+            required: "Entrez des tags",
+          }}
+        />
 
-          />
-          <Input
-            name="tags"
-            label="Tags"
-            rules={{
-              required: "Entrez des tags",
-            }}
-          />
+        <ListingPriceInput
+          name="price"
+          label="Prix"
+          rules={{
+            required: "Entrez un prix",
+          }}
+        />
 
-          <ListingPriceInput
-            name="price"
-            label="Prix"
-            rules={{
-              required: "Entrez un prix",
-            }}
-          />
-
-          <Nav variant="pills" defaultActiveKey="#first">
-            <Nav.Item>
-              <Button variant="link" className="px-0" onClick={cancel}>X Cancel</Button>
-            </Nav.Item>
-            <Nav.Item className="ml-auto">
-              <Button variant="success" type="submit" disabled={isLoading}>Publier</Button>
-            </Nav.Item>
-          </Nav>
-        </Form>
-      }
-      footer={""}
-    />
+        <Nav variant="pills" defaultActiveKey="#first">
+          <Nav.Item>
+            <Button variant="link" className="px-0" onClick={cancel}>X Cancel</Button>
+          </Nav.Item>
+          <Nav.Item className="ml-auto">
+            <Button variant="success" type="submit" disabled={isLoading}>Publier</Button>
+          </Nav.Item>
+        </Nav>
+      </Form>
   );
 
 }

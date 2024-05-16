@@ -39,7 +39,6 @@ const CreateListing = () => {
     })
       .then(response => response.json())
       .then(resp => {
-        debugger
         const uuid = uuidv4();
         const filePath = `${user?.id}/${uuid}.${hdFile.name.split('.')[1]}`
 
