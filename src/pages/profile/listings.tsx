@@ -6,9 +6,7 @@ import ProfileLayout from '@/components/ProfilePage/ProfileLayout'
 
 const UserProfile = () => {
   return (
-    <div>
-      <ProfileListings />
-    </div>
+    <ProfileListings />
   )
 }
 

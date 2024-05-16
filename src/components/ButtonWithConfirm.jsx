@@ -7,7 +7,7 @@ import Popover from 'react-bootstrap/Popover';
 
 
 
-const ButtonWithConfirm = ({ onClick, children, confirmMessage = "Voulez-vous vraiment supprimer votre annonce ?" }) => {
+const ButtonWithConfirm = ({ onClick, children, confirmMessage = "Voulez-vous vraiment supprimer votre annonce ?", ...props }) => {
   const closePopup = () => {
     document.body.click();
   }
@@ -29,7 +29,7 @@ const ButtonWithConfirm = ({ onClick, children, confirmMessage = "Voulez-vous vr
         </Popover.Body>
       </Popover>
     }>
-      <Button variant="secondary">{children}</Button>
+      <Button {...props}>{children}</Button>
     </OverlayTrigger>
   );
 }

@@ -39,9 +39,7 @@ const ListingLayout = ({ title, image, description, footer, price, userProfile, 
           <div className="text-green-500 mt-2 text-right">{price}$</div>
         }
       </div>
-      <CardFooter>
-        {footer}
-      </CardFooter>
+      {footer}
     </CardContent>
   </Card>
 

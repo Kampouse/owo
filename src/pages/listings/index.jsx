@@ -58,22 +58,22 @@ const Listings = () => {
 
     <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8 p-6 md:p-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {listings.map((listing) => {
-            return (
-              <Listing listing={listing} key={`listingpage-${listing.id}`}>
-                {
-                  user.id !== listing.userProfile.id &&
-                  <Button className="mt-4 w-full" size="sm" onClick={() => createConversation({ title: listing.title, user1: user.id, user2: listing.userProfile.id })}>
-                    <IoIosChatbubbles className="icon" />
-                  </Button>
-                }
-              </Listing>
-            )
-          })}
-    </div>
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-lg font-semibold mb-4">Filters</h2>
-    </div>
+        {listings.map((listing) => {
+          return (
+            <Listing listing={listing} key={`listingpage-${listing.id}`}>
+              {
+                user.id !== listing.userProfile.id &&
+                <Button className="mt-4 w-full" size="sm" onClick={() => createConversation({ title: listing.title, user1: user.id, user2: listing.userProfile.id })}>
+                  <IoIosChatbubbles className="icon" />
+                </Button>
+              }
+            </Listing>
+          )
+        })}
+      </div>
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <h2 className="text-lg font-semibold mb-4">Filters</h2>
+      </div>
   </div>
 </>);
 }
