@@ -5,6 +5,9 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import ChatBottombar from "./chat-bottombar";
 import { AnimatePresence, motion } from "framer-motion";
 
+
+const usersAreSame = (u1: User, u2: User) => u1.id === u2.id;
+
 interface ChatListProps {
   messages?: Message[];
   selectedUser: User;
@@ -57,11 +60,11 @@ export function ChatList({
               }}
               className={cn(
                 "flex flex-col gap-2 p-4 whitespace-pre-wrap",
-                message.user?.username !== selectedUser.username ? "items-end" : "items-start"
+                !usersAreSame(message.user, selectedUser) ? "items-end" : "items-start"
               )}
             >
               <div className="flex gap-3 items-center">
-                {message.user?.username === selectedUser.username && (
+                {usersAreSame(message.user, selectedUser) && (
                   <Avatar className="flex justify-center items-center">
                     <AvatarImage
                       src={message.user?.avatar}
@@ -71,10 +74,10 @@ export function ChatList({
                     />
                   </Avatar>
                 )}
-                <span className=" bg-accent p-3 rounded-md max-w-xs">
+                <span className={cn(!usersAreSame(message.user, selectedUser) ? 'bg-muted' : 'bg-secondary'," p-3 rounded-md max-w-xs")}>
                   {message.content}
                 </span>
-                {message.user?.username !== selectedUser.username && (
+                {!usersAreSame(message.user, selectedUser) && (
                   <Avatar className="flex justify-center items-center">
                     <AvatarImage
                       src={message.user?.avatar}

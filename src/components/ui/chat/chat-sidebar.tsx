@@ -37,28 +37,6 @@ export function Sidebar({ links, isCollapsed, isMobile, conversationsByStatus }:
             <p className="font-medium">Chats</p>
             <span className="text-zinc-300">({links.length})</span>
           </div>
-
-          <div>
-            <Link
-              href="#"
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "icon" }),
-                "h-9 w-9"
-              )}
-            >
-              <MoreHorizontal size={20} />
-            </Link>
-
-            <Link
-              href="#"
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "icon" }),
-                "h-9 w-9"
-              )}
-            >
-              <SquarePen size={20} />
-            </Link>
-          </div>
         </div>
       )}
       <nav className="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
@@ -101,10 +79,8 @@ export function Sidebar({ links, isCollapsed, isMobile, conversationsByStatus }:
               key={index}
               href={`/messages/${link.id}`}
               className={cn(
-              buttonVariants({ variant: link.variant, size: "lg" }),
-                link.variant === "primary" &&
-                "dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white shrink",
-                "justify-start gap-4"
+              buttonVariants({ variant: link.variant }),
+                "justify-start gap-4 p-8"
               )}
             >
               <Avatar className="flex justify-center items-center">
@@ -116,9 +92,9 @@ export function Sidebar({ links, isCollapsed, isMobile, conversationsByStatus }:
                   className="w-10 h-10 "
                 />
               </Avatar>
-              <div className="flex flex-col max-w-28">
+              <div className="flex flex-col max-w-28 gap-1">
                 <span>{link.user.username}</span>
-                <span className="text-zinc-300 text-xs truncate ">{link.title}</span>
+                <span className="text-zinc-500 text-xs truncate ">{link.title}</span>
               </div>
               {conversationsByStatus.countBy(link.id, 'new') >= 0 &&
                 <Badge className="absolute -translate-y-1/2 right-2">

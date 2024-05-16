@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useChat } from "./ChatContext";
 
 type LiveChatProps = {
-    conversation: Conversation,
+    conversation?: Conversation,
     currentUser: User,
 }
 
@@ -22,12 +22,14 @@ const onNewMessage = (syncMessage: (message: Message) => void) => (senderMessage
 
 export const useLiveChat = ({ conversation, currentUser }: LiveChatProps) => {
     const { syncMessage } = useChat()
-    
+
     useEffect(() => {
+      if (conversation) {
         const channel = initializeChannel({ channelId: conversation.id, senderId: currentUser.id!, notifyNewMessage: onNewMessage(syncMessage) })
-  
+
         return () => {
           removeChannel(channel)
         }
+      }
     }, [])
 }
