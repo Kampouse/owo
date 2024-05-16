@@ -1,7 +1,7 @@
-import { Message, UserData } from "@/app/data";
+import { Message, UserData } from "./user-data";
 import { cn } from "@/lib/utils";
 import React, { useRef } from "react";
-import { Avatar, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import ChatBottombar from "./chat-bottombar";
 import { AnimatePresence, motion } from "framer-motion";
 

@@ -9,13 +9,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
-import { buttonVariants } from "../ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { Message, loggedInUserData } from "@/app/data";
-import { Textarea } from "../ui/textarea";
-import { EmojiPicker } from "../emoji-picker";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Message, loggedInUserData } from "./user-data";
+import { Textarea } from "@/components/ui/textarea";
+import { EmojiPicker } from "./emoji-picker";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 interface ChatBottombarProps {
   sendMessage: (newMessage: Message) => void;
@@ -90,12 +90,12 @@ export default function ChatBottombar({
           <PlusCircle size={20} className="text-muted-foreground" />
         </Link>
             </PopoverTrigger>
-            <PopoverContent 
+            <PopoverContent
             side="top"
             className="w-full p-2">
              {message.trim() || isMobile ? (
                <div className="flex gap-2">
-                <Link 
+                <Link
               href="#"
               className={cn(
                 buttonVariants({ variant: "ghost", size: "icon" }),
@@ -120,7 +120,7 @@ export default function ChatBottombar({
                ))}
              </div>
              ) : (
-              <Link 
+              <Link
               href="#"
               className={cn(
                 buttonVariants({ variant: "ghost", size: "icon" }),
