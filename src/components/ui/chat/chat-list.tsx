@@ -1,4 +1,4 @@
-import { Message, UserData } from "./user-data";
+import { Message, User } from '@/types/ChatTypes';
 import { cn } from "@/lib/utils";
 import React, { useRef } from "react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -7,16 +7,18 @@ import { AnimatePresence, motion } from "framer-motion";
 
 interface ChatListProps {
   messages?: Message[];
-  selectedUser: UserData;
+  selectedUser: User;
   sendMessage: (newMessage: Message) => void;
   isMobile: boolean;
+  currentUser: User;
 }
 
 export function ChatList({
   messages,
   selectedUser,
   sendMessage,
-  isMobile
+  isMobile,
+  currentUser,
 }: ChatListProps) {
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
@@ -55,28 +57,28 @@ export function ChatList({
               }}
               className={cn(
                 "flex flex-col gap-2 p-4 whitespace-pre-wrap",
-                message.name !== selectedUser.name ? "items-end" : "items-start"
+                message.user?.username !== selectedUser.username ? "items-end" : "items-start"
               )}
             >
               <div className="flex gap-3 items-center">
-                {message.name === selectedUser.name && (
+                {message.user?.username === selectedUser.username && (
                   <Avatar className="flex justify-center items-center">
                     <AvatarImage
-                      src={message.avatar}
-                      alt={message.name}
+                      src={message.user?.avatar}
+                      alt={message.user?.username}
                       width={6}
                       height={6}
                     />
                   </Avatar>
                 )}
                 <span className=" bg-accent p-3 rounded-md max-w-xs">
-                  {message.message}
+                  {message.content}
                 </span>
-                {message.name !== selectedUser.name && (
+                {message.user?.username !== selectedUser.username && (
                   <Avatar className="flex justify-center items-center">
                     <AvatarImage
-                      src={message.avatar}
-                      alt={message.name}
+                      src={message.user?.avatar}
+                      alt={message.user.username}
                       width={6}
                       height={6}
                     />
@@ -87,7 +89,7 @@ export function ChatList({
           ))}
         </AnimatePresence>
       </div>
-      <ChatBottombar sendMessage={sendMessage} isMobile={isMobile}/>
+      <ChatBottombar currentUser={currentUser} sendMessage={sendMessage} isMobile={isMobile}/>
     </div>
   );
 }

@@ -10,9 +10,9 @@ import {
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { buttonVariants } from "@/components/ui/button";
+import { Message, User } from '@/types/ChatTypes';
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { Message, loggedInUserData } from "./user-data";
 import { Textarea } from "@/components/ui/textarea";
 import { EmojiPicker } from "./emoji-picker";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -20,12 +20,13 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 interface ChatBottombarProps {
   sendMessage: (newMessage: Message) => void;
   isMobile: boolean;
+  currentUser: User;
 }
 
 export const BottombarIcons = [{ icon: FileImage }, { icon: Paperclip }];
 
 export default function ChatBottombar({
-  sendMessage, isMobile,
+  sendMessage, isMobile, currentUser
 }: ChatBottombarProps) {
   const [message, setMessage] = useState("");
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -35,24 +36,26 @@ export default function ChatBottombar({
   };
 
   const handleThumbsUp = () => {
-    const newMessage: Message = {
-      id: message.length + 1,
-      name: loggedInUserData.name,
-      avatar: loggedInUserData.avatar,
-      message: "👍",
-    };
+    const newMessage = new Message(
+      currentUser,
+      '👍',
+      new Date().toISOString(),
+      "m-" + Math.floor(Math.random() * 10000), // Replace with a proper ID generation method
+      'text',
+    );
     sendMessage(newMessage);
     setMessage("");
   };
 
   const handleSend = () => {
     if (message.trim()) {
-      const newMessage: Message = {
-        id: message.length + 1,
-        name: loggedInUserData.name,
-        avatar: loggedInUserData.avatar,
-        message: message.trim(),
-      };
+    const newMessage = new Message(
+      currentUser,
+      message.trim(),
+      new Date().toISOString(),
+      "m-" + Math.floor(Math.random() * 10000), // Replace with a proper ID generation method
+      'text',
+    );
       sendMessage(newMessage);
       setMessage("");
 
@@ -76,82 +79,6 @@ export default function ChatBottombar({
 
   return (
     <div className="p-2 flex justify-between w-full items-center gap-2">
-      <div className="flex">
-          <Popover>
-            <PopoverTrigger asChild>
-            <Link
-          href="#"
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "icon" }),
-            "h-9 w-9",
-            "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
-          )}
-        >
-          <PlusCircle size={20} className="text-muted-foreground" />
-        </Link>
-            </PopoverTrigger>
-            <PopoverContent
-            side="top"
-            className="w-full p-2">
-             {message.trim() || isMobile ? (
-               <div className="flex gap-2">
-                <Link
-              href="#"
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "icon" }),
-                "h-9 w-9",
-                "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
-              )}
-              >
-                <Mic size={20} className="text-muted-foreground" />
-              </Link>
-               {BottombarIcons.map((icon, index) => (
-                 <Link
-                   key={index}
-                   href="#"
-                   className={cn(
-                     buttonVariants({ variant: "ghost", size: "icon" }),
-                     "h-9 w-9",
-                     "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
-                   )}
-                 >
-                   <icon.icon size={20} className="text-muted-foreground" />
-                 </Link>
-               ))}
-             </div>
-             ) : (
-              <Link
-              href="#"
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "icon" }),
-                "h-9 w-9",
-                "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
-              )}
-              >
-                <Mic size={20} className="text-muted-foreground" />
-              </Link>
-             )}
-            </PopoverContent>
-          </Popover>
-        {!message.trim() && !isMobile && (
-          <div className="flex">
-            {BottombarIcons.map((icon, index) => (
-              <Link
-                key={index}
-                href="#"
-                className={cn(
-                  buttonVariants({ variant: "ghost", size: "icon" }),
-                  "h-9 w-9",
-                  "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
-                )}
-              >
-                <icon.icon size={20} className="text-muted-foreground" />
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-
       <AnimatePresence initial={false}>
         <motion.div
           key="input"
@@ -176,7 +103,7 @@ export default function ChatBottombar({
             onChange={handleInputChange}
             name="message"
             placeholder="Aa"
-            className=" w-full border rounded-full flex items-center h-9 resize-none overflow-hidden bg-background"
+            className=" w-full border flex items-center h-9 resize-none overflow-hidden bg-background"
           ></Textarea>
           <div className="absolute right-2 bottom-0.5  ">
             <EmojiPicker onChange={(value) => {

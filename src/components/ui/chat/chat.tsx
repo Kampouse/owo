@@ -1,32 +1,27 @@
-import { Message, UserData } from "./user-data";
+import { Message, Conversation, User } from '@/types/ChatTypes';
 import ChatTopbar from "./chat-topbar";
 import { ChatList } from "./chat-list";
 import React from "react";
 
 interface ChatProps {
-  messages?: Message[];
-  selectedUser: UserData;
+  conversation: Conversation;
   isMobile: boolean;
+  sendMessage: (newMessage: Message) => void;
+  currentUser: User;
 }
 
-export function Chat({ messages, selectedUser, isMobile }: ChatProps) {
-  const [messagesState, setMessages] = React.useState<Message[]>(
-    messages ?? []
-  );
-
-  const sendMessage = (newMessage: Message) => {
-    setMessages([...messagesState, newMessage]);
-  };
+export function Chat({ currentUser, conversation, sendMessage, conversation: { messages }, isMobile }: ChatProps) {
 
   return (
     <div className="flex flex-col justify-between w-full h-full">
-      <ChatTopbar selectedUser={selectedUser} />
+      <ChatTopbar selectedUser={conversation.user} />
 
       <ChatList
-        messages={messagesState}
-        selectedUser={selectedUser}
+        messages={messages}
+        selectedUser={conversation.user}
         sendMessage={sendMessage}
         isMobile={isMobile}
+        currentUser={currentUser}
       />
     </div>
   );
