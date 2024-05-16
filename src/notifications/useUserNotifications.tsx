@@ -3,7 +3,8 @@ import { useToast } from "@/components/ui/use-toast"
 import { ToastAction } from "@/components/ui/toast"
 import { useNotificationContext } from "./NotificationContext"
 import { UserConversationNotification } from "./UserNotification"
-import { ConversationId, viewNotification } from "./UserNotificationClient"
+import { ConversationId } from "./UserNotificationClient"
+import { useRouter } from "next/router"
 
 export type Countable = {
   countBy(conversationId: ConversationId, status: UserConversationNotification['status']): number
@@ -51,6 +52,7 @@ type UserNotificationUsecase = {
 export const useUserNotification = (): UserNotificationUsecase => {
   const { userNotifications, setUserNotifications } = useNotificationContext()
   const { toast } = useToast()
+  const router = useRouter()
 
   const conversationsByStatus = useMemo(() => {
     return UserConversationNotificationsGroupedByStatus.create().setNotifications(userNotifications)
@@ -69,7 +71,7 @@ export const useUserNotification = (): UserNotificationUsecase => {
           toast({
             title: notification.context.from,
             description: notification.excerpt,
-            action: <ToastAction altText="👀" onClick={() => viewNotification(notification.context.conversationId)}>👀</ToastAction>
+            action: <ToastAction altText="👀" onClick={() => router.push(`/messages/${notification.context.conversationId}`)}>👀</ToastAction>
           })
         }
       } else {
