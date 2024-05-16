@@ -9,7 +9,7 @@ const ListingLayout = ({ title, image, description, footer, price, userProfile, 
     <div className="absolute top-2 left-2 bg-white rounded-full p-1 flex items-center gap-2 z-10">
       <Avatar className="w-6 h-6 border">
         <AvatarImage alt="@shadcn" src={"https://api.multiavatar.com/" + userProfile.id + '.png'} />
-        <AvatarFallback>AC</AvatarFallback>
+        <AvatarFallback>{userProfile.username.substr(0,2)}</AvatarFallback>
       </Avatar>
       <div className="text-xs font-medium pr-2">@{userProfile.username}</div>
     </div>
