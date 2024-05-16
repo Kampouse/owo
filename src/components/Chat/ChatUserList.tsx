@@ -95,7 +95,7 @@ return (
               <span className="text-zinc-300 text-xs truncate ">{chat.title}</span>
             </div>
             {conversationsByStatus.countBy(chat.id, 'new') >= 0 &&
-              <Badge className="absolute top-1/2 -translate-y-1/2 right-2">
+              <Badge className="absolute -translate-y-1/2 right-2">
                 {conversationsByStatus.countBy(chat.id, 'new')}
               </Badge>
             }
