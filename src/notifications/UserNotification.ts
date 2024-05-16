@@ -10,6 +10,7 @@ type UserNotification<T> = {
 
 type ConversationContext = {
   conversationId: string,
+  from: string,
 }
 
 export type UserConversationNotification = UserNotification<ConversationContext>

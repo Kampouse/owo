@@ -1,8 +1,9 @@
-import { useUi } from "@/contexts/UiContext"
+import React, { useMemo } from "react"
+import { useToast } from "@/components/ui/use-toast"
+import { ToastAction } from "@/components/ui/toast"
 import { useNotificationContext } from "./NotificationContext"
 import { UserConversationNotification } from "./UserNotification"
-import { ConversationId } from "./UserNotificationClient"
-import { useMemo } from "react"
+import { ConversationId, viewNotification } from "./UserNotificationClient"
 
 export type Countable = {
   countBy(conversationId: ConversationId, status: UserConversationNotification['status']): number
@@ -49,7 +50,7 @@ type UserNotificationUsecase = {
 // or onesignal.com
 export const useUserNotification = (): UserNotificationUsecase => {
   const { userNotifications, setUserNotifications } = useNotificationContext()
-  const { addToast } = useUi()
+  const { toast } = useToast()
 
   const conversationsByStatus = useMemo(() => {
     return UserConversationNotificationsGroupedByStatus.create().setNotifications(userNotifications)
@@ -65,11 +66,14 @@ export const useUserNotification = (): UserNotificationUsecase => {
         setUserNotifications([...userNotifications, notification])
 
         if (notification.status === 'new') {
-          addToast(notification)
+          toast({
+            title: notification.context.from,
+            description: notification.excerpt,
+            action: <ToastAction altText="👀" onClick={() => viewNotification(notification.context.conversationId)}>👀</ToastAction>
+          })
         }
       } else {
-        const updatedNotification: UserConversationNotification = {...notificationToModify, status: 'seen' }
-        const updatedNotifications = [...userNotifications.filter(userNotification => userNotification.id !== notificationToModify.id), updatedNotification]
+        const updatedNotifications = [...userNotifications.filter(userNotification => userNotification.id !== notificationToModify.id), notification]
         setUserNotifications(updatedNotifications)
       }
     },

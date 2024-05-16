@@ -3,7 +3,7 @@ import { AppNav, Onboarding } from '@/components'
 import usePrivatePage from '@/contexts/authentication/usePrivatePage';
 import { useNotificationBroadcaster } from '@/notifications/useNotificationBroadcaster';
 import { NotificationProvider } from '@/notifications/NotificationContext';
-import NotificationContainer from '@/components/Notifications/NotificationContainer';
+import { Toaster } from "@/components/ui/toaster"
 
 const InnerLayout: React.FC<PropsWithChildren> = ({ children }) => {
   useNotificationBroadcaster()
@@ -15,7 +15,7 @@ const InnerLayout: React.FC<PropsWithChildren> = ({ children }) => {
         <main>{children}</main>
       </div>
       <Onboarding />
-      <NotificationContainer />
+      <Toaster />
     </>
   )
 }
