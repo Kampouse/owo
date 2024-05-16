@@ -15,7 +15,7 @@ const Registration = ({ }) => {
         <li><b>Recherche intelligente</b> : La recherche utilise l'intelligence artificielle pour présenter les résultats les plus pertinents, peu importe les mots que tu utilises. Cela te permet aussi d'être très détaillé dans ta recherche.</li>
       </ul>
 
-      <p>Si tu as des suggestions ou veux nous donner des commentaires sur ton expérience avec les annonces, <a href="#">écris-nous ici</a> !</p>
+      <p>Si tu as des suggestions ou veux nous donner des commentaires sur ton expérience avec les annonces, <a href="mailto:info@owo.quebec">écris-nous ici</a> !</p>
 
       <p>Et n'oublie pas, si une annonce t'interpelle, clique simplement sur le bouton avec la bulle 🗨️ pour entrer en contact avec son auteur. L'échange, le partage et la découverte n'ont jamais été aussi simples !</p>
 

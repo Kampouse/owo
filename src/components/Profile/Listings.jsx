@@ -1,4 +1,4 @@
-import { Row, Figure } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import Listing from '@/components/Listing'
 import { ButtonWithConfirm  } from '@/components'
 import { useEffect } from 'react';

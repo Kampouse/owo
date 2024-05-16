@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react';
 import { ToastContainer } from 'react-bootstrap';
 import { useUi } from '@/contexts/UiContext'
@@ -6,8 +7,6 @@ import SingleNotification from './SingleNotification';
 
 const NotificationContainer = ({ }) => {
   const { uiState: {toasts} } = useUi();
-
-  return (<pre>{JSON.stringify(toasts)}</pre>)
 
   return (
     <ToastContainer position="top-center" className="p-3" style={{ position: 'fixed' }}>

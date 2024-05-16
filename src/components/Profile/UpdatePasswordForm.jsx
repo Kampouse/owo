@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardImg, CardTitle, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardTitle, CardHeader } from "@/components/ui/card";
 
 
 

@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import ListingLayout from '@/components/Listing/Layout'
 import { Nav } from 'react-bootstrap';
 import { Button } from "@/components/ui/button"
-import { PictureInput, Form, Input, Textarea, ListingPriceInput } from '@/components/Form'
+import { Form, Input, Textarea, ListingPriceInput } from '@/components/Form'
 
 
 const NewListing = ({ cancel, saveListing, listing }) => {

@@ -3,7 +3,6 @@ import useAuthentication from "@/contexts/authentication/useAuthentication"
 import { Card, CardContent, CardDescription, CardImg, CardTitle, CardHeader } from "@/components/ui/card";
 
 
-import { useRouter } from "next/router";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
