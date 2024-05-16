@@ -63,7 +63,7 @@ const AppNav = () => {
         <Sheet>
           <SheetTrigger asChild>
             <Button className="rounded-full lg:hidden" size="icon" variant="outline">
-              <MenuIcon className="h-6 w-6" />
+              <MenuIcon className="h-6 w-6 text-black" />
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
