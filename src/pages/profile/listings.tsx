@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import { ProfileListings } from "@/components"
 import { PrivateLayout } from "@/components/Layouts"
-import ProfileLayout from '@/components/Profile/ProfileLayout'
+import ProfileLayout from '@/components/ProfilePage/ProfileLayout'
 
 
 const UserProfile = () => {
