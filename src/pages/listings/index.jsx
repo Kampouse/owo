@@ -1,7 +1,7 @@
 import useListing from '@/contexts/listing/useListing'
 import { useEffect, useState } from 'react';
 import Listing from '@/components/Listing'
-import { Container, Row, Col, Button, Navbar, ListGroup, Form, FormControl, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Button, Navbar, Form, FormControl, Spinner } from 'react-bootstrap';
 import { PrivateLayout } from "@/components/Layouts"
 import { useRouter } from 'next/router'
 import useAuthentication from '@/contexts/authentication/useAuthentication';
@@ -24,8 +24,13 @@ const Listings = () => {
   }
 
   const searchAction = (event) => {
-    search(currentSearch);
+    search(currentSearch)
     event.preventDefault()
+  }
+
+  const resetSearch = () => {
+    setCurrentSearch('')
+    getAll()
   }
 
   return (
@@ -35,8 +40,8 @@ const Listings = () => {
         <Navbar.Brand href="#home">Les annonces</Navbar.Brand>
         <Form className="form-inline" method="post" onSubmit={searchAction}>
           <FormControl type="text" placeholder="Recherche" onChange={(event) => setCurrentSearch(event.target.value)} value={currentSearch} />
-          <Button variant="outline-success" onClick={searchAction}>{loading ? <Spinner as="span" size="sm" /> : 'Recherche'}</Button>
-          <Button variant="outline-success" onClick={getAll}>Réinitialiser la recherche!</Button>
+          <Button disabled={loading || currentSearch === ''} variant="outline-success" onClick={searchAction}>{loading ? <Spinner as="span" size="sm" /> : 'Recherche'}</Button>
+          <Button disabled={currentSearch === ''} variant="outline-success" onClick={resetSearch}>Réinitialiser la recherche!</Button>
         </Form>
       </Navbar>
 

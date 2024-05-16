@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
+import React from 'react';
+import { Row, Col, Card } from 'react-bootstrap';
 import ReactTimeAgo from 'react-time-ago'
 import ListingLayout from './Layout'
 
@@ -9,8 +9,6 @@ const borderTypes = {
   'pret': 'info',
   'service': 'success',
 }
-
-const getTypeColor = (type) => type && type.length ? borderTypes[type[0]] : 'primary'
 
 const Listing = ({ listing: { id, title, description, type, tags, userProfile, created_at, images, price }, children, noProfile }) => {
   return (

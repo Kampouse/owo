@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import ListingLayout from '@/components/Listing/Layout'
-import { Container, Row, Col, Button, Card, Nav } from 'react-bootstrap';
-import { PictureInput, Form, Input, Textarea, ListingPriceInput } from '@/components/Form'
+import { Button, Nav } from 'react-bootstrap';
+import { Form, Input, Textarea, ListingPriceInput } from '@/components/Form'
 
 
 const NewListing = ({ cancel, saveListing, listing }) => {
@@ -68,9 +67,6 @@ const NewListing = ({ cancel, saveListing, listing }) => {
       footer={""}
     />
   );
-
 }
-
-NewListing.propTypes = {};
 
 export default NewListing;
