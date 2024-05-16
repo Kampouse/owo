@@ -17,35 +17,35 @@ import { cn } from "@/lib/utils"
 const AppNav = () => {
   const { hasNewNotification  } = useUserNotification()
   return (
-    <header className="flex h-16 w-full items-center justify-between px-4 bg-white shadow-sm dark:bg-gray-950 dark:text-gray-50">
+    <header className="flex h-16 w-full items-center justify-between py-4 px-6 md:px-8  bg-gray-900 text-white shadow-sm dark:bg-gray-950 dark:text-gray-50">
       <Link className="flex items-center gap-2" href="/listings">
         <OwoIcon className="h-6 w-6" />
-        <span className="sr-only">Acme Inc</span>
+        <span className="sr-only">owo</span>
       </Link>
       <nav className="hidden flex-1 justify-center lg:flex items-center gap-6">
         <Link
-          className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-900 dark:hover:text-gray-50"
+          className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-500"
           href="/listings"
         >
           <NewspaperIcon className="h-5 w-5" />
           <span className="hidden md:inline">Annonces</span>
         </Link>
         <Link
-          className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-900 dark:hover:text-gray-50"
+          className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-500"
           href="/messages"
         >
           <MessagesSquareIcon className="h-5 w-5" />
           <span className="hidden md:inline">Messages</span>
         </Link>
         <Link
-          className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-900 dark:hover:text-gray-50"
+          className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-500"
           href="/listings/create"
         >
           <PlusIcon className="h-5 w-5" />
           <span className="hidden md:inline">Annoncer</span>
         </Link>
         <Link
-          className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-900 dark:hover:text-gray-50"
+          className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-500"
           href="/profile"
         >
           <UserIcon className="h-5 w-5" />
@@ -54,11 +54,11 @@ const AppNav = () => {
       </nav>
       <div className="flex items-center gap-4">
         <Link
-          className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-900 dark:hover:text-gray-50"
+          className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-500"
           href="/notifications"
         >
           <BellIcon className={cn("h-5 w-5", { 'text-red-500': hasNewNotification })} />
-          <span className="hidden md:inline">Notifications</span>
+          <span className="hidden">Notifications</span>
         </Link>
         <Sheet>
           <SheetTrigger asChild>
