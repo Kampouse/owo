@@ -7,6 +7,8 @@ export class User {
 }
 
 export type MessageType = 'text' | 'image' // | 'video' | 'audio' | 'file' | 'location' | 'sticker' | 'contact' | 'link' | 'poll' | 'template' | 'list' | 'carousel' | 'buttons' | 'quickReplies' | 'form' | 'custom'
+
+// REFACTOR: make user a not required info, and in the context  addMessage fill it with the current user. if the user is not present.
 export class Message {
   id: string;
   user: User;
@@ -79,3 +81,14 @@ export class BotMessage extends Message {
   }
 
 }
+
+
+export type ChatInputProps = {
+  sendMessage: (newMessage: Message) => void;
+  currentUser: User;
+
+}
+export type DynamicInputProps = ChatInputProps &{
+  inputMode: BotMode;
+}
+

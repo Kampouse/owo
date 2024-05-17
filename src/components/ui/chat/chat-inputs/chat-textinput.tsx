@@ -1,28 +1,20 @@
 import {
-  FileImage,
-  Paperclip,
   SendHorizontal,
   ThumbsUp,
 } from "lucide-react";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { buttonVariants } from "@/components/ui/button";
-import { Message, User, BotMode } from '@/types/ChatTypes';
+import { Message, ChatInputProps } from '@/types/ChatTypes';
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { Textarea } from "@/components/ui/textarea";
 import { EmojiPicker } from "./emoji-picker";
 
-interface ChatTextinputProps {
-  sendMessage: (newMessage: Message) => void;
-  currentUser: User;
-}
-
-export const BottombarIcons = [{ icon: FileImage }, { icon: Paperclip }];
 
 export default function ChatTextinput({
   sendMessage, currentUser
-}: ChatTextinputProps) {
+}: ChatInputProps) {
   const [message, setMessage] = useState("");
   const inputRef = useRef<HTMLTextAreaElement>(null);
 

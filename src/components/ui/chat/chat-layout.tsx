@@ -106,9 +106,9 @@ export function ChatLayout({
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
+        {isBot && <button onClick={resetBot}>reset bot // TODO: ####</button>}
 
-      {isBot && <button onClick={resetBot}>reset bot // TODO: ####</button>}
-            {JSON.stringify(botMode)}
+
         <div className="flex flex-col justify-between w-full h-full">
           <ChatTopbar selectedUser={conversation.user} />
           <ChatList
