@@ -4,7 +4,7 @@ import { SEARCH_BOT_CONFIG } from '@/bots/search/config'
 import { Message, BotMessage, BotMode } from "@/types/ChatTypes";
 import { useChat } from "./ChatContext";
 
-interface BotContextData {
+export interface BotContextData {
   botMemory: Record<string, string>;
   botMode: BotMode;
   resetBot: () => void;

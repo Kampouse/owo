@@ -9,11 +9,14 @@ import {
 import { User, Conversation } from '@/types/ChatTypes';
 import { cn } from "@/lib/utils";
 import { Sidebar } from "./chat-sidebar";
+import ChatTopbar from "./chat-topbar";
+import { ChatList } from "./chat-list";
 import { Countable } from '@/notifications/useUserNotifications';
-import { Chat } from "./chat";
+import ChatBottombar from "./chat-bottombar";
+import { BotMode } from "@/types/ChatTypes";
 
 interface ChatLayoutProps {
-  defaultLayout: number[] | undefined;
+  defaultLayout?: number[];
   defaultCollapsed?: boolean;
   navCollapsedSize: number;
   conversations: Conversation[]
@@ -21,6 +24,7 @@ interface ChatLayoutProps {
   currentChatId: string,
   conversation: Conversation,
   currentUser: User,
+  botCongif: { resetBot: () => void, isBot: boolean, botMode: BotMode }
   sendMessage: (newMessage: any) => void;
 }
 
@@ -34,6 +38,7 @@ export function ChatLayout({
   conversation,
   currentUser,
   sendMessage,
+  botCongif: { resetBot, isBot, botMode },
 }: ChatLayoutProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
   const [isMobile, setIsMobile] = useState(false);
@@ -101,12 +106,22 @@ export function ChatLayout({
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
-        <Chat
-          sendMessage={sendMessage}
-          conversation={conversation}
-          isMobile={isMobile}
-          currentUser={currentUser}
-        />
+
+      {isBot && <button onClick={resetBot}>reset bot // TODO: ####</button>}
+            {JSON.stringify(botMode)}
+        <div className="flex flex-col justify-between w-full h-full">
+          <ChatTopbar selectedUser={conversation.user} />
+          <ChatList
+            messages={conversation.messages}
+            selectedUser={conversation.user}
+            sendMessage={sendMessage}
+            isMobile={isMobile}
+            currentUser={currentUser}
+          >
+            <ChatBottombar currentUser={currentUser} sendMessage={sendMessage} isMobile={isMobile} inputMode={isBot ? botMode : 'listen'} />
+          </ChatList>
+        </div>
+
       </ResizablePanel>
     </ResizablePanelGroup>
   );

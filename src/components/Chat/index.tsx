@@ -1,19 +1,23 @@
 import React, { useEffect } from "react";
 import { useChat } from "@/contexts/ChatContext";
-
-import ChatWithBot from './ChatBot'
 import { useUserNotification } from "@/notifications/useUserNotifications";
 import { ChatLayout } from '@/components/ui/chat/chat-layout';
 import { viewNotificationsFromConversation } from '@/notifications/UserNotificationClient';
 import { useLiveChat } from '@/contexts/useLiveChat';
+import { useBot } from "@/contexts/BotContext";
 
 const Chat: React.FC = () => {
-  // const layout = cookies().get("react-resizable-panels:layout");
-  // const defaultLayout = layout ? JSON.parse(layout.value) : undefined;
 
   const { selectedConversation: conversation, currentUser, conversations, currentChatId, isSelectedConversationBot, addMessage } = useChat();
+  // TODO: es-ce que j'ai besoin de caller getMessages ici?
+  // const currentMessages = conversation?.messages || getMessages();
+  const { resetBot, botMode, botMemory } = useBot();
+
   const { conversationsByStatus } = useUserNotification();
+
+
   useLiveChat({ conversation, currentUser })
+
 
   useEffect(() => {
     if (currentUser.id && conversation?.id) {
@@ -26,12 +30,10 @@ const Chat: React.FC = () => {
   }
 
 
-  // TODO: make the height dynamic / responsive intelligent
   return (
     <>
       <div className="z-10 border h-[calc(100dvh-200px)] rounded-lg w-full text-sm">
         <ChatLayout
-          defaultLayout={undefined}
           navCollapsedSize={8}
           conversations={conversations}
           currentChatId={currentChatId}
@@ -39,9 +41,8 @@ const Chat: React.FC = () => {
           conversation={conversation}
           currentUser={currentUser}
           sendMessage={addMessage}
+          botCongif={{resetBot, isBot: isSelectedConversationBot, botMode}}
         />
-
-        {isSelectedConversationBot && <ChatWithBot />}
       </div>
     </>
 

@@ -14,6 +14,7 @@ interface ChatListProps {
   sendMessage: (newMessage: Message) => void;
   isMobile: boolean;
   currentUser: User;
+  children: React.ReactNode;
 }
 
 export function ChatList({
@@ -22,6 +23,7 @@ export function ChatList({
   sendMessage,
   isMobile,
   currentUser,
+  children
 }: ChatListProps) {
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
@@ -92,7 +94,7 @@ export function ChatList({
           ))}
         </AnimatePresence>
       </div>
-      <ChatBottombar currentUser={currentUser} sendMessage={sendMessage} isMobile={isMobile}/>
+      {children}
     </div>
   );
 }
