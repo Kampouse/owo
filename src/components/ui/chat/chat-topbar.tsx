@@ -1,20 +1,17 @@
 import React from 'react'
-import { User } from '@/types/ChatTypes';
+import { User, ButtonBarIcons } from '@/types/ChatTypes';
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { Info, Phone, Video } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 
 interface ChatTopbarProps {
   selectedUser: User;
+  buttonBarIcons: ButtonBarIcons
 }
 
-//export const TopbarIcons = [{ icon: Phone }, { icon: Video }, { icon: Info }];
-// TODO: make that work with the bot
-export const TopbarIcons = [];
-
-export default function ChatTopbar({ selectedUser }: ChatTopbarProps) {
+export default function ChatTopbar({ selectedUser, buttonBarIcons }: ChatTopbarProps) {
   return (
     <div className="w-full h-20 flex p-4 justify-between items-center border-b">
         <div className="flex items-center gap-2">
@@ -29,23 +26,21 @@ export default function ChatTopbar({ selectedUser }: ChatTopbarProps) {
           </Avatar>
           <div className="flex flex-col">
             <span className="font-medium">{selectedUser.username}</span>
-            <span className="text-xs"># TODO: Active 2 mins ago</span>
+            <span className="text-xs"># TODO: Active 2 mins ago //  TODO: Nom de l'obet a vendre // title de la conversation </span>
           </div>
         </div>
 
         <div>
-          {TopbarIcons.map((icon, index) => (
-            <Link
+          {buttonBarIcons.map(({ icon: Icon, onClick }, index) => (
+            <Button
               key={index}
-              href="#"
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "icon" }),
-                "h-9 w-9",
-                "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
-              )}
+              onClick={onClick}
+              className="h-9 w-9"
+              size="icon"
+              variant="outline"
             >
-              <icon.icon size={20} className="text-muted-foreground" />
-            </Link>
+              <Icon size={20} className="text-muted-foreground" />
+            </Button>
           ))}
         </div>
       </div>

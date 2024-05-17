@@ -14,6 +14,7 @@ import { ChatList } from "./chat-list";
 import { Countable } from '@/notifications/useUserNotifications';
 import ChatBottombar from "./chat-bottombar";
 import { BotMode } from "@/types/ChatTypes";
+import { ListRestart } from "lucide-react"
 
 interface ChatLayoutProps {
   defaultLayout?: number[];
@@ -106,11 +107,12 @@ export function ChatLayout({
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
-        {isBot && <button onClick={resetBot}>reset bot // TODO: ####</button>}
-
 
         <div className="flex flex-col justify-between w-full h-full">
-          <ChatTopbar selectedUser={conversation.user} />
+          <ChatTopbar
+            selectedUser={conversation.user}
+            buttonBarIcons={isBot ? [{ icon:ListRestart, onClick:resetBot }] :[]}
+            />
           <ChatList
             messages={conversation.messages}
             selectedUser={conversation.user}

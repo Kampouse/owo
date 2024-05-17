@@ -92,3 +92,4 @@ export type DynamicInputProps = ChatInputProps &{
   inputMode: BotMode;
 }
 
+export type ButtonBarIcons = { icon: React.FC<any>, onClick: (e: any) => void }[];
