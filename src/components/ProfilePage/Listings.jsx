@@ -5,7 +5,7 @@ import useListing from '@/contexts/listing/useListing'
 import useAuthentication from "@/contexts/authentication/useAuthentication"
 
 const UserListings = ({ }) => {
-  const { listings, getAll, deleteListingById } = useListing()
+  const { listings, getAll, deleteListingById, sellListingById } = useListing()
   const { user } = useAuthentication() || {};
 
   useEffect(() => {
@@ -20,7 +20,12 @@ const UserListings = ({ }) => {
           <Listing
             listing={listing}
             key={listing.id}>
-            <ButtonWithConfirm className="mt-4 w-full" size="sm" onClick={() => { deleteListingById(listing.id) }}>Supprimer</ButtonWithConfirm>
+            <ButtonWithConfirm className="mt-4 w-full" size="sm" onClick={() => { deleteListingById(listing.id)
+      .then(() => {
+        if (confirm(`Est-ce que l'offre a été vendu?`)) {
+          sellListingById(listing.id)
+        }
+      })}}>Supprimer</ButtonWithConfirm>
           </Listing>
         )
       })}

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Listing } from "./Listing"
-import { fetchListings, searchListings, deleteListing } from "./ListingClient"
+import { fetchListings, searchListings, deleteListing, markAsSoldListing } from "./ListingClient"
 
 type UseListing = {
     listings: Listing[]
@@ -8,6 +8,7 @@ type UseListing = {
     getAll: () => Promise<void>
     search: (query: string) => Promise<void>
     deleteListingById: (id: string) => Promise<void>
+    sellListingById: (id: string) => Promise<void>
 }
 
 const useListing = (): UseListing => {
@@ -29,6 +30,12 @@ const useListing = (): UseListing => {
         setLoading(false)
     }
 
+    const sellListingById = async (id: string): Promise<void> => {
+        setLoading(true)
+        await markAsSoldListing({ id })
+        setLoading(false)
+    }
+
     const search = async (query: string): Promise<void> => {
         setLoading(true)
         const newListings = await searchListings({ searchQuery: query })
@@ -36,7 +43,7 @@ const useListing = (): UseListing => {
         setLoading(false)
     }
 
-    return { listings, loading, getAll, search, deleteListingById }
+    return { listings, loading, getAll, search, deleteListingById, sellListingById }
 }
 
 export default useListing
