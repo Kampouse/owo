@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ListingLayout from '@/components/Listing/Layout'
 import { Nav } from 'react-bootstrap';
 import { Button } from "@/components/ui/button"
 import { Form, Input, Textarea, ListingPriceInput } from '@/components/Form'
@@ -64,9 +63,6 @@ const NewListing = ({ cancel, saveListing, listing }) => {
         </Nav>
       </Form>
   );
-
 }
-
-NewListing.propTypes = {};
 
 export default NewListing;

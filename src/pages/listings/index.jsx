@@ -27,7 +27,7 @@ const Listings = () => {
 
   // TODO: submit on stop writing if not "enter"
   const searchAction = (event) => {
-    search(currentSearch);
+    search(currentSearch)
     event.preventDefault()
   }
 
@@ -35,7 +35,7 @@ const Listings = () => {
     if (currentSearch === '') {
       getAll()
     }
-  }, [currentSearch])
+  }, [currentSearch, getAll])
 
   return (
   <>

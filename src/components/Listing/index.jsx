@@ -5,6 +5,7 @@ const Listing = (props) => {
   if(!props.listing) return null
 
   const { listing: { id, title, description, type, tags, userProfile, created_at, images, price }, children } = props
+
   return (
     <ListingLayout
       key={`listinglayout-${id}`}
