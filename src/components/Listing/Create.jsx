@@ -29,33 +29,29 @@ export const CreateListing = () => {
     const resizedImg = await resizeImg(data.pictureFile, 800, 800)
     const hdFile = await resizeImg(data.pictureFile, 2000, 2000, 'file')
 
-    fetch('/api/listings/generate', {
+    const response = await fetch('/api/listings/generate', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+      'Content-Type': 'application/json',
       },
       body: JSON.stringify({ picture: resizedImg }),
-    })
-      .then(response => response.json())
-      .then(resp => {
-        const uuid = uuidv4();
-        const filePath = `${user?.id}/${uuid}.${hdFile.name.split('.')[1]}`
+    });
+    const resp = await response.json();
+    const uuid = uuidv4();
+    const filePath = `${user?.id}/${uuid}.${hdFile.name.split('.')[1]}`;
 
-        supabase
-          .storage
-          .from('offers')
-          .upload(filePath, hdFile, {
-            cacheControl: '3600',
-          })
-          .then(() => {
-            const generatedlisting = { ...resp, tags: resp.tags.join(', '), picture: `https://nchfhnhquozlugyqknuf.supabase.co/storage/v1/object/public/offers/${filePath}` }
-            setListing(generatedlisting);
-            setIsLoading(false);
-          })
-      })
+    await supabase.storage
+      .from('offers')
+      .upload(filePath, hdFile, {
+      cacheControl: '3600',
+      });
+
+    const generatedlisting = { ...resp, tags: resp.tags.join(', '), picture: `https://nchfhnhquozlugyqknuf.supabase.co/storage/v1/object/public/offers/${filePath}` };
+    setListing(generatedlisting);
+    setIsLoading(false);
   }
 
-  const saveListing = ({ title, description, picture, price, tags }) => {
+  const saveListing = async ({ title, description, picture, price, tags }) => {
     const listing = {
       title,
       description,
@@ -70,25 +66,27 @@ export const CreateListing = () => {
       tags: tags.split(',').map(tag => tag.trim()),
       price: price,
     }
+    try {
+      await fetch('/api/listings/save-offer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(listing),
+      });
 
-    fetch('/api/listings/save-offer', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(listing),
-    })
-      .then((response) => {
-        console.log(response)
-        setSaveStatus('success');
-        setTimeout(() => {
-          router.push('/listings')
-        }, 3 * 1000);
-      })
-      .catch(() => {
-        setSaveStatus('error');
-        alert('FAIL');
-      })
+      setSaveStatus('success');
+
+      setTimeout(() => {
+        router.push('/listings');
+      }, 3 * 1000);
+
+    } catch (error) {
+
+      setSaveStatus('error');
+      alert('FAIL');
+
+    }
 
   }
 
