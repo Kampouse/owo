@@ -21,7 +21,7 @@ class UserConversationNotificationsGroupedByStatus implements Countable {
     notifications.forEach(notification => {
       const conversationId = notification.context.conversationId
       const status = notification.status
-      
+
       if (this.newNotificationsByConversation[conversationId] === undefined) {
         this.newNotificationsByConversation[conversationId] = { 'new': 0, 'deleted': 0, 'seen': 0 }
       }
@@ -47,7 +47,8 @@ type UserNotificationUsecase = {
   conversationsByStatus: Countable,
   syncNotification: (newNotification: UserConversationNotification) => void,
 }
-// TODO: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Tutorials/js13kGames/Re-engageable_Notifications_Push
+// TODO: push notification
+// https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Tutorials/js13kGames/Re-engageable_Notifications_Push
 // or onesignal.com
 export const useUserNotification = (): UserNotificationUsecase => {
   const { userNotifications, setUserNotifications } = useNotificationContext()

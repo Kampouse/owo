@@ -35,7 +35,7 @@ const Listings = () => {
     if (currentSearch === '') {
       getAll()
     }
-  }, [currentSearch, getAll])
+  }, [currentSearch])
 
   return (
   <>
