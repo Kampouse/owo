@@ -11,7 +11,7 @@ const AuthLayout: React.FC<PropsWithChildren> = ({ children }) => {
         </div>
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
-            <p className="text-lg">owo-closed-beta v.#commit-number</p>
+            <p className="text-lg">owo-closed-beta v.#commit-number // TODO: </p>
             <footer className="text-sm">
               <a href="https://owo.quebec/legal/privacy-policy" target="_blank">Politique de Confidentialité</a>&nbsp;|&nbsp;
               <a href="https://owo.quebec/legal/tos" target="_blank">Conditions d'Utilisation</a></footer>

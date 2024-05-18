@@ -28,7 +28,7 @@ const Profile = ({ }) => {
         <CardContent>
           <p>First Name: {user.firstname}</p>
           <p>Last Name: {user.name}</p>
-          <p>Postal Code: ##user.postalcode </p>
+          <p>Postal Code: ##user.postalcode // TODO: </p>
         </CardContent>
       </Card>
       <UpdatePasswordForm />

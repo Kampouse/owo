@@ -11,7 +11,7 @@ const Badge = ({ name, label }) => (
     </Avatar>
     <div className="text-center">
       <p className="text-sm font-medium leading-none">Béta Habitus🌿</p>
-      <p className="text-sm text-muted-foreground">#account-creation-date</p>
+      <p className="text-sm text-muted-foreground">#account-creation-date // TODO: </p>
     </div>
   </div>
 )

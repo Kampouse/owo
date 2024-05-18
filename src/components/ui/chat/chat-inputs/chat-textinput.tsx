@@ -101,6 +101,7 @@ export default function ChatTextinput({
           </div>
         </motion.div>
 
+        {/*  TODO: use button instead of link */}
         {message.trim() ? (
           <Link
             href="#"
