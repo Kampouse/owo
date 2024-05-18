@@ -12,6 +12,7 @@ const UserListings = ({ }) => {
     getAll()
   }, [])
 
+  //TODO: feedbacks on button position and mark as sold action
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {listings.filter(l => l.userProfile.id === user.id).length === 0 && <p className="text-center"> Vous n&apos;avez pas encore d&apos;annonces</p>}
