@@ -98,6 +98,7 @@ export function Sidebar({ links, isCollapsed, isMobile, conversationsByStatus }:
               </div>
               {conversationsByStatus.countBy(link.id, 'new') >= 0 &&
                 <Badge className="absolute -translate-y-1/2 right-2">
+                  TODO: make it work
                   {conversationsByStatus.countBy(link.id, 'new')}
                 </Badge>
               }
