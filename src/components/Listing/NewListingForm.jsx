@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Form, Input, Textarea, ListingPriceInput } from '@/components/Form'
 
 
-const NewListing = ({ cancel, saveListing, listing }) => {
+const NewListingForm = ({ cancel, saveListing, listing }) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const onSave = async (values) => {
@@ -65,4 +65,4 @@ const NewListing = ({ cancel, saveListing, listing }) => {
   );
 }
 
-export default NewListing;
+export default NewListingForm;
