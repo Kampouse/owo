@@ -1,0 +1,197 @@
+/* src/styles/global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --owo-primary: 244 83% 32%;
+
+    --secondary: 210 40% 96.1%;
+    --owo-secondary: 162 77% 45%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --owo-accent: 0 100% 71%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+
+  h1 {
+    @apply text-2xl font-semibold tracking-tight;
+  }
+
+  h2 {
+    @apply py-4 text-4xl font-black text-gray-800;
+  }
+
+  a {
+    @apply underline underline-offset-4 hover:text-primary;
+  }
+
+  [type='checkbox'] {
+    @apply text-input border border-input;
+  }
+
+  [type='checkbox']:checked {
+    @apply text-primary border border-primary;
+  }
+
+  [type='checkbox']:focus,
+  [type='radio']:focus {
+    @apply ring-0;
+  }
+
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+/*
+body{
+  min-height: 100%;
+}
+.public-layout,
+.private-layout {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.private-layout {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 60px);
+  height: 100vh;
+}
+
+.private-layout main,
+.private-layout main .container-fluid,
+.private-layout main .container-fluid .row,
+.private-layout main .container-fluid .row .col-chat {
+  height: 100%;
+}
+
+.private-layout.keyboard-open {
+  padding-bottom: 0;
+  height: 100%;
+}
+
+.private-layout.keyboard-open+nav {
+  display: none;
+}
+
+.bottom-navbar {
+  position: fixed;
+  bottom: 0;
+}
+.bottom-navbar a{
+  color: #fff;
+}
+
+.breadcrumb{
+  padding: 0;
+  margin-bottom: 0;
+  list-style: none;
+  background: none;
+  border-radius: 0;
+}
+
+.chatWindow{
+  height: 100%;
+}
+.offcanvas-header .btn-close{
+  margin-top: env(safe-area-inset-top);
+}
+
+
+.chat-message.justify-content-start + .chat-message.justify-content-start img,
+.chat-message.justify-content-end + .chat-message.justify-content-end img{
+  opacity: 0;
+}
+
+
+.chat-message.justify-content-start +.chat-message.justify-content-start,
+.chat-message.justify-content-end +.chat-message.justify-content-end {
+  margin-top: -2em;
+}
+
+.chat-input input{
+  width: 80%;
+  margin-right: 2em;
+}
+
+.bottom-navbar .badge{
+  height: 9px;
+  width: 4px;
+}
+
+.full-width-height {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  z-index: 80;
+}
+*/

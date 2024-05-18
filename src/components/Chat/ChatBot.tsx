@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
+import { Button } from "@/components/ui/button"
 import { BiReset } from 'react-icons/bi';
 import { useChat } from "@/contexts/ChatContext";
 import { useBot } from "@/contexts/BotContext";
@@ -31,9 +32,8 @@ const BotInput: React.FC<{botMode : BotMode}> = ({ botMode }) => {
 }
 
 type ChatBotProps = {
-  showNav: () => void;
 }
-const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
+const ChatBot: React.FC<ChatBotProps> = () => {
   const { getMessages, currentUser, selectedConversation: conversation } = useChat();
   const { resetBot, botMode, botMemory } = useBot();
   const ref = useRef<HTMLDivElement>(null);
@@ -52,11 +52,8 @@ const ChatBot: React.FC<ChatBotProps> = ({ showNav }) => {
   return (
     <Card className="chatWindow">
       <Card.Header className="d-flex justify-content-between align-items-center p-3">
-        <Button variant="light" className="d-md-none" onClick={showNav}>
-          <IoIosMenu className="icon" />
-        </Button>
         <h5 className="mb-0">{conversation?.title} <span className="text-muted" title={JSON.stringify(botMemory, null, 2)}>🛠</span></h5>
-        <Button variant="light" onClick={resetBot}>
+        <Button variant="ghost" onClick={resetBot}>
           <BiReset className="icon" />
         </Button>
       </Card.Header>

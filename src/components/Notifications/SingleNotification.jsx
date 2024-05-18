@@ -13,7 +13,7 @@ const SingleNotification = ({ id, excerpt, createdAt, status, type, context, flo
     delay: 7000,
     autohide: true,
   } : {}
- 
+
   useEffect(() => {
     setIsClient(true)
   }, [])
@@ -24,10 +24,10 @@ const SingleNotification = ({ id, excerpt, createdAt, status, type, context, flo
         <Toast.Header closeButton={false}>
           <IoIosChatbubbles className="icon" />
           <strong className="me-auto ml-2">
-             {context.from}
+            {context.from}
           </strong>
           <small>
-             <ReactTimeAgo date={new Date(createdAt)} locale="fr" />
+            <ReactTimeAgo date={new Date(createdAt)} locale="fr" />
           </small>
         </Toast.Header>
         <Toast.Body>{type === 'message' && "Nouveau message"}: {excerpt}</Toast.Body>

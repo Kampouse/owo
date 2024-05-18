@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { Button } from "@/components/ui/button"
 import { useUi } from '@/contexts/UiContext'
+
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 function Lightbox({ title, children, name }) {
   const [show, setShow] = useState(false);
@@ -16,24 +23,24 @@ function Lightbox({ title, children, name }) {
   useEffect(() => {
     setShow(true);
   }, [])
-
+  // show={show} onHide={setShowFalse}
   return (
-    <Modal show={show} onHide={setShowFalse}>
-      <Modal.Header closeButton>
-        <Modal.Title>{title}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+    <Dialog open={show} onOpenChange={setShow}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+        </DialogHeader>
         {children}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="primary" onClick={handleClose}>
-          Ne plus voir ce message
-        </Button>
-        <Button variant="secondary" onClick={handleClose}>
-          Fermer
-        </Button>
-      </Modal.Footer>
-    </Modal>
+        <DialogFooter>
+          <Button variant="primary" onClick={handleClose}>
+            Ne plus voir ce message
+          </Button>
+          <Button variant="secondary" onClick={setShowFalse}>
+            Fermer
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
 

@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useChat } from "@/contexts/ChatContext";
 import { FaPaperPlane } from 'react-icons/fa';
 import { Message } from "@/types/ChatTypes";
-import { Button, ToggleButtonGroup, ToggleButton } from 'react-bootstrap'
+import { ToggleButtonGroup, ToggleButton } from 'react-bootstrap'
+import { Button } from "@/components/ui/button"
+
 
 interface ConfirmInputProps {
   disabled?: boolean;

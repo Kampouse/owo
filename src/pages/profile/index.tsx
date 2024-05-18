@@ -1,17 +1,16 @@
 import { ReactNode } from "react"
 import { Profile } from "@/components"
 import { PrivateLayout } from "@/components/Layouts"
+import ProfileLayout from '@/components/ProfilePage/ProfileLayout'
 
 const UserProfile = () => {
   return (
-    <div>
-      <Profile />
-    </div>
+    <Profile />
   )
 }
 
 UserProfile.getLayout = function getLayout(page: ReactNode) {
-  return <PrivateLayout>{page}</PrivateLayout>
+  return <PrivateLayout><ProfileLayout>{page}</ProfileLayout></PrivateLayout>
 }
 
 

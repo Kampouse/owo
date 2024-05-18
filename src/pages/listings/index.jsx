@@ -1,12 +1,14 @@
 import useListing from '@/contexts/listing/useListing'
 import { useEffect, useState } from 'react';
 import Listing from '@/components/Listing'
-import { Container, Row, Col, Button, Navbar, Form, FormControl, Spinner } from 'react-bootstrap';
+import { Form, FormControl, Spinner } from 'react-bootstrap';
+import { Button } from "@/components/ui/button"
 import { PrivateLayout } from "@/components/Layouts"
 import { useRouter } from 'next/router'
 import useAuthentication from '@/contexts/authentication/useAuthentication';
 import { initializeConversation } from "@/conversations/ConversationClient";
 import { IoIosChatbubbles } from 'react-icons/io';
+import { SearchIcon } from '@/components/ui/icons';
 
 const Listings = () => {
   const { user } = useAuthentication();
@@ -23,77 +25,57 @@ const Listings = () => {
     router.push(`/messages/${loaded.id}`)
   }
 
+  // TODO: submit on stop writing if not "enter"
   const searchAction = (event) => {
     search(currentSearch)
     event.preventDefault()
   }
 
-  const resetSearch = () => {
-    setCurrentSearch('')
-    getAll()
-  }
+  useEffect(() => {
+    if (currentSearch === '') {
+      getAll()
+    }
+  }, [currentSearch, getAll])
 
   return (
-    <Container fluid>
-      {/* Top bar with categories */}
-      <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">Les annonces</Navbar.Brand>
-        <Form className="form-inline" method="post" onSubmit={searchAction}>
-          <FormControl type="text" placeholder="Recherche" onChange={(event) => setCurrentSearch(event.target.value)} value={currentSearch} />
-          <Button disabled={loading || currentSearch === ''} variant="outline-success" onClick={searchAction}>{loading ? <Spinner as="span" size="sm" /> : 'Recherche'}</Button>
-          <Button disabled={currentSearch === ''} variant="outline-success" onClick={resetSearch}>Réinitialiser la recherche!</Button>
-        </Form>
-      </Navbar>
+  <>
+    <header className="bg-gray-100 dark:bg-gray-800 py-4 px-6 flex items-center justify-between">
+      <div className="text-2xl font-bold">Le marché</div>
+      <Form className="relative w-full max-w-md" method="post" onSubmit={searchAction}>
+        <FormControl
+          type="search"
+          placeholder="Search products..."
+          className="w-full bg-white dark:bg-gray-950 pl-10 pr-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary dark:border-gray-700 dark:focus:ring-gray-700 dark:focus:border-gray-700"
+          onChange={(event) => setCurrentSearch(event.target.value)}
+          value={currentSearch}
+        />
+        {loading ?
+          <Spinner as="span" size="sm" /> :
+          <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+        }
+      </Form>
+    </header>
 
-      <Row className="pt-3">
-        {/* Sidebar with categories and filters */}
-        {/*<Col md={3}>
-          <Form>
-
-            <Dropdown onSelect={() => { }}>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Order By
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item eventKey="relevance">Relevance</Dropdown.Item>
-                <Dropdown.Item eventKey="date">Date</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </Form> */}
-          {/* TODO: navigation par catefories ou tags
-          <h3>Categories</h3>
-          <ListGroup className="mb-2">
-            <ListGroup.Item>Service</ListGroup.Item>
-            <ListGroup.Item>Don</ListGroup.Item>
-            <ListGroup.Item>Vente</ListGroup.Item>
-            <ListGroup.Item>Pret</ListGroup.Item>
-          </ListGroup>
-          <h3>Tags</h3>
-
-        </Col>*/}
-
-        {/* Main area for listings */}
-        <Col>
-          <Row>
-            <h3>Vos offres</h3>
-            {listings.map((listing) => {
-              return (
-                <Col key={listing.id} xs={12} lg={4}>
-                  <Listing listing={listing}>{
-                    user.id !== listing.userProfile.id &&
-                    <Button onClick={() => createConversation({ title: listing.title, user1: user.id, user2: listing.userProfile.id })}>
-                      <IoIosChatbubbles className="icon" />
-                    </Button>
-                  }
-                  </Listing>
-                </Col>
-              )
-            })}
-          </Row>
-        </Col>
-      </Row>
-    </Container>
-  );
+    <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8 p-6 md:p-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {listings.map((listing) => {
+          return (
+            <Listing listing={listing} key={`listingpage-${listing.id}`}>
+              {
+                user.id !== listing.userProfile.id &&
+                <Button className="mt-4 w-full" size="sm" onClick={() => createConversation({ title: listing.title, user1: user.id, user2: listing.userProfile.id })}>
+                  <IoIosChatbubbles className="icon" />
+                </Button>
+              }
+            </Listing>
+          )
+        })}
+      </div>
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <h2 className="text-lg font-semibold mb-4">Filters</h2>
+      </div>
+  </div>
+</>);
 }
 
 Listings.getLayout = function getLayout(page) {

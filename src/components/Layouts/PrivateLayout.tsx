@@ -1,21 +1,21 @@
 import React, { PropsWithChildren } from 'react';
-import { FooterNav, Onboarding } from '@/components'
+import { AppNav, Onboarding } from '@/components'
 import usePrivatePage from '@/contexts/authentication/usePrivatePage';
 import { useNotificationBroadcaster } from '@/notifications/useNotificationBroadcaster';
 import { NotificationProvider } from '@/notifications/NotificationContext';
-import NotificationContainer from '@/components/Notifications/NotificationContainer';
+import { Toaster } from "@/components/ui/toaster"
 
 const InnerLayout: React.FC<PropsWithChildren> = ({ children }) => {
   useNotificationBroadcaster()
 
   return (
     <>
+      <AppNav />
       <div className="private-layout">
         <main>{children}</main>
       </div>
       <Onboarding />
-      <FooterNav />
-      <NotificationContainer />
+      <Toaster />
     </>
   )
 }

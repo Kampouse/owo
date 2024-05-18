@@ -1,38 +1,50 @@
-import { Row, Col, Card } from 'react-bootstrap';
+import ReactTimeAgo from 'react-time-ago'
 
-const ListingLayout = ({ title, image, description, footer, price, left = "" }) => (
-  <Card className="mb-3">
-    <Card.Header>
-      <Card.Title>
-        {title}
-          {!!price ?
-            <span className="text-danger float-end">{price}$</span>
-          :
-            <span className="text-success float-end">{0}$</span>
-          }
-      </Card.Title>
-    </Card.Header>
-    <Card.Body>
-      <Row>
-        {!!image &&
-          <Col sm={4} xs={12}>
-            <Card.Img
-              src={image}
-            />
-            {left}
-          </Col>
-        }
-        <Col>
-          <Card.Text>
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+// TODO: make the image open in modal on click
+const ListingLayout = ({ title, image, description, footer, price, userProfile, createdAt }) => (
+  <Card className="overflow-hidden relative">
+    {!!userProfile &&
+      <div className="absolute top-2 left-2 bg-white rounded-full p-1 flex items-center gap-2 z-10">
+        <Avatar className="w-6 h-6 border">
+          <AvatarImage alt="@shadcn" src={"https://api.multiavatar.com/" + userProfile.id + '.png'} />
+          <AvatarFallback>{userProfile.username.substr(0,2)}</AvatarFallback>
+        </Avatar>
+        <div className="text-xs font-medium pr-2">@{userProfile.username}</div>
+      </div>
+    }
+    <img
+      alt={title}
+      className="w-full h-48 object-cover"
+      height={300}
+      src={image || "/placeholder.svg"}
+      style={{
+        aspectRatio: "400/300",
+        objectFit: "cover",
+      }}
+      width={400}
+    />
+    <CardContent className="p-4 ">
+      <div className="flex justify-between items-start">
+        <div>
+          <h3 className="text-lg font-semibold">{title}</h3>
+          <p className="text-sm text-gray-500 mt-2"><ReactTimeAgo date={new Date(createdAt)} locale="fr" /></p>
+          <p className="text-gray-500 mt-2">
             {description}
-          </Card.Text>
-        </Col>
-      </Row>
-    </Card.Body>
-    <Card.Footer>
+          </p>
+        </div>
+        {!!price ?
+          <div className="text-gray-500 mt-2 text-right">{price}$</div>
+          :
+          <div className="text-green-500 mt-2 text-right">{price}$</div>
+        }
+      </div>
       {footer}
-    </Card.Footer>
+    </CardContent>
   </Card>
+
 );
 
 export default ListingLayout;

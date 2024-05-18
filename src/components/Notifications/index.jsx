@@ -1,14 +1,14 @@
-import React from 'react';
+'use client'
+
 import SingleNotification from './SingleNotification';
-import { Row, Col, Container } from "react-bootstrap";
 
 const Notifications = ({ notifications }) => {
   return (
-    <Container>
+    <>
       {notifications.map((notification, index) => (
-        <Row key={index} className="pt-3"><Col><SingleNotification  {...notification} /></Col></Row>
+        <SingleNotification  {...notification} key={`notiflist-${index}`} />
       ))}
-    </Container>
+    </>
   )
 }
 
