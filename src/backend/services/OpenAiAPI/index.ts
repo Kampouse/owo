@@ -82,7 +82,7 @@ class OpenAiAPI {
             des noms, des audiences, des lifestyle, des activitées faites avec ces objets, etc
             tu vas ensuite me répondre uniquement un objet JSON validecontenant les infroamtions suivantes:
             \`\`\`
-            {"title": [le titre],
+            {"title": [the title],
             "description": [la description],
             "tags": string[][liste des tags]
           `,

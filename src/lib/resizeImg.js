@@ -8,7 +8,7 @@ const resizeImg = (file, maxWidth, maxHeight, type='base64') =>
       maxWidth,
       maxHeight,
       "JPEG",
-      100,
+      90,
       0,
       (uri) => {
         resolve(uri);
