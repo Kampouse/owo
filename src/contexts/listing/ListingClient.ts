@@ -80,3 +80,12 @@ export const deleteListing = async ({ id }: DeleteUsecase): Promise<void> => {
         .update({deleted: true})
         .eq('id', id)
 }
+
+type MarkAsSoldListing = DeleteUsecase;
+
+export const markAsSoldListing = async ({ id }: MarkAsSoldListing): Promise<void> => {
+    await supabase
+        .from('offer')
+        .update({sold: true})
+        .eq('id', id)
+}
