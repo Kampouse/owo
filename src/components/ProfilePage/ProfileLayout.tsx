@@ -2,7 +2,7 @@ import { SidebarNav } from "@/components/ui/sidebarNav"
 
 const sidebarNavItems = [
   {
-    title: "Mon profile",
+    title: "Mon profil",
     href: "/profile",
   },
   {
