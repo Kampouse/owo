@@ -30,6 +30,24 @@ describe('UserConversationNotificationsGroupedByStatus', () => {
 
       expect(count).toEqual(0);
     });
+
+    it('when counting total of new, then returns 0', () => {
+      const total = underTest.totalOf('new');
+
+      expect(total).toEqual(0);
+    });
+
+    it('when counting total of seen, then returns 0', () => {
+      const total = underTest.totalOf('new');
+
+      expect(total).toEqual(0);
+    });
+
+    it('when counting total of deleted, then returns 0', () => {
+      const total = underTest.totalOf('new');
+
+      expect(total).toEqual(0);
+    });
   });
 
   describe('given multiple notifications from different conversations', () => {
@@ -47,11 +65,29 @@ describe('UserConversationNotificationsGroupedByStatus', () => {
 
     scenerios.forEach(({ conversationId, status, count }) => {
       it(`when counting ${conversationId} by ${status} status, then returns ${count}`, () => {
-        const updated = underTest.setNotifications(givenMultipleNotificationsFromDifferentConversations());
+        underTest.setNotifications(givenMultipleNotificationsFromDifferentConversations());
 
-        expect(updated.countBy(conversationId, status)).toEqual(count);
+        expect(underTest.countBy(conversationId, status)).toEqual(count);
       });
-    })
+    });
+
+    it('when counting total of new, then returns 503', () => {
+      underTest.setNotifications(givenMultipleNotificationsFromDifferentConversations());
+
+      expect(underTest.totalOf('new')).toEqual(503);
+    });
+
+    it('when counting total of seen, then returns 2', () => {
+      underTest.setNotifications(givenMultipleNotificationsFromDifferentConversations());
+
+      expect(underTest.totalOf('seen')).toEqual(2);
+    });
+
+    it('when counting total of deleted, then returns 3', () => {
+      underTest.setNotifications(givenMultipleNotificationsFromDifferentConversations());
+
+      expect(underTest.totalOf('deleted')).toEqual(3);
+    });
   });
 });
 

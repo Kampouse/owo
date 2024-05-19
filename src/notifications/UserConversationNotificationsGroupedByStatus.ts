@@ -35,4 +35,14 @@ export class UserConversationNotificationsGroupedByStatus implements Countable {
 
     return this.newNotificationsByConversation[conversationId][status];
   }
+
+  public totalOf(status: UserConversationNotification['status']): number {
+    let total = 0;
+
+    Object.entries(this.newNotificationsByConversation).forEach(([_conversation, countByStatus]) => {
+      total = total + countByStatus[status];
+    })
+
+    return total;
+  }
 }
