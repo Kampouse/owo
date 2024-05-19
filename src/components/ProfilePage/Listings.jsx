@@ -21,7 +21,7 @@ const UserListings = ({ }) => {
           <Listing
             listing={listing}
             key={listing.id}>
-            <ButtonWithConfirm title='Confirmation' confirmMessage={`Est-ce que cet offre a été vendu?`} className="mt-4 w-full" size="sm" onClick={() => { sellListingById(listing.id)}}>Signaler comme vendu</ButtonWithConfirm>
+            <ButtonWithConfirm title='Confirmation' confirmMessage={`Est-ce que cet offre a été vendu? Elle ne sera plus disponible!`} className="mt-4 w-full" size="sm" onClick={() => { sellListingById(listing.id); deleteListingById(listing.id); }}>Signaler comme vendu</ButtonWithConfirm>
             <ButtonWithConfirm className="mt-4 w-full" size="sm" onClick={() => { deleteListingById(listing.id)}}>Supprimer</ButtonWithConfirm>
           </Listing>
         )
