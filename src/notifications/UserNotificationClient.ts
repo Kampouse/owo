@@ -7,7 +7,8 @@ type UserId = string
 
 type UserNotificationIdentification = {
   targetUserId: UserId,
-  notify: (notification: UserConversationNotification) => void,
+  notifyInserts: (notification: UserConversationNotification) => void,
+  notifyUpdates: () => void,
 }
 
 type SQLUserConversationNotification = Omit<UserConversationNotification, 'createdAt'> & {
@@ -24,7 +25,7 @@ const fromSQLToDomain = (sql: SQLUserConversationNotification): UserConversation
 const SOURCE_SCHEMA = "public"
 const SOURCE_TABLE = "user_notifications"
 
-const initializeUserNotificationBroadcaster = ({ targetUserId, notify }: UserNotificationIdentification): RealtimeChannel => {
+const initializeUserNotificationBroadcaster = ({ targetUserId, notifyInserts, notifyUpdates }: UserNotificationIdentification): RealtimeChannel => {
   return supabase.channel(targetUserId)
     .on<SQLUserConversationNotification>(
       "postgres_changes",
@@ -35,7 +36,7 @@ const initializeUserNotificationBroadcaster = ({ targetUserId, notify }: UserNot
         filter: `target=eq.${targetUserId}`,
       },
       (payload) => {
-        notify(fromSQLToDomain(payload.new))
+        notifyInserts(fromSQLToDomain(payload.new))
       })
     .on<SQLUserConversationNotification>(
       "postgres_changes",
@@ -45,8 +46,8 @@ const initializeUserNotificationBroadcaster = ({ targetUserId, notify }: UserNot
         table: SOURCE_TABLE,
         filter: `target=eq.${targetUserId}`,
       },
-      (payload) => {
-        notify(fromSQLToDomain(payload.new))
+      () => {
+        notifyUpdates()
       })
     .subscribe()
 }

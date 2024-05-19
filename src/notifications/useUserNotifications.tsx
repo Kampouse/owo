@@ -10,7 +10,8 @@ type UserNotificationUsecase = {
   notifications: UserConversationNotification[],
   hasNewNotification: boolean,
   conversationsByStatus: Countable,
-  syncNotification: (newNotification: UserConversationNotification) => void,
+  syncNewNotification: (newNotification: UserConversationNotification) => void,
+  syncUpdateNotification: () => void,
 }
 // TODO: push notification
 // https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Tutorials/js13kGames/Re-engageable_Notifications_Push
@@ -28,21 +29,23 @@ export const useUserNotification = (): UserNotificationUsecase => {
     notifications: userNotifications,
     hasNewNotification: userNotifications.some((notification) => notification.status === 'new'),
     conversationsByStatus,
-    syncNotification: (notification) => {
-      const notificationToModify = userNotifications.find(userNotification => userNotification.id === notification.id)
-      if (notificationToModify === undefined) {
-        setUserNotifications([...userNotifications, notification])
+    syncNewNotification: (notification) => {
+      setUserNotifications([...userNotifications, notification])
 
-        if (notification.status === 'new') {
-          toast({
-            title: notification.context.from,
-            description: notification.excerpt,
-            action: <ToastAction altText="👀" onClick={() => router.push(`/messages/${notification.context.conversationId}`)}>👀</ToastAction>
-          })
-        }
-      } else {
-        setUserNotifications([...userNotifications.filter(userNotification => userNotification.id !== notificationToModify.id), notification])
+      if (notification.status === 'new') {
+        toast({
+          title: notification.context.from,
+          description: notification.excerpt,
+          action: <ToastAction altText="👀" onClick={() => router.push(`/messages/${notification.context.conversationId}`)}>👀</ToastAction>
+        })
       }
     },
+    syncUpdateNotification: () => {
+      const updatedNotications = [
+        ...userNotifications.filter(notification => notification.status === 'new')
+        .map(notification => ({...notification, status: "seen"} as UserConversationNotification))
+      ];
+      setUserNotifications([...userNotifications.filter(notification => notification.status !== 'new'), ...updatedNotications]);
+    }
   }
 }

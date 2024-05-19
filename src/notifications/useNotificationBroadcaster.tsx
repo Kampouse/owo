@@ -5,15 +5,15 @@ import { useUserNotification } from "./useUserNotifications"
 
 export const useNotificationBroadcaster = () => {
   const { user } = useAuthentication()
-  const { syncNotification } = useUserNotification()
+  const { syncNewNotification, syncUpdateNotification } = useUserNotification()
   
   useEffect(() => {
     if (user) {
-      const channel = initializeUserNotificationBroadcaster({ targetUserId: user.id, notify: syncNotification })
+      const channel = initializeUserNotificationBroadcaster({ targetUserId: user.id, notifyInserts: syncNewNotification, notifyUpdates: syncUpdateNotification })
 
       return () => {
         removeUserNotificationBroadcaster(channel)
       }
     }
-  }, [syncNotification, user])
+  }, [syncNewNotification, syncUpdateNotification, user])
 }
