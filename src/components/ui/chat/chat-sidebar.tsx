@@ -17,7 +17,7 @@ import { Countable } from "@/notifications/UserConversationNotificationsGroupedB
 interface SidebarProps {
   isCollapsed: boolean;
   links: Array<Conversation & {
-    variant: "primary" | "ghost";
+    variant: "outline-accent" | "ghost";
   }>;
   conversationsByStatus: Countable;
   onClick?: () => void;
@@ -49,7 +49,7 @@ export function Sidebar({ links, isCollapsed, conversationsByStatus }: SidebarPr
                     className={cn(
                       buttonVariants({ size: "icon", variant: link.variant }),
                       "h-11 w-11 md:h-16 md:w-16",
-                      link.variant === "primary" &&
+                      link.variant === "outline-accent" &&
                       "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
                     )}
                   >
