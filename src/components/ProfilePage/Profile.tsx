@@ -14,8 +14,8 @@ const Profile = ({}) => {
     <>
       <Card className="my-3">
         <CardHeader>
-          <CardTitle>Profile</CardTitle>
-          <CardDescription>This is how others will see you on the site</CardDescription>
+          <CardTitle>Profil</CardTitle>
+          <CardDescription>Voici comment les gens de l'application vous perçoivent</CardDescription>
           <Separator />
         </CardHeader>
         <CardContent className="grid gap-6">
