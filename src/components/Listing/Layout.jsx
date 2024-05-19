@@ -1,6 +1,6 @@
 import ReactTimeAgo from 'react-time-ago'
 
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // TODO: make the image open in modal on click

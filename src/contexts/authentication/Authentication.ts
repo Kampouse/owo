@@ -11,6 +11,7 @@ export type User = {
     firstname: string
     username: string
     postalcode: string
+    creationDate: Date
 }
 
 type Authenticated = {
@@ -53,14 +54,17 @@ export type LogoutResponse = NoAuthentication | ErrorWhileAuthenticating
 
 export type RegisterResponse = Authenticated | ErrorWhileAuthenticating
 
-export const fromAuthenticationResponseToUser = (userData: any): User => ({
-    id: userData['id'],
-    email: userData['email'],
-    name: userData['user_metadata']['name'],
-    firstname: userData['user_metadata']['firstname'],
-    username: userData['user_metadata']['username'],
-    postalcode: userData['user_metadata']['postalcode'],
-})
+export const fromAuthenticationResponseToUser = (userData: any): User => {
+    return {
+        id: userData['id'],
+        email: userData['email'],
+        creationDate: new Date(userData['created_at']),
+        name: userData['user_metadata']['name'],
+        firstname: userData['user_metadata']['firstname'],
+        username: userData['user_metadata']['username'],
+        postalcode: userData['user_metadata']['postalcode'],
+    }
+}
 
 export const fromAuthErrorToMessage = (errorData: any): ResponseError => ({
     message: errorData['message'],
