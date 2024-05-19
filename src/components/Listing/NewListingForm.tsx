@@ -16,6 +16,7 @@ interface FormValues {
   imageDescription: string;
   tags: string;
   price: number;
+  picture: string;
 }
 
 interface NewListingFormProps {
@@ -41,10 +42,17 @@ const NewListingForm: React.FC<NewListingFormProps> = ({ onSubmit, initialValues
     await onSubmit(values);
     setIsLoading(false)
   }
+  // TODO: when price is free show "Gratuit!" en vert par dessus le input
 
   return (
     <div className="mx-auto sm:w-[450px] w-full">
         <h1 className="text-center my-4">Publier une annonce</h1>
+        <img
+          alt="Uploaded Image"
+          className="rounded-md object-cover mb-4"
+          src={initialValues.picture}
+        />
+
         <Formik
           initialValues={initialValues}
           validationSchema={NewListingFormSchema}
@@ -52,6 +60,7 @@ const NewListingForm: React.FC<NewListingFormProps> = ({ onSubmit, initialValues
         >
           {({ errors, touched }) => (
             <Form className="grid gap-4">
+
               <FormController>
                 <Label htmlFor="title">Titre</Label>
                 <Field
@@ -112,7 +121,7 @@ const NewListingForm: React.FC<NewListingFormProps> = ({ onSubmit, initialValues
                     />
                     <span className="ml-2">$</span>
                   </div>
-                  // TODO: when price is free show "Gratuit!" en vert par dessus le input
+
                 {errors.price ? (
                   <Label htmlFor="price" className="text-red-600 text-sm">
                     {errors.price}
@@ -120,13 +129,13 @@ const NewListingForm: React.FC<NewListingFormProps> = ({ onSubmit, initialValues
                 ) : null}
               </FormController>
 
-              <div className="flex space-x-4 justify-space-between">
+              <div className="flex space-x-4 justify-between">
               {!isLoading && <>
                 <Button variant="outline" onClick={cancel}>Anuller</Button>
                 <Button type="submit" disabled={isLoading}>Publier</Button>
               </>}
 
-              {isLoading && <>// TODO: icon of loading in progress </>}
+              {isLoading && <>TODO: Loading ⏳ </>}
               </div>
             </Form>
           )}
