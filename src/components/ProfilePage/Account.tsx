@@ -14,14 +14,14 @@ const Profile = ({ }) => {
       <div>
         <h3 className="text-lg font-medium">Account</h3>
         <p className="text-sm text-muted-foreground">
-          Here you can manage your personnal informations
+          Here you can manage your personal informations
         </p>
       </div>
       <Separator />
       <Card className="my-3">
         <CardHeader>
-          <CardTitle>Personnal informations</CardTitle>
-          <CardDescription>This is your personnal and confidential infomraitons, thay are not shared withot anyone wihtout your explicit consent.</CardDescription>
+          <CardTitle>Personal informations</CardTitle>
+          <CardDescription>This is your personal and confidential informations, they are not shared with anyone without your explicit consent.</CardDescription>
           <Separator />
         </CardHeader>
         <CardContent>
