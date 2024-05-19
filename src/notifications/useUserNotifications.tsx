@@ -3,43 +3,8 @@ import { useToast } from "@/components/ui/use-toast"
 import { ToastAction } from "@/components/ui/toast"
 import { useNotificationContext } from "./NotificationContext"
 import { UserConversationNotification } from "./UserNotification"
-import { ConversationId } from "./UserNotificationClient"
 import { useRouter } from "next/router"
-
-export type Countable = {
-  countBy(conversationId: ConversationId, status: UserConversationNotification['status']): number
-}
-
-class UserConversationNotificationsGroupedByStatus implements Countable {
-  private newNotificationsByConversation: Record<ConversationId, Record<UserConversationNotification['status'], number>> = {}
-
-  public static create (): UserConversationNotificationsGroupedByStatus {
-    return new UserConversationNotificationsGroupedByStatus()
-  }
-
-  public setNotifications(notifications: UserConversationNotification[]): UserConversationNotificationsGroupedByStatus {
-    notifications.forEach(notification => {
-      const conversationId = notification.context.conversationId
-      const status = notification.status
-
-      if (this.newNotificationsByConversation[conversationId] === undefined) {
-        this.newNotificationsByConversation[conversationId] = { 'new': 0, 'deleted': 0, 'seen': 0 }
-      }
-
-      this.newNotificationsByConversation[conversationId][status]++
-    })
-
-    return this
-  }
-
-  public countBy(conversationId: ConversationId, status: UserConversationNotification['status']): number {
-    if (this.newNotificationsByConversation[conversationId] === undefined) {
-      return 0
-    }
-
-    return this.newNotificationsByConversation[conversationId][status]
-  }
-}
+import { Countable, UserConversationNotificationsGroupedByStatus } from "./UserConversationNotificationsGroupedByStatus"
 
 type UserNotificationUsecase = {
   notifications: UserConversationNotification[],
@@ -76,8 +41,7 @@ export const useUserNotification = (): UserNotificationUsecase => {
           })
         }
       } else {
-        const updatedNotifications = [...userNotifications.filter(userNotification => userNotification.id !== notificationToModify.id), notification]
-        setUserNotifications(updatedNotifications)
+        setUserNotifications([...userNotifications.filter(userNotification => userNotification.id !== notificationToModify.id), notification])
       }
     },
   }

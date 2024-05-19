@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { MoreHorizontal, SquarePen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -13,7 +12,7 @@ import {
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Conversation } from '@/types/ChatTypes';
-import { Countable } from '@/notifications/useUserNotifications';
+import { Countable } from "@/notifications/UserConversationNotificationsGroupedByStatus";
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -25,7 +24,7 @@ interface SidebarProps {
   isMobile: boolean;
 }
 
-export function Sidebar({ links, isCollapsed, isMobile, conversationsByStatus }: SidebarProps) {
+export function Sidebar({ links, isCollapsed, conversationsByStatus }: SidebarProps) {
   return (
     <div
       data-collapsed={isCollapsed}
@@ -98,7 +97,6 @@ export function Sidebar({ links, isCollapsed, isMobile, conversationsByStatus }:
               </div>
               {conversationsByStatus.countBy(link.id, 'new') >= 0 &&
                 <Badge className="absolute -translate-y-1/2 right-2">
-                  TODO: make it work
                   {conversationsByStatus.countBy(link.id, 'new')}
                 </Badge>
               }

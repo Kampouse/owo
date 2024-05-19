@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { Sidebar } from "./chat-sidebar";
 import ChatTopbar from "./chat-topbar";
 import { ChatList } from "./chat-list";
-import { Countable } from '@/notifications/useUserNotifications';
+import { Countable } from "@/notifications/UserConversationNotificationsGroupedByStatus";
 import ChatBottombar from "./chat-bottombar";
 import { BotMode } from "@/types/ChatTypes";
 import { ListRestart } from "lucide-react"
