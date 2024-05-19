@@ -2,14 +2,14 @@
 
 import SingleNotification from './SingleNotification';
 
-const Notifications = ({ notifications }) => {
+export const Notifications = ({ notifications, actionComponent }) => {
   return (
     <>
       {notifications.map((notification, index) => (
-        <SingleNotification  {...notification} key={`notiflist-${index}`} />
+        <SingleNotification  {...notification} key={`notiflist-${index}`} actionComponent={actionComponent} />
       ))}
     </>
   )
 }
 
-export default Notifications;
+

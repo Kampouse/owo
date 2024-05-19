@@ -1,4 +1,5 @@
 import React, { useMemo } from "react"
+import Link from 'next/link'
 import { useToast } from "@/components/ui/use-toast"
 import { ToastAction } from "@/components/ui/toast"
 import { useNotificationContext } from "./NotificationContext"
@@ -31,12 +32,16 @@ export const useUserNotification = (): UserNotificationUsecase => {
     conversationsByStatus,
     syncNewNotification: (notification) => {
       setUserNotifications([...userNotifications, notification])
-
       if (notification.status === 'new') {
         toast({
           title: notification.context.from,
           description: notification.excerpt,
-          action: <ToastAction altText="👀" onClick={() => router.push(`/messages/${notification.context.conversationId}`)}>👀</ToastAction>
+          action:
+          <ToastAction asChild altText="👀">
+            <Link href={notification.type === 'message' ? `/messages/${notification.context.conversationId}` : '/messages'}>
+              👀
+            </Link>
+          </ToastAction>
         })
       }
     },

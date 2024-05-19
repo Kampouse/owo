@@ -108,7 +108,7 @@ const NewListingForm: React.FC<NewListingFormProps> = ({ onSubmit, initialValues
                   </Label>
                 ) : null}
               </FormController>
-              <FormController className="">
+              <FormController>
                 <Label htmlFor="price">Prix</Label>
                   <div className="flex items-center">
                     <Field

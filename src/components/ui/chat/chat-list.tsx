@@ -34,8 +34,6 @@ export function ChatList({
     }
   }, [messages]);
 
-  // TODO: BOT use component ChatBotMessage for type of message display
-
   return (
     <div className="w-full overflow-y-auto overflow-x-hidden h-full flex flex-col">
       <div

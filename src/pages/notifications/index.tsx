@@ -1,14 +1,14 @@
 import { ReactNode } from "react"
 import { PrivateLayout } from "@/components/Layouts"
-import { Notifications } from '@/components'
+import { Notifications } from '@/components/Notifications'
 import { useUserNotification } from "@/notifications/useUserNotifications"
 
 const NotificationWall = () => {
   const { notifications } = useUserNotification()
 
   return (
-    <div>
-      <Notifications notifications={notifications} />
+    <div className="grid gap-4 p-4">
+      <Notifications notifications={notifications} actionComponent={null}/>
     </div>
   )
 }

@@ -18,7 +18,7 @@ const buttonVariants = cva(
         accent: "bg-accent text-gray-50 hover:bg-accent/90 hover:text-white dark:bg-blue-900 dark:text-gray-50 dark:hover:bg-blue-900/90",
         secondary:
           "bg-secondary text-gray-900 hover:bg-secondary/80 dark:bg-secon dark:text-gray-900 dark:hover:bg-secon/80",
-        ghost: "hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-50",
+        ghost: "hover:bg-gray-100/10 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-50",
         link: "text-gray-900 underline-offset-4 hover:underline dark:text-gray-50",
         danger: "text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300",
         success: "bg-success text-gray-50 hover:bg-success/90 dark:bg-success dark:text-gray-50 dark:hover:bg-green-400 dark:hover:text-gray-50",
