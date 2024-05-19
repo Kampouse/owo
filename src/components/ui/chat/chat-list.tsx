@@ -1,6 +1,6 @@
 import { Message, User } from '@/types/ChatTypes';
 import { cn } from "@/lib/utils";
-import React, { useRef } from "react";
+import React, { useRef, Fragment } from "react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import ChatBottombar from "./chat-bottombar";
 import { AnimatePresence, motion } from "framer-motion";
@@ -78,9 +78,21 @@ export function ChatList({
                     />
                   </Avatar>
                 )}
-                <span className={cn(!usersAreSame(message.user, selectedUser) ? 'bg-muted' : 'bg-secondary'," p-3 rounded-md max-w-xs")}>
-                  {message.content}
-                </span>
+
+
+                {message.type === 'image' && (
+                  <span className={cn(!usersAreSame(message.user, selectedUser) ? 'bg-muted' : 'bg-secondary'," p-3 rounded-md max-w-xs")}>
+                    <img src={message.content} alt="image" className="rounded-md object-cover" />
+                  </span>
+                )}
+
+                {message.type !== 'image' && (
+                  <span className={cn(!usersAreSame(message.user, selectedUser) ? 'bg-muted' : 'bg-secondary'," p-3 rounded-md max-w-xs")}>
+                    {message.content.split("\n").map((l: string) => <Fragment key={l}>{l}<br /></Fragment>)}
+                  </span>
+                )}
+
+
                 {!usersAreSame(message.user, selectedUser) && (
                   <Avatar className="flex justify-center items-center">
                     <AvatarImage

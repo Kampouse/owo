@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 import { supabase } from '@/config/SupabaseClient'
-import { FaPaperPlane } from 'react-icons/fa';
 import { ChatInputProps, Message } from "@/types/ChatTypes";
 import { Button } from "@/components/ui/button"
 import { PhotoUpload } from '@/components'
+import { SendHorizontal } from "lucide-react";
 
 
 
@@ -63,18 +63,23 @@ const ChatPictureinput: React.FC<ChatInputProps> = ({ sendMessage, currentUser }
   }
 
   return (
-    <div className="chat-input d-flex align-items-center">
-      <PhotoUpload onFileSelect={handleFileSelect} />
-      <div>
-        {file && <Button onClick={handleSend} className="mr-2">
-          <FaPaperPlane className="icon" />
-        </Button>}
+    <>
+      <Button variant="destructive" onClick={handleCancelMessage} >
+        Non
+      </Button>
 
-        <Button variant="danger" onClick={handleCancelMessage} >
-          X
-        </Button>
-      </div>
-    </div>
+      <PhotoUpload onFileSelect={handleFileSelect} />
+
+      <Button
+        variant="ghost"
+        size="icon"
+        className="h-9 w-9 dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white shrink-0"
+        onClick={handleSend}
+      >
+        <SendHorizontal size={20} className="text-muted-foreground" />
+      </Button>
+
+    </>
   );
 };
 
