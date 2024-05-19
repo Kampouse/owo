@@ -56,7 +56,7 @@ const Listings = () => {
       </Form>
     </header>
 
-    <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8 p-6 md:p-8">
+    <div className="grid grid-cols-1 gap-8 p-6 md:p-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {listings.map((listing) => {
           return (
@@ -70,9 +70,6 @@ const Listings = () => {
             </Listing>
           )
         })}
-      </div>
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-lg font-semibold mb-4">Filters</h2>
       </div>
   </div>
 </>);
