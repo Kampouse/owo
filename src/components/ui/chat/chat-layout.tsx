@@ -98,7 +98,7 @@ export function ChatLayout({
           isCollapsed={isCollapsed || isMobile}
           links={conversations.map((chat) => ({
             ...chat,
-            variant: chat.id === currentChatId ? "primary" : "ghost",
+            variant: chat.id === currentChatId ? "outline-accent" : "ghost",
           }))}
           conversationsByStatus={conversationsByStatus}
           isMobile={isMobile}

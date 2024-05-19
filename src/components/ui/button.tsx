@@ -15,6 +15,7 @@ const buttonVariants = cva(
         outline:
           "border border-gray-200 bg-white hover:bg-gray-100 hover:text-gray-900 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50",
         primary: "bg-primary text-gray-50 hover:bg-primary/90 hover:text-white dark:bg-blue-900 dark:text-gray-50 dark:hover:bg-blue-900/90",
+        accent: "bg-accent text-gray-50 hover:bg-accent/90 hover:text-white dark:bg-blue-900 dark:text-gray-50 dark:hover:bg-blue-900/90",
         secondary:
           "bg-secondary text-gray-900 hover:bg-secondary/80 dark:bg-secon dark:text-gray-900 dark:hover:bg-secon/80",
         ghost: "hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-50",
@@ -22,6 +23,7 @@ const buttonVariants = cva(
         danger: "text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300",
         success: "bg-success text-gray-50 hover:bg-success/90 dark:bg-success dark:text-gray-50 dark:hover:bg-green-400 dark:hover:text-gray-50",
         'outline-success': "border border-success text-success hover:bg-success/90 hover:text-gray-50 dark:border-green-400 dark:bg-green-500 dark:text-gray-50 dark:hover:bg-green-400 dark:hover:text-gray-50",
+        'outline-accent': "border border-accent text-accent hover:bg-accent/90 ",
       },
       size: {
         default: "h-10 px-4 py-2",

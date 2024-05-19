@@ -17,9 +17,9 @@ import { cn } from "@/lib/utils"
 const AppNav = () => {
   const { hasNewNotification  } = useUserNotification()
   return (
-    <header className="flex h-16 w-full items-center justify-between py-4 px-6 md:px-8  bg-gray-900 text-white shadow-sm dark:bg-gray-950 dark:text-gray-50">
-      <Link className="flex items-center gap-2" href="/listings">
-        <OwoIcon className="h-6 w-6" />
+    <header className="flex h-16 w-full items-center justify-between py-4 px-6 md:px-8  bg-primary text-white shadow-sm">
+      <Link className="flex items-center gap-2 hover:text-white" href="/listings">
+        <OwoIcon className="w-16" />
         <span className="sr-only">owo</span>
       </Link>
       <nav className="hidden flex-1 justify-center lg:flex items-center gap-6">

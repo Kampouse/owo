@@ -105,7 +105,7 @@ export const CreateListing = () => {
       {!listing &&
         <div>
             <div
-              className="fixed h-[calc(100dvh-100px)] bottom-0 inset-0 flex items-center justify-center bg-cover bg-center"
+              className="fixed h-[calc(100dvh-64px)] bottom-0 inset-0 flex items-center justify-center bg-cover bg-center"
               controlname="picuture"
               style={{
                 backgroundImage: `url('${stringPicture || '/placeholder.svg'}')`,
