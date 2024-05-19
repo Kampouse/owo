@@ -32,7 +32,7 @@ const Chat: React.FC = () => {
 
   return (
     <>
-      <div className="z-10 border h-[calc(100dvh-200px)] rounded-lg w-full text-sm">
+      <div className="z-10 border h-[calc(100dvh-64px)] rounded-lg w-full text-sm">
         <ChatLayout
           navCollapsedSize={8}
           conversations={conversations}
