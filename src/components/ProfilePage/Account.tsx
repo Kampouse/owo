@@ -2,12 +2,11 @@ import UpdatePasswordForm from './UpdatePasswordForm'
 import useAuthentication from "@/contexts/authentication/useAuthentication"
 import { Card, CardContent, CardDescription, CardTitle, CardHeader } from "@/components/ui/card";
 
-import { useRouter } from "next/router";
 import { Separator } from "@/components/ui/separator";
 
 const Profile = ({ }) => {
-  const { user, logout } = useAuthentication();
-  const router = useRouter()
+  const { user } = useAuthentication();
+
   if (!user) { return (<span>LOADING PROFILE</span>) }
 
   return (
@@ -28,7 +27,7 @@ const Profile = ({ }) => {
         <CardContent>
           <p>First Name: {user.firstname}</p>
           <p>Last Name: {user.name}</p>
-          <p>Postal Code: ##user.postalcode // TODO: </p>
+          <p>Postal Code: {user.postalcode} </p>
         </CardContent>
       </Card>
       <UpdatePasswordForm />

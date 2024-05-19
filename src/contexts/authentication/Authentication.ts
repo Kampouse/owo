@@ -10,6 +10,7 @@ export type User = {
     name: string
     firstname: string
     username: string
+    postalcode: string
 }
 
 type Authenticated = {
@@ -58,6 +59,7 @@ export const fromAuthenticationResponseToUser = (userData: any): User => ({
     name: userData['user_metadata']['name'],
     firstname: userData['user_metadata']['firstname'],
     username: userData['user_metadata']['username'],
+    postalcode: userData['user_metadata']['postalcode'],
 })
 
 export const fromAuthErrorToMessage = (errorData: any): ResponseError => ({
