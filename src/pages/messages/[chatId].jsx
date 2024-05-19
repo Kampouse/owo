@@ -1,4 +1,4 @@
-import { Chat } from '@/components'
+import { Chat } from '@/components/Chat'
 import { useRouter } from 'next/router'
 import { BotProvider } from '@/contexts/BotContext'
 import { ChatProvider } from '@/contexts/ChatContext'

@@ -5,7 +5,7 @@ interface PhotoUploadProps {
   onFileSelect: (file: File) => void;
 }
 
-const PhotoUpload: React.FC<PhotoUploadProps> = ({ onFileSelect }) => {
+export const PhotoUpload: React.FC<PhotoUploadProps> = ({ onFileSelect }) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const fileInputRef = React.createRef<HTMLInputElement>();
 
@@ -45,5 +45,3 @@ const PhotoUpload: React.FC<PhotoUploadProps> = ({ onFileSelect }) => {
     </div>
   );
 };
-
-export default PhotoUpload;

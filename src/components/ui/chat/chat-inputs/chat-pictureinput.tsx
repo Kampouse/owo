@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { supabase } from '@/config/SupabaseClient'
 import { ChatInputProps, Message } from "@/types/ChatTypes";
 import { Button } from "@/components/ui/button"
-import { PhotoUpload } from '@/components'
+import { PhotoUpload } from '@/components/PhotoUpload'
 import { SendHorizontal } from "lucide-react";
 
 

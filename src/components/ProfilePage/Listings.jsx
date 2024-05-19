@@ -1,10 +1,10 @@
 import Listing from '@/components/Listing'
-import { ButtonWithConfirm  } from '@/components'
+import { ButtonWithConfirm } from '@/components/ButtonWithConfirm'
 import { useEffect } from 'react';
 import useListing from '@/contexts/listing/useListing'
 import useAuthentication from "@/contexts/authentication/useAuthentication"
 
-const UserListings = ({ }) => {
+export const UserListings = ({ }) => {
   const { listings, getAll, deleteListingById, sellListingById } = useListing()
   const { user } = useAuthentication() || {};
 
@@ -28,4 +28,3 @@ const UserListings = ({ }) => {
     </div>
   )
 }
-export default UserListings;

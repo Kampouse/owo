@@ -6,7 +6,7 @@ import { viewNotificationsFromConversation } from '@/notifications/UserNotificat
 import { useLiveChat } from '@/contexts/useLiveChat';
 import { useBot } from "@/contexts/BotContext";
 
-const Chat: React.FC = () => {
+export const Chat: React.FC = () => {
 
   const { selectedConversation: conversation, currentUser, conversations, currentChatId, isSelectedConversationBot, addMessage } = useChat();
   // TODO: es-ce que j'ai besoin de caller getMessages ici?
@@ -48,5 +48,3 @@ const Chat: React.FC = () => {
 
   );
 };
-
-export default Chat;

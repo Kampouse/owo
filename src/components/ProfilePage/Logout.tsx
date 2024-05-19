@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Separator } from "@/components/ui/separator";
 import { useEffect } from "react";
 
-const Logout = ({ }) => {
+export const Logout = ({ }) => {
   const router = useRouter()
   const { logout } = useAuthentication();
 
@@ -26,5 +26,3 @@ const Logout = ({ }) => {
   )
 
 }
-
-export default Logout;

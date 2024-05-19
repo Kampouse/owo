@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { Profile } from "@/components"
+import { Profile } from "@/components/ProfilePage/Profile"
 import { PrivateLayout } from "@/components/Layouts"
 import ProfileLayout from '@/components/ProfilePage/ProfileLayout'
 

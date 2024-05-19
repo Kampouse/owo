@@ -3,7 +3,7 @@ import { Form, InputGroup } from 'react-bootstrap';
 import cn from 'classnames';
 
 const ListingPriceInput = ({ name, label, rules, register, error, placeholder, setValue }) => {
-  const [ isFree, setIsFree ] = useState(true);
+  const [isFree, setIsFree] = useState(true);
 
   const onSwitchChange = (e) => {
     const isChecked = e.target.checked;
@@ -14,33 +14,33 @@ const ListingPriceInput = ({ name, label, rules, register, error, placeholder, s
   }
 
   return (
-      <Form.Group className="mp-3" controlname={name}>
+    <Form.Group className="mp-3" controlname={name}>
       <Form.Label>{label}</Form.Label>
       <div className="d-flex flex-row">
-      <Form.Check
-        type="switch"
-          className={cn('px-5 switch-success switch-lg', isFree && 'text-success'  )}
-        id={`switch-${name}`}
-        label={isFree ? 'Gratuit!' : ''}
-        onChange={onSwitchChange}
-        checked={isFree}
-      />
-      {!isFree &&
-        <InputGroup className="mb-3">
-          <Form.Control
-            id={name}
-            name={name}
-            type="number"
-            label={label}
-            isInvalid={!!error}
-            placeholder={placeholder}
-            className="text-right"
-            disabled={isFree}
-            {...register(name, rules)}
-          />
-          <InputGroup.Text>.00</InputGroup.Text>
-        </InputGroup>
-      }
+        <Form.Check
+          type="switch"
+          className={cn('px-5 switch-success switch-lg', isFree && 'text-success')}
+          id={`switch-${name}`}
+          label={isFree ? 'Gratuit!' : ''}
+          onChange={onSwitchChange}
+          checked={isFree}
+        />
+        {!isFree &&
+          <InputGroup className="mb-3">
+            <Form.Control
+              id={name}
+              name={name}
+              type="number"
+              label={label}
+              isInvalid={!!error}
+              placeholder={placeholder}
+              className="text-right"
+              disabled={isFree}
+              {...register(name, rules)}
+            />
+            <InputGroup.Text>.00</InputGroup.Text>
+          </InputGroup>
+        }
       </div>
 
       {error && (

@@ -8,7 +8,7 @@ import LightboxMessages from './LightboxMessages';
 
 
 
-const Onboarding = ({}) => {
+export const Onboarding = ({}) => {
   const { uiState } = useUi();
   const {route} = useRouter();
   const routeBase = route.split('/')[1];
@@ -20,5 +20,3 @@ const Onboarding = ({}) => {
   </>
   );
 }
-
-export default Onboarding;

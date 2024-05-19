@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/alert-dialog"
 
 
-const ButtonWithConfirm = ({ onClick, children, title="Supprimer", confirmMessage = "Voulez-vous vraiment supprimer votre annonce ?", ...props }) => {
+export const ButtonWithConfirm = ({ onClick, children, title="Supprimer", confirmMessage = "Voulez-vous vraiment supprimer votre annonce ?", ...props }) => {
 
   return (
     <AlertDialog>
@@ -35,5 +35,3 @@ const ButtonWithConfirm = ({ onClick, children, title="Supprimer", confirmMessag
   )
 }
 
-
-export default ButtonWithConfirm;

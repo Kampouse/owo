@@ -1,4 +1,4 @@
-import Badges from './Badges'
+import { Badges } from './Badges'
 import useAuthentication from "@/contexts/authentication/useAuthentication"
 import { Card, CardContent, CardDescription, CardImg, CardTitle, CardHeader } from "@/components/ui/card";
 
@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardImg, CardTitle, CardHeader } fr
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const Profile = ({}) => {
+export const Profile = ({}) => {
   const { user } = useAuthentication();
   if (!user) { return (<span>LOADING PROFILE</span>) }
 
@@ -38,5 +38,3 @@ const Profile = ({}) => {
     </>
   )
 }
-
-export default Profile;

@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import useAuthentication from "@/contexts/authentication/useAuthentication";
 
-const Badge = ({ name, label, creationDate }) => (
+export const Badge = ({ name, label, creationDate }) => (
   <div className="flex flex-col items-center space-y-4 w-48">
     <Avatar className="w-32 h-32">
       <AvatarImage src={`/badges/${name}.png`} />
@@ -17,7 +17,7 @@ const Badge = ({ name, label, creationDate }) => (
   </div>
 )
 
-const Badges = ({}) => {
+export const Badges = ({}) => {
   const { user } = useAuthentication()
 
   return (
@@ -33,5 +33,3 @@ const Badges = ({}) => {
     </Card>
   );
 };
-
-export default Badges;

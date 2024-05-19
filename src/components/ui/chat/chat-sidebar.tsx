@@ -95,7 +95,7 @@ export function Sidebar({ links, isCollapsed, conversationsByStatus }: SidebarPr
                 <span>{link.user.username}</span>
                 <span className="text-zinc-500 text-xs truncate ">{link.title}</span>
               </div>
-              {conversationsByStatus.countBy(link.id, 'new') >= 0 &&
+              {conversationsByStatus.countBy(link.id, 'new') > 0 &&
                 <Badge className="absolute -translate-y-1/2 right-2">
                   {conversationsByStatus.countBy(link.id, 'new')}
                 </Badge>

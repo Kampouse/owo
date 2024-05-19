@@ -15,7 +15,7 @@ import { Notifications } from '@/components/Notifications';
 
 import { cn } from "@/lib/utils"
 
-const AppNav = () => {
+export const AppNav = () => {
   const { hasNewNotification, notifications  } = useUserNotification()
   return (
     <header className="flex h-16 w-full items-center justify-between py-4 px-6 md:px-8  bg-primary text-white shadow-sm">
@@ -25,28 +25,28 @@ const AppNav = () => {
       </Link>
       <nav className="hidden flex-1 justify-center lg:flex items-center gap-6">
         <Link
-          className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-500"
+          className="no-underline flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-500"
           href="/listings"
         >
           <NewspaperIcon className="h-5 w-5" />
           <span className="hidden md:inline">Annonces</span>
         </Link>
         <Link
-          className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-500"
+          className="no-underline flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-500"
           href="/messages"
         >
           <MessagesSquareIcon className="h-5 w-5" />
           <span className="hidden md:inline">Messages</span>
         </Link>
         <Link
-          className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-500"
+          className="no-underline flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-500"
           href="/listings/create"
         >
           <PlusIcon className="h-5 w-5" />
           <span className="hidden md:inline">Annoncer</span>
         </Link>
         <Link
-          className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-500"
+          className="no-underline flex items-center gap-2 text-sm font-medium transition-colors hover:text-gray-500"
           href="/profile"
         >
           <UserIcon className="h-5 w-5" />
@@ -80,23 +80,23 @@ const AppNav = () => {
           </SheetTrigger>
           <SheetContent side="right">
             <div className="grid gap-4 p-4">
-              <Link className="flex items-center gap-2" href="/listings">
+              <Link className="flex items-center gap-2 py-2" href="/listings">
                 <NewspaperIcon className="h-5 w-5" />
                 <span>Annonces</span>
               </Link>
-              <Link className="flex items-center gap-2" href="/messages">
+              <Link className="flex items-center gap-2 py-2" href="/messages">
                 <MessagesSquareIcon className="h-5 w-5" />
                 <span>Messages</span>
               </Link>
-              <Link className="flex items-center gap-2" href="/listings/create">
+              <Link className="flex items-center gap-2 py-2" href="/listings/create">
                 <PlusIcon className="h-5 w-5" />
                 <span>Annoncer</span>
               </Link>
-              <Link className="flex items-center gap-2" href="/profile">
+              <Link className="flex items-center gap-2 py-2" href="/profile">
                 <UserIcon className="h-5 w-5" />
                 <span>Profil</span>
               </Link>
-              <Link className="flex items-center gap-2" href="/notifications">
+              <Link className="flex items-center gap-2 py-2" href="/notifications">
                 <BellIcon className={cn("h-5 w-5", { 'text-red-500': hasNewNotification })} />
                 <span>Notifications</span>
               </Link>
@@ -107,5 +107,3 @@ const AppNav = () => {
     </header>
   );
 };
-
-export default AppNav;

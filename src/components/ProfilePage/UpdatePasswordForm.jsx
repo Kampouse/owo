@@ -7,7 +7,7 @@ import { Card, CardContent, CardTitle, CardHeader } from "@/components/ui/card";
 
 
 
-const UpdatePasswordForm = () => {
+export const UpdatePasswordForm = () => {
   const { updatePassword } = useAuthentication()
   const { register, handleSubmit } = useForm()
   const [validated, setValidated] = useState(false)
@@ -42,5 +42,3 @@ const UpdatePasswordForm = () => {
     </Card>
   )
 }
-
-export default UpdatePasswordForm;

@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react';
-import { AppNav, Onboarding } from '@/components'
+import { AppNav } from '@/components/AppNav'
+import { Onboarding } from '@/components/Onboarding'
 import usePrivatePage from '@/contexts/authentication/usePrivatePage';
 import { useNotificationBroadcaster } from '@/notifications/useNotificationBroadcaster';
 import { NotificationProvider } from '@/notifications/NotificationContext';

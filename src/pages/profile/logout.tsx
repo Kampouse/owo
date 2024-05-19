@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { Logout } from "@/components"
+import { Logout } from "@/components/ProfilePage/Logout"
 import { PrivateLayout } from "@/components/Layouts"
 import ProfileLayout from '@/components/ProfilePage/ProfileLayout'
 

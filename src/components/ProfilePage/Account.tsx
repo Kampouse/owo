@@ -1,10 +1,10 @@
-import UpdatePasswordForm from './UpdatePasswordForm'
+import { UpdatePasswordForm } from './UpdatePasswordForm'
 import useAuthentication from "@/contexts/authentication/useAuthentication"
 import { Card, CardContent, CardDescription, CardTitle, CardHeader } from "@/components/ui/card";
 
 import { Separator } from "@/components/ui/separator";
 
-const Profile = ({ }) => {
+export const ProfileAccount = ({ }) => {
   const { user } = useAuthentication();
 
   if (!user) { return (<span>LOADING PROFILE</span>) }
@@ -35,5 +35,3 @@ const Profile = ({ }) => {
   )
 
 }
-
-export default Profile;
