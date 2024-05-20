@@ -11,7 +11,8 @@ const AuthLayout: React.FC<PropsWithChildren> = ({ children }) => {
         </div>
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
-            <p className="text-lg">owo-closed-beta v.#commit-number // TODO: show a version number or indication. could be datet ime, sha number, anything.</p>
+            <p className="text-lg">owo-closed-beta</p>
+            <p className="text-xs">{process.env.NEXT_PUBLIC_APP_VERSION}</p>
             <footer className="text-sm">
               <a href="https://owo.quebec/legal/privacy-policy" target="_blank">Politique de Confidentialité</a>&nbsp;|&nbsp;
               <a href="https://owo.quebec/legal/tos" target="_blank">Conditions d'Utilisation</a></footer>
