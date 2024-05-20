@@ -106,7 +106,7 @@ export const ChatProvider = ({ children, chatId }: ChatProviderProps) => {
     <ChatContext.Provider
       value={{
         users,
-        currentUser: { id: user?.id },
+        currentUser: { id: user?.id, username: user?.username, avatar: `https://api.multiavatar.com/${user?.id}.png` },
         currentChatId: chatId,
         conversations,
         addMessage,
