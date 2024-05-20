@@ -2,6 +2,7 @@ import { SenderMessage, initializeChannel, removeChannel } from "@/conversations
 import { Conversation, Message, User } from "@/types/ChatTypes";
 import { useEffect } from "react";
 import { useChat } from "./ChatContext";
+import { viewNotificationsFromConversation } from '@/notifications/UserNotificationClient';
 
 type LiveChatProps = {
     conversation?: Conversation,
@@ -32,4 +33,10 @@ export const useLiveChat = ({ conversation, currentUser }: LiveChatProps) => {
         }
       }
     }, [])
+
+    useEffect(() => {
+      if (currentUser.id && conversation?.id) {
+        viewNotificationsFromConversation({ conversationId: conversation?.id, userId: currentUser.id })
+      }
+    }, [conversation?.id, currentUser.id]);
 }
