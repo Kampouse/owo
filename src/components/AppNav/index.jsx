@@ -12,11 +12,12 @@ import {
 } from '@/components/ui/icons'
 import { useUserNotification } from '@/notifications/useUserNotifications';
 import { Notifications } from '@/components/Notifications';
+import { Badge } from "@/components/ui/badge";
 
 import { cn } from "@/lib/utils"
 
 export const AppNav = () => {
-  const { hasNewNotification, notifications  } = useUserNotification()
+  const { conversationsByStatus, notifications, hasNewNotification } = useUserNotification()
   return (
     <header className="flex h-16 w-full items-center justify-between py-4 px-6 md:px-8  bg-primary text-white shadow-sm">
       <Link className="flex items-center gap-2 hover:text-white" href="/listings">
@@ -61,7 +62,11 @@ export const AppNav = () => {
               size="icon"
               variant="ghost">
               <BellIcon className={cn("h-5 w-5", hasNewNotification ? 'text-red-500' : 'text-white' )} />
-              <span className="hidden">Notifications</span>
+              {conversationsByStatus.totalOf('new') > 0 &&
+                <Badge className="absolute -translate-y-1/2 py-0 px-2 ml-5">
+                  {conversationsByStatus.totalOf('new')}
+                </Badge>
+              }
             </Button>
           </SheetTrigger>
           <SheetContent side="right">
