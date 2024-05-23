@@ -29,8 +29,14 @@ const RegisterForm = ({ onSignIn }) => {
   const { error, register: registerUser } = useAuthentication();
 
   async function signUp({ email, password, username, name, firstname, tos, postalcode }) {
-    await registerUser({ email, password, username, name, firstname, tos, postalcode }, () => router.push('/listings'));
+    // TODO: Handle error
+    try {
+      await registerUser({ email, password, username, name, firstname, tos, postalcode }, () => router.push('/listings'));
+    } catch (error) {
+      alert(error)
+    }
   }
+
 
   return (
     <div className="mx-auto sm:w-[450px] w-full">
