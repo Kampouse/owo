@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ImgDialog } from "@/components/ui/img-dialog";
 
-// TODO: make the image open in modal on click
 const Listing = (props) => {
 
   if (!props.listing) return null
