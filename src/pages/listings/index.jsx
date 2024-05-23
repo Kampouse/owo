@@ -26,7 +26,6 @@ const Listings = () => {
     router.push(`/messages/${loaded.id}`)
   }
 
-  // TODO: submit on stop writing if not "enter"
   const searchAction = (event) => {
     search(currentSearch)
     event.preventDefault()
