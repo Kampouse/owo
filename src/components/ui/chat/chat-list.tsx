@@ -4,6 +4,7 @@ import React, { useRef, Fragment } from "react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import ChatBottombar from "./chat-bottombar";
 import { AnimatePresence, motion } from "framer-motion";
+import { ImgDialog } from "@/components/ui/img-dialog";
 
 
 const usersAreSame = (u1: User, u2: User) => u1.id === u2.id;
@@ -80,7 +81,7 @@ export function ChatList({
 
                 {message.type === 'image' && (
                   <span className={cn(!usersAreSame(message.user, selectedUser) ? 'bg-muted' : 'bg-secondary'," p-3 rounded-md max-w-xs")}>
-                    <img src={message.content} alt="image" className="rounded-md object-cover" />
+                    <ImgDialog src={message.content} alt="image" className="rounded-md object-cover" />
                   </span>
                 )}
 

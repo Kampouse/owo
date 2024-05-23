@@ -2,6 +2,7 @@ import ReactTimeAgo from 'react-time-ago'
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ImgDialog } from "@/components/ui/img-dialog";
 
 // TODO: make the image open in modal on click
 const Listing = (props) => {
@@ -22,16 +23,11 @@ const Listing = (props) => {
           <div className="text-xs font-medium pr-2">@{userProfile.username}</div>
         </div>
       }
-      <img
-        alt={title}
-        className="w-full h-48 object-cover"
-        height={300}
-        src={image || "/placeholder.svg"}
-        style={{
-          aspectRatio: "400/300",
-          objectFit: "cover",
-        }}
+      <ImgDialog
+        src={image}
+        className=""
         width={400}
+        alt={title}
       />
       <CardContent className="p-4 ">
         <div className="flex justify-between items-start">
