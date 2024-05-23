@@ -4,7 +4,6 @@ import cn from 'classnames'
 import { FaWandMagicSparkles } from "react-icons/fa6";
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Container, Row, Col } from 'react-bootstrap';
 import NewListingForm from '@/components/Listing/NewListingForm'
 import { supabase } from "@/config/SupabaseClient"
 import resizeImg from '@/lib/resizeImg'
@@ -29,36 +28,44 @@ export const CreateListing = () => {
   }
 
   const pictureToListing = async (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    if (!haveFile) return;
+    try {
 
-    setIsLoading(true);
+      e.stopPropagation();
+      e.preventDefault();
+      if (!haveFile) return;
 
-    const resizedImg = await resizeImg(pictureFile, 800, 800)
-    const hdFile = await resizeImg(pictureFile, 2000, 2000, 'file')
+      setIsLoading(true);
 
-    const response = await fetch('/api/listings/generate', {
-      method: 'POST',
-      headers: {
-      'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ picture: resizedImg }),
-    });
-    const resp = await response.json();
-    console.log(resp)
-    const uuid = uuidv4();
-    const filePath = `${user?.id}/${uuid}.${hdFile.name.split('.')[1]}`;
+      const resizedImg = await resizeImg(pictureFile, 800, 800)
+      const hdFile = await resizeImg(pictureFile, 2000, 2000, 'file')
 
-    await supabase.storage
-      .from('offers')
-      .upload(filePath, hdFile, {
-      cacheControl: '3600',
+      const response = await fetch('/api/listings/generate', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ picture: resizedImg }),
       });
+      const resp = await response.json();
+      console.log(resp)
+      const uuid = uuidv4();
+      const filePath = `${user?.id}/${uuid}.${hdFile.name.split('.')[1]}`;
 
-    const generatedlisting = { ...resp, price: 0, tags: resp.tags.join(', '), picture: `https://nchfhnhquozlugyqknuf.supabase.co/storage/v1/object/public/offers/${filePath}` };
-    setListing(generatedlisting);
-    setIsLoading(false);
+      await supabase.storage
+        .from('offers')
+        .upload(filePath, hdFile, {
+        cacheControl: '3600',
+        });
+
+      const generatedlisting = { ...resp, price: 0, tags: resp.tags.join(', '), picture: `https://nchfhnhquozlugyqknuf.supabase.co/storage/v1/object/public/offers/${filePath}` };
+      setListing(generatedlisting);
+      setIsLoading(false);
+
+    }
+    catch (e) {
+      setIsLoading(false);
+      alert(e)
+    }
   }
 
   const saveListing = async ({ title, description, picture, price, tags }) => {
@@ -115,7 +122,8 @@ export const CreateListing = () => {
 
               <div className={cn(
                 "absolute inset-0 backdrop-blur-sm dark:bg-gray-800/50",
-                !haveFile ? 'bg-gray-900/50' : 'bg-white/30'
+                !haveFile ? 'bg-gray-900/30' : 'bg-white/30',
+                isLoading && 'bg-pulse'
               )} />
 
               <label
@@ -149,9 +157,9 @@ export const CreateListing = () => {
 
 
               {haveFile && isLoading &&
-                <div className="full-width-height bg-light text-center d-flex align-items-center justify-content-center">
-                  <FaWandMagicSparkles size="2em" className="px-2" />
-                  L'assistant owo est au travail et rédige votre annonce! // TODO: animate the background to pulse on loading
+                <div className="full-width-height bg-light flex flex-col items-center text-center flex align-items-center justify-content-center text-white">
+                  <FaWandMagicSparkles size="4em" className="px-2 "/>
+                  L'assistant owo est au travail et rédige votre annonce!
                 </div>
               }
 
@@ -188,7 +196,7 @@ export const CreateListing = () => {
         />
       }
       {saveStatus === 'success' && (
-        <Alert variant="success" className="mx-auto sm:w-[450px] w-full mt-4">
+        <Alert variant="success" className="fixed top-0 mx-auto left-1/2 transform -translate-x-1/2 sm:w-[450px] w-full mt-4">
           <FaWandMagicSparkles className="h-4 w-4" />
           <AlertTitle>Merci!</AlertTitle>
           <AlertDescription>
@@ -198,7 +206,7 @@ export const CreateListing = () => {
       )}
 
       {saveStatus === 'error' && (
-        <Alert variant="destructive" className="mx-auto sm:w-[450px] w-full mt-4">
+        <Alert variant="destructive" className="fixed top-0 mx-auto left-1/2 transform -translate-x-1/2 sm:w-[450px] w-full mt-4">
           <FaWandMagicSparkles className="h-4 w-4" />
           <AlertTitle>Dommage...</AlertTitle>
           <AlertDescription>

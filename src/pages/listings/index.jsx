@@ -41,10 +41,10 @@ const Listings = () => {
   <>
     <header className="bg-gray-100 dark:bg-gray-800 py-4 px-6 flex items-center justify-between">
       <div className="text-2xl font-bold">Le marché</div>
-      <Form className="relative w-full max-w-md" method="post" onSubmit={searchAction}>
+      <Form className="relative w-full max-w-xxs md:max-w-sm" method="post" onSubmit={searchAction}>
         <FormControl
           type="search"
-          placeholder="Search products..."
+          placeholder="Rechercher..."
           className="w-full bg-white dark:bg-gray-950 pl-10 pr-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary dark:border-gray-700 dark:focus:ring-gray-700 dark:focus:border-gray-700"
           onChange={(event) => setCurrentSearch(event.target.value)}
           value={currentSearch}

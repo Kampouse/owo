@@ -22,7 +22,7 @@ const InnerLayout: React.FC<PropsWithChildren> = ({ children }) => {
 }
 
 const PrivateLayout: React.FC<PropsWithChildren> = ({ children }) => {
-  usePrivatePage()
+  usePrivatePage() // TODO: quand je navigue sur une page privéee et que je ne suis pas ocnnecté ca plante. ex: go to /profile/logout then "back"
 
   return (
     <NotificationProvider>

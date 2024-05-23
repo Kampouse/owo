@@ -9,7 +9,7 @@ import useAuthentication from '@/contexts/authentication/useAuthentication';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
+import { CardHeader, CardContent, CardFooter } from '@/components/ui/card';
 import { FormController } from '@/components/ui/FormController';
 
 const postalCodePattern = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
@@ -176,8 +176,9 @@ const RegisterForm = ({ onSignIn }) => {
         </Formik>
       </CardContent>
       <CardFooter className="text-center text-sm text-muted-foreground grid">
+        Vous avez déjà un compte?
         <Button variant="link" onClick={onSignIn} className="w-full">
-          Vous avez déjà un compte? Connectez-vous.
+           Connectez-vous.
         </Button>
       </CardFooter>
     </div>

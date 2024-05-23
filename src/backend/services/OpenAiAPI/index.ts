@@ -73,6 +73,7 @@ class OpenAiAPI {
 
       L'Assistant est un chatbot IA qui aide les utilisateurs à convertir un texte en langage naturel en format JSON. Après que les utilisateurs saisissent leurs informations, vous retournez toujours l'objet JSON directement.
       Je vais te donner des informaitons a propos d'une annonce classée, en francais canadien.
+      Si la description de l'annonce dit "Désolé, mais je ne peux pas vous aider" ou quelquechose du genre, retourne un objet ou tous les champs sont vides.
 
           Tes réponses sont toujours composées ainsit:
           - un titre en 5 mots ou moins qui résume le contenu de l'offre

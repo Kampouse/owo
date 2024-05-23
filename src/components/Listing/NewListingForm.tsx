@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';  // Assuming you have a Textarea component
 import { FormController } from '@/components/ui/FormController';
+import { CardHeader, CardContent } from '@/components/ui/card';
 
 interface FormValues {
   title: string;
@@ -46,10 +47,13 @@ const NewListingForm: React.FC<NewListingFormProps> = ({ onSubmit, initialValues
 
   return (
     <div className="mx-auto sm:w-[450px] w-full">
-        <h1 className="text-center my-4">Publier une annonce</h1>
+      <CardHeader className="text-center">
+        <h1>Publier une annonce</h1>
+      </CardHeader>
+      <CardContent className="grid gap-4">
         <img
           alt="Uploaded Image"
-          className="rounded-md object-cover mb-4"
+          className="rounded-md object-cover mb-4 mx-auto"
           src={initialValues.picture}
         />
 
@@ -140,6 +144,7 @@ const NewListingForm: React.FC<NewListingFormProps> = ({ onSubmit, initialValues
             </Form>
           )}
         </Formik>
+      </CardContent>
     </div>
   );
 };

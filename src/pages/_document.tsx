@@ -17,7 +17,7 @@ export default function Document() {
         <link rel="icon" href="/favicon.png" />
 
       </Head>
-      <body className="ßmin-h-screen bg-background font-sans antialiased">
+      <body className="min-h-screen bg-background font-sans antialiased">
         <Main />
         <NextScript />
       </body>

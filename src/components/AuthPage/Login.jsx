@@ -29,7 +29,7 @@ const Login = ({ onSignUp }) => {
     <div className="mx-auto sm:w-[450px] w-full">
       <CardHeader className="text-center">
         <h1>Connexion</h1>
-        <p className="text-sm text-muted-foreground">Vous n'avez pas de compte? <Button variant="link" onClick={onSignUp}>Créez un compte</Button>.</p>
+        <p className="text-xs text-muted-foreground">Vous n'avez pas de compte? <Button variant="link" onClick={onSignUp} className="text-xs">Créez un compte</Button>.</p>
       </CardHeader>
 
       <CardContent className="grid gap-4">
@@ -80,8 +80,9 @@ const Login = ({ onSignUp }) => {
       </CardContent>
 
       <CardFooter className="text-center text-sm text-muted-foreground grid">
+        Vous n'avez pas de compte?
         <Button variant="link" onClick={onSignUp} className="w-full">
-          Vous n'avez pas de compte? Créez un compte.
+           Créez un compte.
         </Button>
       </CardFooter>
     </div>
