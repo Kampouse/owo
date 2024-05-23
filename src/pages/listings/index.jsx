@@ -9,6 +9,7 @@ import useAuthentication from '@/contexts/authentication/useAuthentication';
 import { initializeConversation } from "@/conversations/ConversationClient";
 import { IoIosChatbubbles } from 'react-icons/io';
 import { SearchIcon } from '@/components/ui/icons';
+import { useLazyEffect } from '@/contexts/useLazyEffect'
 
 const Listings = () => {
   const { user } = useAuthentication();
@@ -31,11 +32,14 @@ const Listings = () => {
     event.preventDefault()
   }
 
-  useEffect(() => {
+  useLazyEffect(() => {
+    console.log('laxy')
     if (currentSearch === '') {
       getAll()
+    } else {
+      search(currentSearch)
     }
-  }, [currentSearch])
+  }, [currentSearch], 500)
 
   return (
   <>

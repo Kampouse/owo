@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     if (req.method !== "POST") {
       throw "Only POST requests are allowed";
     }
-    // TODO: Make the 2 calls a single one when the models alows it. (now there is no vision with json_mode)
+    // HACK: Make the 2 calls a single one when the models alows it. (now there is no vision with json_mode)
     const { picture } = req.body;
 /*
     const imageDescription = "this is a pair of shoes :D";
