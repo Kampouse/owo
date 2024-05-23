@@ -110,6 +110,7 @@ export function ChatLayout({
 
         <div className="flex flex-col justify-between w-full h-full">
           <ChatTopbar
+            title={conversation.title}
             selectedUser={conversation.user}
             buttonBarIcons={isBot ? [{ icon:ListRestart, onClick:resetBot }] :[]}
             />

@@ -9,9 +9,10 @@ import { Button, buttonVariants } from '@/components/ui/button';
 interface ChatTopbarProps {
   selectedUser: User;
   buttonBarIcons: ButtonBarIcons
+  title: string;
 }
 
-export default function ChatTopbar({ selectedUser, buttonBarIcons }: ChatTopbarProps) {
+export default function ChatTopbar({ selectedUser, buttonBarIcons, title }: ChatTopbarProps) {
   return (
     <div className="w-full h-20 flex p-4 justify-between items-center border-b">
         <div className="flex items-center gap-2">
@@ -26,7 +27,7 @@ export default function ChatTopbar({ selectedUser, buttonBarIcons }: ChatTopbarP
           </Avatar>
           <div className="flex flex-col">
             <span className="font-medium">{selectedUser.username}</span>
-            <span className="text-xs"># TODO: Active 2 mins ago //  TODO: Nom de l'obet a vendre // title de la conversation </span>
+            <span className="text-xs">{title}</span>
           </div>
         </div>
 

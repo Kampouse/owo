@@ -4,7 +4,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Message, ChatInputProps } from '@/types/ChatTypes';
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
@@ -101,31 +101,24 @@ export default function ChatTextinput({
           </div>
         </motion.div>
 
-        {/*  TODO: use button instead of link */}
         {message.trim() ? (
-          <Link
-            href="#"
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "icon" }),
-              "h-9 w-9",
-              "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white shrink-0"
-            )}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-9 w-9"
             onClick={handleSend}
           >
             <SendHorizontal size={20} className="text-muted-foreground" />
-          </Link>
+          </Button>
         ) : (
-          <Link
-            href="#"
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "icon" }),
-              "h-9 w-9",
-              "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white shrink-0"
-            )}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-9 w-9"
             onClick={handleThumbsUp}
           >
             <ThumbsUp size={20} className="text-muted-foreground" />
-          </Link>
+          </Button>
         )}
       </AnimatePresence>
   );
