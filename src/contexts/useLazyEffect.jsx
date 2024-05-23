@@ -1,9 +1,9 @@
-import {  useEffect, useRef, useCallback, DependencyList, EffectCallback } from 'react'
+import {  useEffect, useRef, useCallback } from 'react'
 import debounce from 'lodash.debounce'
 
-export function useLazyEffect(effect: EffectCallback, deps: DependencyList = [], wait = 300) {
-  const cleanUp = useRef <void | (() => void)> ();
-  const effectRef = useRef <EffectCallback> ();
+export function useLazyEffect(effect, deps = [], wait = 300) {
+  const cleanUp = useRef();
+  const effectRef = useRef();
   const updatedEffect = useCallback(effect, deps);
   effectRef.current = updatedEffect;
   const lazyEffect = useCallback(
