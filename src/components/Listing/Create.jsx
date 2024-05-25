@@ -57,7 +57,7 @@ export const CreateListing = () => {
         cacheControl: '3600',
         });
 
-      const generatedlisting = { ...resp, price: 0, tags: resp.tags.join(', '), picture: `https://nchfhnhquozlugyqknuf.supabase.co/storage/v1/object/public/offers/${filePath}` };
+      const generatedlisting = { ...resp, price: 0, tags: resp.tags.join(', '), picture: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/offers/${filePath}` };
       setListing(generatedlisting);
       setIsLoading(false);
 

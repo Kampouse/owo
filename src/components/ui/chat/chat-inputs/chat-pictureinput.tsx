@@ -32,7 +32,7 @@ const ChatPictureinput: React.FC<ChatInputProps> = ({ sendMessage, currentUser }
         cacheControl: '3600',
       })
 
-    const publicBaseUrl = 'https://nchfhnhquozlugyqknuf.supabase.co/storage/v1/object/public/offers'
+    const publicBaseUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/offers`
 
     const newMessage = new Message(
       currentUser,
