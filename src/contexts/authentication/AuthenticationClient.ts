@@ -32,7 +32,7 @@ const fromRequestToSignup = (request: RegisterRequest): SignUpWithPasswordCreden
     email: request.email,
     password: request.password,
     options: {
-        emailRedirectTo: "https://app.owo.quebec/listings",
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_REGISTER_REDIRECT_URL!}/listings`,
         data: {
             username: request.username,
             name: request.name,
