@@ -1,4 +1,4 @@
-# owo Marketplace App
+# owo Marketplace App.
 
 ## Introduction
 
