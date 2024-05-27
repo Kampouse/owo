@@ -72,7 +72,7 @@ const Login = ({ onSignUp }) => {
                   <Label htmlFor="password" className="text-red-600 text-sm">{errors.password}</Label>
                 ) : null}
               </FormController>
-              {error && <div className="text-red-600">{error}</div>}
+              {error?.message && <div className="text-red-600">{error.message}</div>}
               <Button type="submit">Connexion</Button>
             </Form>
           )}
