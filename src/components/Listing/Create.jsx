@@ -24,7 +24,7 @@ export const CreateListing = () => {
 
 
   const cancel = () => {
-    setListing(null);
+    changePictureFile(null);
   }
 
   const pictureToListing = async (e) => {
@@ -42,7 +42,7 @@ export const CreateListing = () => {
       const response = await fetch('/api/listings/generate', {
         method: 'POST',
         headers: {
-        'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ picture: resizedImg }),
       });
@@ -54,7 +54,7 @@ export const CreateListing = () => {
       await supabase.storage
         .from('offers')
         .upload(filePath, hdFile, {
-        cacheControl: '3600',
+          cacheControl: '3600',
         });
 
       const generatedlisting = { ...resp, price: 0, tags: resp.tags.join(', '), picture: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/offers/${filePath}` };
@@ -111,35 +111,35 @@ export const CreateListing = () => {
     <>
       {!listing &&
         <div>
-            <div
-              className="fixed h-[calc(100dvh-64px)] bottom-0 inset-0 flex items-center justify-center bg-cover bg-center"
-              controlname="picuture"
-              style={{
-                backgroundImage: `url('${stringPicture || '/placeholder.svg'}')`,
-                top: 'auto'
-              }}
+          <div
+            className="fixed h-[calc(100dvh-64px)] bottom-0 inset-0 flex items-center justify-center bg-cover bg-center"
+            controlname="picuture"
+            style={{
+              backgroundImage: `url('${stringPicture || '/placeholder.svg'}')`,
+              top: 'auto'
+            }}
+          >
+
+            <div className={cn(
+              "absolute inset-0 backdrop-blur-sm dark:bg-gray-800/50",
+              !haveFile ? 'bg-gray-900/30' : 'bg-white/30',
+              isLoading && 'bg-pulse'
+            )} />
+
+            <label
+              disabled={isLoading}
+              htmlFor="picuture"
+              className={cn(
+                "group z-10 flex h-full w-full flex-col items-center justify-center cursor-pointer transition-colors",
+                !haveFile && "hover:bg-gray-900/70 dark:hover:bg-gray-800/70")}
             >
 
-              <div className={cn(
-                "absolute inset-0 backdrop-blur-sm dark:bg-gray-800/50",
-                !haveFile ? 'bg-gray-900/30' : 'bg-white/30',
-                isLoading && 'bg-pulse'
-              )} />
-
-              <label
-                disabled={isLoading}
-                htmlFor="picuture"
-                className={cn(
-                  "group z-10 flex h-full w-full flex-col items-center justify-center cursor-pointer transition-colors",
-                  !haveFile && "hover:bg-gray-900/70 dark:hover:bg-gray-800/70")}
-              >
-
-                {!haveFile && <>
-                  <PlusIcon className="text-white group-hover:scale-110 transition-transform h-24 w-24" />
-                  <span className="mt-4 text-2xl font-medium text-white text-center">
-                    Choisir ou <br />prendre une photo
-                  </span>
-                </>}
+              {!haveFile && <>
+                <PlusIcon className="text-white group-hover:scale-110 transition-transform h-24 w-24" />
+                <span className="mt-4 text-2xl font-medium text-white text-center">
+                  Choisir ou <br />prendre une photo
+                </span>
+              </>}
 
 
               {/* error && (
@@ -151,14 +151,14 @@ export const CreateListing = () => {
               {haveFile && !isLoading &&
                 <div className="flex flex-col space-y-2 gap-6">
                   <Button variant="secondary" onClick={pictureToListing} className="w-full" size="xl">🤖 Générer une annonce avec cette photo 🤖</Button>
-                  <Button variant="outline" onClick={resetImage} className="w-full">Annuler</Button>
+                  <Button variant="outline" onClick={() => { console.log("what up"); cancel() }} className="w-full">Annuler</Button>
                 </div>
               }
 
 
               {haveFile && isLoading &&
                 <div className="full-width-height bg-light flex flex-col items-center text-center flex align-items-center justify-content-center text-white">
-                  <FaWandMagicSparkles size="4em" className="px-2 "/>
+                  <FaWandMagicSparkles size="4em" className="px-2 " />
                   L'assistant owo est au travail et rédige votre annonce!
                 </div>
               }
@@ -200,7 +200,7 @@ export const CreateListing = () => {
           <FaWandMagicSparkles className="h-4 w-4" />
           <AlertTitle>Merci!</AlertTitle>
           <AlertDescription>
-          Votre annonce a été sauvegardé! Vous allez être redirigé vers le <Link href='/listings'>marché</Link>.
+            Votre annonce a été sauvegardé! Vous allez être redirigé vers le <Link href='/listings'>marché</Link>.
           </AlertDescription>
         </Alert>
       )}
@@ -217,4 +217,3 @@ export const CreateListing = () => {
     </>
   );
 }
-

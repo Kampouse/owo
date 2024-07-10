@@ -14,6 +14,10 @@ const usePicturePreview = (): UsePicturePreview => {
 
   const changePictureFile = (newPicture: File): void => {
     setFile(newPicture);
+    if (!newPicture) {
+      setBase64String(null);
+      return;
+    }
     const reader = new FileReader();
     reader.onloadend = () => {
       setBase64String(reader.result as string);
@@ -32,7 +36,7 @@ const usePicturePreview = (): UsePicturePreview => {
     resetPicture,
     pictureFile: file,
     haveFile: useMemo(() => file !== null, [file]),
-   };
+  };
 };
 
 export default usePicturePreview;
