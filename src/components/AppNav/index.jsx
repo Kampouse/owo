@@ -15,8 +15,9 @@ import { useUserNotification } from '@/notifications/useUserNotifications';
 import { Notifications } from '@/components/Notifications';
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils"
-
+import { useRouter } from "next/router"
 export const AppNav = () => {
+  const { pathname } = useRouter()
   const { conversationsByStatus, notifications, hasNewNotification } = useUserNotification()
   return (
     <>
@@ -62,7 +63,7 @@ export const AppNav = () => {
               <Button
                 size="icon"
                 variant="ghost">
-                <BellIcon className={cn("h-5 w-5", hasNewNotification ? 'text-red-500' : 'text-white' )} />
+                <BellIcon className={cn("h-5 w-5", hasNewNotification ? 'text-red-500' : 'text-white')} />
                 {conversationsByStatus.totalOf('new') > 0 &&
                   <Badge className="absolute -translate-y-1/2 py-0 px-2 ml-5">
                     {conversationsByStatus.totalOf('new')}
@@ -128,10 +129,13 @@ export const AppNav = () => {
         </div>
       </header>
       <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 sm:hidden">
-        <Button as={Link} aria-label="Annoncer" size="icon" href="/listings/create" variant="primary" className="rounded-full">
-          <PlusIcon className="h-6 w-6" />
-        </Button>
-      </div>
+        {pathname !== '/listings/create' &&
+          < Button aria-label="Annoncer" size="icon" variant="primary" className="rounded-full">
+            <Link href="/listings/create">
+              <PlusIcon className="h-6 w-6" />
+            </Link>
+          </Button>}
+      </div >
     </>
   );
 };
